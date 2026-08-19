@@ -18,16 +18,29 @@
 <style>
   /* ============ PREMIUM COLOR SYSTEM ============ */
   :root {
-    --bg: #fafbfc; --bg-subtle: #f4f6fa; --bg-elevated: #ffffff;
-    --surface: #ffffff; --surface-2: #f1f5f9; --surface-3: #e8ecf3;
-    --border: #e2e8f0; --border-strong: #cbd5e1;
-    --text: #0f172a; --text-muted: #64748b; --text-subtle: #94a3b8;
-    --accent: #6366f1; --accent-hover: #4f46e5;
-    --accent-soft: #eef2ff; --accent-text: #ffffff;
-    --accent-2: #a855f7; --accent-3: #ec4899;
-    --success: #10b981; --success-soft: #d1fae5;
-    --warning: #f59e0b; --warning-soft: #fef3c7;
-    --danger: #ef4444; --danger-soft: #fee2e2;
+    --bg: #fafbfc;
+    --bg-subtle: #f4f6fa;
+    --bg-elevated: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f1f5f9;
+    --surface-3: #e8ecf3;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --text-subtle: #94a3b8;
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --accent-soft: #eef2ff;
+    --accent-text: #ffffff;
+    --accent-2: #a855f7;
+    --accent-3: #ec4899;
+    --success: #10b981;
+    --success-soft: #d1fae5;
+    --warning: #f59e0b;
+    --warning-soft: #fef3c7;
+    --danger: #ef4444;
+    --danger-soft: #fee2e2;
     --gradient-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
     --gradient-accent: linear-gradient(135deg, #ec4899 0%, #f59e0b 100%);
     --gradient-cool: linear-gradient(135deg, #06b6d4 0%, #6366f1 100%);
@@ -39,23 +52,40 @@
     --shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.1), 0 8px 16px rgba(15, 23, 42, 0.06);
     --shadow-xl: 0 30px 60px rgba(99, 102, 241, 0.15), 0 12px 24px rgba(15, 23, 42, 0.08);
     --shadow-glow: 0 0 0 4px rgba(99, 102, 241, 0.15);
-    --radius-xs: 6px; --radius-sm: 8px; --radius: 12px;
-    --radius-lg: 16px; --radius-xl: 24px; --radius-2xl: 32px;
+    --radius-xs: 6px;
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px;
     --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   [data-theme="dark"] {
-    --bg: #0a0e1a; --bg-subtle: #0f1424; --bg-elevated: #141a2e;
-    --surface: #141a2e; --surface-2: #1c2440; --surface-3: #243049;
-    --border: #243049; --border-strong: #334166;
-    --text: #f1f5f9; --text-muted: #94a3b8; --text-subtle: #64748b;
-    --accent: #818cf8; --accent-hover: #a5b4fc;
-    --accent-soft: #1e1b4b; --accent-text: #0a0e1a;
-    --accent-2: #c084fc; --accent-3: #f472b6;
-    --success: #34d399; --success-soft: #064e3b;
-    --warning: #fbbf24; --warning-soft: #451a03;
-    --danger: #f87171; --danger-soft: #450a0a;
+    --bg: #0a0e1a;
+    --bg-subtle: #0f1424;
+    --bg-elevated: #141a2e;
+    --surface: #141a2e;
+    --surface-2: #1c2440;
+    --surface-3: #243049;
+    --border: #243049;
+    --border-strong: #334166;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-subtle: #64748b;
+    --accent: #818cf8;
+    --accent-hover: #a5b4fc;
+    --accent-soft: #1e1b4b;
+    --accent-text: #0a0e1a;
+    --accent-2: #c084fc;
+    --accent-3: #f472b6;
+    --success: #34d399;
+    --success-soft: #064e3b;
+    --warning: #fbbf24;
+    --warning-soft: #451a03;
+    --danger: #f87171;
+    --danger-soft: #450a0a;
     --gradient-primary: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
     --gradient-accent: linear-gradient(135deg, #f472b6 0%, #fbbf24 100%);
     --gradient-cool: linear-gradient(135deg, #22d3ee 0%, #818cf8 100%);
@@ -73,8 +103,12 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body {
-    font-family: var(--font); background: var(--bg); color: var(--text);
-    line-height: 1.6; -webkit-font-smoothing: antialiased;
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
     transition: background var(--transition-slow), color var(--transition);
     font-feature-settings: 'cv11', 'ss01';
@@ -90,7 +124,11 @@
   button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
   input, select, textarea { font-family: inherit; font-size: inherit; }
   img { max-width: 100%; display: block; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
   ::selection { background: var(--accent); color: white; }
 
   /* ============ LAYOUT ============ */
@@ -105,10 +143,14 @@
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid var(--border);
   }
-  .header-inner { display: flex; align-items: center; gap: 16px; height: 64px; }
+  .header-inner {
+    display: flex; align-items: center; gap: 16px;
+    height: 64px;
+  }
   .logo {
     display: flex; align-items: center; gap: 10px;
-    font-weight: 800; font-size: 18px; letter-spacing: -0.02em; flex-shrink: 0;
+    font-weight: 800; font-size: 18px; letter-spacing: -0.02em;
+    flex-shrink: 0;
   }
   .logo-mark {
     width: 34px; height: 34px; border-radius: 10px;
@@ -124,17 +166,24 @@
   .nav-link {
     padding: 8px 14px; border-radius: 10px;
     font-size: 14px; font-weight: 500; color: var(--text-muted);
-    transition: all var(--transition);
+    transition: all var(--transition); position: relative;
   }
   .nav-link:hover { background: var(--surface-2); color: var(--text); }
-  .nav-link.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .nav-link.active {
+    background: var(--accent-soft); color: var(--accent);
+    font-weight: 600;
+  }
   .header-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
   .icon-btn {
     width: 40px; height: 40px; border-radius: 10px;
-    display: grid; place-items: center; color: var(--text-muted);
+    display: grid; place-items: center;
+    color: var(--text-muted);
     transition: all var(--transition);
   }
-  .icon-btn:hover { background: var(--surface-2); color: var(--text); transform: translateY(-1px); }
+  .icon-btn:hover {
+    background: var(--surface-2); color: var(--text);
+    transform: translateY(-1px);
+  }
   .icon-btn svg { width: 20px; height: 20px; }
   .menu-btn { display: grid; }
   @media (min-width: 1024px) { .menu-btn { display: none; } }
@@ -142,7 +191,8 @@
   /* ============ MOBILE MENU ============ */
   .mobile-menu {
     position: fixed; inset: 64px 0 0 0; z-index: 99;
-    background: var(--bg); padding: 20px;
+    background: var(--bg);
+    padding: 20px;
     transform: translateX(100%);
     transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
@@ -157,7 +207,8 @@
   .bottom-nav {
     display: flex; position: fixed; bottom: 0; left: 0; right: 0;
     background: color-mix(in srgb, var(--bg-elevated) 90%, transparent);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid var(--border);
     padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
     z-index: 50; gap: 4px;
@@ -170,7 +221,10 @@
     transition: all var(--transition);
   }
   .bottom-nav-item svg { width: 22px; height: 22px; }
-  .bottom-nav-item.active { color: var(--accent); background: var(--accent-soft); }
+  .bottom-nav-item.active {
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
 
   main { padding: 24px 0 120px; min-height: calc(100vh - 64px); }
   @media (min-width: 1024px) { main { padding: 40px 0 80px; } }
@@ -187,25 +241,30 @@
     box-shadow: var(--shadow-sm);
   }
   .hero h1 {
-    font-size: clamp(34px, 6.5vw, 60px); font-weight: 900;
-    letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 20px;
+    font-size: clamp(34px, 6.5vw, 60px);
+    font-weight: 900; letter-spacing: -0.035em;
+    line-height: 1.05; margin-bottom: 20px;
     background: linear-gradient(135deg, var(--text) 0%, var(--text-muted) 100%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   [data-theme="dark"] .hero h1 {
     background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   .hero p {
-    font-size: clamp(16px, 2.5vw, 20px); color: var(--text-muted);
-    max-width: 640px; margin: 0 auto 36px; line-height: 1.5;
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: var(--text-muted); max-width: 640px;
+    margin: 0 auto 36px; line-height: 1.5;
   }
   .hero-search { max-width: 640px; margin: 0 auto 32px; position: relative; }
   .hero-search input {
     width: 100%; padding: 18px 56px 18px 54px;
     border: 1px solid var(--border); border-radius: 18px;
     background: var(--surface); color: var(--text); font-size: 16px;
-    box-shadow: var(--shadow); transition: all var(--transition);
+    box-shadow: var(--shadow);
+    transition: all var(--transition);
   }
   .hero-search input:focus {
     outline: none; border-color: var(--accent);
@@ -242,6 +301,7 @@
   .suggestion-info { flex: 1; min-width: 0; }
   .suggestion-name { font-weight: 600; font-size: 14px; }
   .suggestion-cat { font-size: 12px; color: var(--text-muted); }
+
   .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
   /* ============ BUTTONS ============ */
@@ -265,7 +325,8 @@
   .btn-primary:active { transform: translateY(0); }
   .btn-secondary {
     background: var(--surface); color: var(--text);
-    border-color: var(--border); box-shadow: var(--shadow-sm);
+    border-color: var(--border);
+    box-shadow: var(--shadow-sm);
   }
   .btn-secondary:hover {
     background: var(--surface-2); border-color: var(--border-strong);
@@ -305,12 +366,14 @@
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius-lg); padding: 16px;
     display: flex; flex-direction: column; gap: 8px;
-    box-shadow: var(--shadow); animation: float 6s ease-in-out infinite;
+    box-shadow: var(--shadow);
+    animation: float 6s ease-in-out infinite;
     transition: all var(--transition);
   }
   .hero-chip:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: var(--shadow-lg); border-color: var(--accent);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent);
   }
   .hero-chip:nth-child(2) { animation-delay: -1s; }
   .hero-chip:nth-child(3) { animation-delay: -2s; }
@@ -319,7 +382,10 @@
   .hero-chip:nth-child(6) { animation-delay: -5s; }
   .hero-chip:nth-child(7) { animation-delay: -0.5s; }
   .hero-chip:nth-child(8) { animation-delay: -1.5s; }
-  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
   .hero-chip-icon {
     width: 36px; height: 36px; border-radius: 10px;
     background: var(--gradient-primary); color: white;
@@ -337,11 +403,17 @@
     display: flex; align-items: end; justify-content: space-between;
     margin-bottom: 24px; gap: 16px; flex-wrap: wrap;
   }
-  .section-title { font-size: clamp(22px, 3vw, 28px); font-weight: 800; letter-spacing: -0.02em; }
+  .section-title {
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 800; letter-spacing: -0.02em;
+  }
   .section-subtitle { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
 
   /* ============ TOOL CARDS ============ */
-  .tools-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .tools-grid {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
   .tool-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius-lg); padding: 20px;
@@ -357,7 +429,8 @@
     transition: transform var(--transition-slow);
   }
   .tool-card:hover {
-    transform: translateY(-4px); box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
     border-color: var(--accent);
   }
   .tool-card:hover::before { transform: scaleX(1); }
@@ -380,7 +453,8 @@
     position: absolute; top: 14px; right: 14px;
     width: 34px; height: 34px; border-radius: 10px;
     display: grid; place-items: center;
-    color: var(--text-subtle); transition: all var(--transition);
+    color: var(--text-subtle);
+    transition: all var(--transition);
     background: var(--surface-2);
   }
   .tool-fav-btn:hover {
@@ -391,7 +465,10 @@
   .tool-fav-btn svg { width: 16px; height: 16px; }
 
   /* ============ CATEGORY CARDS ============ */
-  .cat-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .cat-grid {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
   .cat-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius-lg); padding: 24px;
@@ -405,7 +482,8 @@
     opacity: 0; transition: opacity var(--transition);
   }
   .cat-card:hover {
-    transform: translateY(-4px); box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
     border-color: var(--accent);
   }
   .cat-card:hover::before { opacity: 0.05; }
@@ -435,14 +513,18 @@
   }
   .tool-header-icon svg { width: 30px; height: 30px; }
   .tool-header-info { flex: 1; min-width: 0; }
-  .tool-header h1 { font-size: clamp(24px, 4vw, 32px); font-weight: 800; letter-spacing: -0.02em; }
+  .tool-header h1 {
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 800; letter-spacing: -0.02em;
+  }
   .tool-header p { color: var(--text-muted); margin-top: 4px; }
   .tool-actions-top { display: flex; gap: 8px; flex-shrink: 0; }
 
   .tool-panel {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius-xl); padding: 24px;
-    margin-bottom: 20px; box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
     transition: box-shadow var(--transition);
   }
   .tool-panel:hover { box-shadow: var(--shadow); }
@@ -450,12 +532,16 @@
 
   /* ============ FORM ELEMENTS ============ */
   .form-group { margin-bottom: 18px; }
-  .form-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+  .form-label {
+    display: block; font-size: 13px; font-weight: 600;
+    margin-bottom: 6px; color: var(--text);
+  }
   .form-hint { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
   .input, .select, .textarea {
     width: 100%; padding: 12px 14px;
     border: 1px solid var(--border); border-radius: 10px;
-    background: var(--bg); color: var(--text); font-size: 15px;
+    background: var(--bg); color: var(--text);
+    font-size: 15px;
     transition: all var(--transition);
   }
   .input:focus, .select:focus, .textarea:focus {
@@ -476,15 +562,24 @@
     transition: color var(--transition);
   }
   .checkbox-row:hover { color: var(--accent); }
-  .checkbox-row input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
-
+  .checkbox-row input {
+    width: 18px; height: 18px; accent-color: var(--accent);
+    cursor: pointer;
+  }
   /* ============ CONVERTER ============ */
-  .converter { display: grid; gap: 16px; grid-template-columns: 1fr; align-items: end; }
-  @media (min-width: 640px) { .converter { grid-template-columns: 1fr auto 1fr; } }
+  .converter {
+    display: grid; gap: 16px;
+    grid-template-columns: 1fr;
+    align-items: end;
+  }
+  @media (min-width: 640px) {
+    .converter { grid-template-columns: 1fr auto 1fr; }
+  }
   .converter-swap {
     width: 48px; height: 48px; border-radius: 50%;
     background: var(--gradient-primary); color: white;
-    display: grid; place-items: center; justify-self: center;
+    display: grid; place-items: center;
+    justify-self: center;
     transition: all var(--transition);
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
   }
@@ -497,7 +592,8 @@
   /* ============ RESULT BOX ============ */
   .result-box {
     background: var(--bg-subtle); border: 1px solid var(--border);
-    border-radius: var(--radius-lg); padding: 20px; margin-top: 20px;
+    border-radius: var(--radius-lg); padding: 20px;
+    margin-top: 20px;
   }
   .result-row {
     display: flex; justify-content: space-between; align-items: center;
@@ -505,13 +601,17 @@
   }
   .result-row:last-child { border-bottom: none; }
   .result-label { color: var(--text-muted); font-size: 14px; }
-  .result-value { font-weight: 700; font-size: 16px; font-variant-numeric: tabular-nums; }
+  .result-value {
+    font-weight: 700; font-size: 16px;
+    font-variant-numeric: tabular-nums;
+  }
   .result-highlight {
     background: var(--gradient-primary); color: white;
     padding: 18px 24px; border-radius: var(--radius-lg);
     font-size: 22px; font-weight: 800;
     display: flex; justify-content: space-between; align-items: center;
-    margin-top: 16px; box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+    margin-top: 16px;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
   }
 
   /* ============ FILE UPLOADER ============ */
@@ -519,17 +619,20 @@
     border: 2px dashed var(--border-strong);
     border-radius: var(--radius-xl);
     padding: 48px 24px; text-align: center;
-    transition: all var(--transition); cursor: pointer;
+    transition: all var(--transition);
+    cursor: pointer;
     background: var(--bg-subtle);
   }
   .uploader:hover, .uploader.dragover {
-    border-color: var(--accent); background: var(--accent-soft);
+    border-color: var(--accent);
+    background: var(--accent-soft);
     transform: scale(1.01);
   }
   .uploader-icon {
     width: 64px; height: 64px; border-radius: 16px;
     background: var(--gradient-primary); color: white;
-    display: grid; place-items: center; margin: 0 auto 16px;
+    display: grid; place-items: center;
+    margin: 0 auto 16px;
     box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
   }
   .uploader-icon svg { width: 32px; height: 32px; }
@@ -544,7 +647,8 @@
   }
   .progress-bar {
     height: 100%; background: var(--gradient-primary);
-    border-radius: 999px; transition: width 200ms; width: 0%;
+    border-radius: 999px; transition: width 200ms;
+    width: 0%;
     box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
   }
 
@@ -552,7 +656,8 @@
   .preview-area {
     background: var(--bg-subtle); border: 1px solid var(--border);
     border-radius: var(--radius-lg); padding: 20px;
-    display: grid; place-items: center; min-height: 200px; margin: 16px 0;
+    display: grid; place-items: center; min-height: 200px;
+    margin: 16px 0;
   }
   .preview-area img, .preview-area canvas {
     max-width: 100%; max-height: 400px; border-radius: 10px;
@@ -563,7 +668,8 @@
   .qr-preview {
     background: white; padding: 24px; border-radius: var(--radius-lg);
     display: grid; place-items: center;
-    border: 1px solid var(--border); box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
   }
 
   /* ============ TABS ============ */
@@ -579,10 +685,15 @@
     transition: all var(--transition);
   }
   .tab:hover { color: var(--text); }
-  .tab.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
+  .tab.active {
+    background: var(--surface); color: var(--text);
+    box-shadow: var(--shadow-sm);
+  }
 
   /* ============ CATEGORY FILTER ============ */
-  .category-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .category-filter {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;
+  }
   .filter-chip {
     padding: 8px 16px; border-radius: 999px;
     background: var(--surface); border: 1px solid var(--border);
@@ -598,6 +709,7 @@
     border-color: transparent;
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
   }
+
   /* ============ STATS GRID ============ */
   .stats-grid {
     display: grid; gap: 12px;
@@ -607,32 +719,29 @@
   .stat-card {
     padding: 16px; background: var(--bg-subtle);
     border: 1px solid var(--border); border-radius: var(--radius-lg);
-    text-align: center; transition: all var(--transition);
+    text-align: center;
+    transition: all var(--transition);
   }
   .stat-card:hover {
-    transform: translateY(-2px); box-shadow: var(--shadow);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
     border-color: var(--accent);
   }
   .stat-value {
     font-size: 26px; font-weight: 800;
     font-variant-numeric: tabular-nums;
     background: var(--gradient-primary);
-    -webkit-background-clip: text; background-clip: text;
+    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: 600; }
-
   /* ============ COLOR PREVIEW ============ */
   .color-preview {
     width: 100%; height: 180px; border-radius: var(--radius-lg);
     border: 1px solid var(--border); margin-bottom: 16px;
-    transition: background 150ms; box-shadow: var(--shadow);
-    position: relative; overflow: hidden;
-  }
-  .color-preview::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
-    pointer-events: none;
+    transition: background 150ms;
+    box-shadow: var(--shadow);
   }
   .color-values { display: grid; gap: 10px; }
   .color-value-row {
@@ -660,7 +769,8 @@
     cursor: pointer; transition: all var(--transition);
   }
   .palette-card:hover {
-    transform: translateY(-3px); box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
     border-color: var(--accent);
   }
   .palette-colors {
@@ -670,7 +780,8 @@
   }
   .palette-color {
     flex: 1; position: relative;
-    transition: flex var(--transition); cursor: pointer;
+    transition: flex var(--transition);
+    cursor: pointer;
   }
   .palette-card:hover .palette-color:hover { flex: 1.6; }
   .palette-name { font-size: 13px; font-weight: 700; color: var(--text); }
@@ -690,7 +801,8 @@
     box-shadow: var(--shadow);
   }
   .gradient-preset:hover {
-    transform: scale(1.05); border-color: var(--accent);
+    transform: scale(1.05);
+    border-color: var(--accent);
     box-shadow: var(--shadow-lg);
   }
   .gradient-preset-label {
@@ -698,7 +810,8 @@
     background: rgba(0,0,0,0.7); color: white;
     padding: 6px 10px; border-radius: 8px;
     font-size: 12px; font-weight: 700;
-    backdrop-filter: blur(10px); text-align: center;
+    backdrop-filter: blur(10px);
+    text-align: center;
   }
 
   /* ============ GRADIENT PREVIEW ============ */
@@ -720,38 +833,6 @@
     background: none; cursor: pointer; border-radius: 6px;
   }
 
-  /* ============ TIMER DISPLAY ============ */
-  .timer-display {
-    font-size: clamp(44px, 10vw, 76px);
-    font-weight: 800; letter-spacing: -0.03em;
-    font-variant-numeric: tabular-nums;
-    text-align: center; padding: 32px;
-    background: var(--bg-subtle); border-radius: var(--radius-xl);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    background-image: var(--gradient-primary);
-    background-clip: text; -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    position: relative;
-  }
-  .timer-display::before {
-    content: ''; position: absolute; inset: 0;
-    background: var(--bg-subtle); border-radius: var(--radius-xl);
-    z-index: -1;
-  }
-  .timer-controls {
-    display: flex; gap: 10px; justify-content: center;
-    flex-wrap: wrap; margin-top: 24px;
-  }
-  .laps { margin-top: 20px; max-height: 260px; overflow-y: auto; }
-  .lap-item {
-    display: flex; justify-content: space-between;
-    padding: 12px 16px; border-radius: 10px;
-    background: var(--bg-subtle); margin-bottom: 8px;
-    font-variant-numeric: tabular-nums; font-size: 14px;
-    border: 1px solid var(--border);
-  }
-
   /* ============ PASSWORD STRENGTH ============ */
   .strength-meter {
     height: 8px; background: var(--surface-2);
@@ -771,6 +852,29 @@
     border-radius: var(--radius-lg); word-break: break-all; min-height: 60px;
     display: flex; align-items: center;
     box-shadow: var(--shadow-sm);
+  }
+
+  /* ============ TIMER DISPLAY ============ */
+  .timer-display {
+    font-size: clamp(44px, 10vw, 76px);
+    font-weight: 800; letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    text-align: center; padding: 32px;
+    background: var(--bg-subtle); border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .timer-controls {
+    display: flex; gap: 10px; justify-content: center;
+    flex-wrap: wrap; margin-top: 24px;
+  }
+  .laps { margin-top: 20px; max-height: 260px; overflow-y: auto; }
+  .lap-item {
+    display: flex; justify-content: space-between;
+    padding: 12px 16px; border-radius: 10px;
+    background: var(--bg-subtle); margin-bottom: 8px;
+    font-variant-numeric: tabular-nums; font-size: 14px;
+    border: 1px solid var(--border);
   }
 
   /* ============ TOAST NOTIFICATIONS ============ */
@@ -874,7 +978,8 @@
     transition: all var(--transition);
   }
   .feature-card:hover {
-    transform: translateY(-4px); box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
     border-color: var(--accent);
   }
   .feature-icon {
@@ -1063,8 +1168,7 @@ const ICONS = {
   sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>',
   moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
 };
-
-/* ============ STATE MANAGEMENT ============ */
+  /* ============ STATE MANAGEMENT ============ */
 const state = {
   theme: localStorage.getItem('ek-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
   favorites: JSON.parse(localStorage.getItem('ek-favorites') || '[]'),
@@ -1137,7 +1241,7 @@ mobileMenu.addEventListener('click', e => {
   }
 });
 
-/* ============ UTILITY FUNCTIONS (FIXED) ============ */
+/* ============ UTILITY FUNCTIONS ============ */
 function formatBytes(bytes) {
   if (bytes < 1024) return bytes + ' B';
   if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
@@ -1145,41 +1249,9 @@ function formatBytes(bytes) {
   return (bytes/1024/1024/1024).toFixed(2) + ' GB';
 }
 
-// FIXED: Universal number formatter - handles all sizes properly
 function fmtNum(n) {
   if (!isFinite(n)) return '—';
-  if (n === 0) return '0';
-  if (isNaN(n)) return '—';
-  
-  const absN = Math.abs(n);
-  
-  // Very small numbers (use scientific notation)
-  if (absN > 0 && absN < 0.000001) {
-    return n.toExponential(6);
-  }
-  
-  // Small numbers (high precision)
-  if (absN < 1) {
-    const str = n.toPrecision(6);
-    return parseFloat(str).toString();
-  }
-  
-  // Medium numbers (1 to 999.9999)
-  if (absN < 1000) {
-    const str = n.toPrecision(8);
-    return parseFloat(str).toString();
-  }
-  
-  // Large numbers (1000+) with commas
-  if (absN < 1e15) {
-    return n.toLocaleString(undefined, { 
-      maximumFractionDigits: 4,
-      minimumFractionDigits: 0
-    });
-  }
-  
-  // Very large numbers (scientific notation)
-  return n.toExponential(6);
+  return Math.abs(n) >= 1000 ? n.toLocaleString(undefined, { maximumFractionDigits: 2 }) : +n.toFixed(4) + '';
 }
 
 function pad(n, len) { return String(n).padStart(len, '0'); }
@@ -1338,8 +1410,7 @@ const TOOLS = [
   { id: 'gradient', name: 'Gradient Generator', cat: 'design', icon: 'palette', desc: 'Create beautiful CSS gradients with presets', keywords: ['css gradient','linear gradient','presets'] },
   { id: 'color-converter', name: 'Color Converter', cat: 'design', icon: 'palette', desc: 'Convert between HEX, RGB, HSL', keywords: ['hex to rgb','rgb to hex'] },
 ];
-
-/* ============ ROUTER ============ */
+  /* ============ ROUTER ============ */
 const app = document.getElementById('app');
 
 function parseRoute() {
@@ -1701,8 +1772,7 @@ function renderPopular() {
   `;
   attachToolCardEvents(app);
 }
-
-/* ============ CATEGORIES PAGE ============ */
+  /* ============ CATEGORIES PAGE ============ */
 function renderCategories() {
   document.title = 'Categories — EverydayKit';
   app.innerHTML = `
@@ -1744,7 +1814,8 @@ function renderCategoryPage(catId) {
   `;
   attachToolCardEvents(app);
 }
-  /* ============ FAVORITES PAGE ============ */
+
+/* ============ FAVORITES PAGE ============ */
 function renderFavorites() {
   document.title = 'Favorites — EverydayKit';
   const favs = state.favorites.map(id => TOOLS.find(t => t.id === id)).filter(Boolean);
@@ -2231,7 +2302,7 @@ TOOL_RENDERERS['image-to-pdf'] = () => `
     <div class="uploader" id="uploader">
       <div class="uploader-icon">${ICONS.upload}</div>
       <div class="uploader-title">Drop images here or click to select</div>
-      <div class="uploader-desc">Multiple images allowed · JPG, PNG</div>
+      <div class="uploader-desc">Multiple images allowed · JPG, PNG, WebP</div>
       <input type="file" id="fileInput" accept="image/*" multiple />
     </div>
     <div id="fileList" class="hidden mt-4"></div>
@@ -2322,7 +2393,8 @@ TOOL_INIT['image-to-pdf'] = async () => {
     progress.classList.add('hidden');
   });
 };
-  /* ============ PDF MERGE ============ */
+
+/* ============ PDF MERGE ============ */
 TOOL_RENDERERS['pdf-merge'] = () => `
   <div class="tool-panel">
     <div class="uploader" id="uploader">
@@ -2536,22 +2608,22 @@ TOOL_RENDERERS['percentage'] = () => `
   </div>
   <div class="tool-panel" id="panel1">
     <div class="form-row form-row-2">
-      <div class="form-group"><label class="form-label">Percentage (%)</label><input class="input" type="number" id="p1x" placeholder="20" step="any" /></div>
-      <div class="form-group"><label class="form-label">Of value</label><input class="input" type="number" id="p1y" placeholder="200" step="any" /></div>
+      <div class="form-group"><label class="form-label">Percentage (%)</label><input class="input" type="number" id="p1x" placeholder="20" /></div>
+      <div class="form-group"><label class="form-label">Of value</label><input class="input" type="number" id="p1y" placeholder="200" /></div>
     </div>
     <div class="result-highlight"><span>Result</span><span id="p1r">—</span></div>
   </div>
   <div class="tool-panel hidden" id="panel2">
     <div class="form-row form-row-2">
-      <div class="form-group"><label class="form-label">Value</label><input class="input" type="number" id="p2x" placeholder="40" step="any" /></div>
-      <div class="form-group"><label class="form-label">Of total</label><input class="input" type="number" id="p2y" placeholder="200" step="any" /></div>
+      <div class="form-group"><label class="form-label">Value</label><input class="input" type="number" id="p2x" placeholder="40" /></div>
+      <div class="form-group"><label class="form-label">Of total</label><input class="input" type="number" id="p2y" placeholder="200" /></div>
     </div>
     <div class="result-highlight"><span>Percentage</span><span id="p2r">—</span></div>
   </div>
   <div class="tool-panel hidden" id="panel3">
     <div class="form-row form-row-2">
-      <div class="form-group"><label class="form-label">From</label><input class="input" type="number" id="p3a" placeholder="100" step="any" /></div>
-      <div class="form-group"><label class="form-label">To</label><input class="input" type="number" id="p3b" placeholder="125" step="any" /></div>
+      <div class="form-group"><label class="form-label">From</label><input class="input" type="number" id="p3a" placeholder="100" /></div>
+      <div class="form-group"><label class="form-label">To</label><input class="input" type="number" id="p3b" placeholder="125" /></div>
     </div>
     <div class="result-highlight"><span>Change</span><span id="p3r">—</span></div>
   </div>
@@ -2563,26 +2635,9 @@ TOOL_INIT['percentage'] = () => {
     ['panel1','panel2','panel3'].forEach(id => document.getElementById(id).classList.add('hidden'));
     document.getElementById('panel' + t.dataset.tab).classList.remove('hidden');
   }));
-  const calc1 = () => {
-    const x = parseFloat(document.getElementById('p1x').value);
-    const y = parseFloat(document.getElementById('p1y').value);
-    document.getElementById('p1r').textContent = (!isNaN(x) && !isNaN(y)) ? fmtNum(x/100*y) : '—';
-  };
-  const calc2 = () => {
-    const x = parseFloat(document.getElementById('p2x').value);
-    const y = parseFloat(document.getElementById('p2y').value);
-    document.getElementById('p2r').textContent = (!isNaN(x) && !isNaN(y) && y !== 0) ? fmtNum(x/y*100) + '%' : '—';
-  };
-  const calc3 = () => {
-    const a = parseFloat(document.getElementById('p3a').value);
-    const b = parseFloat(document.getElementById('p3b').value);
-    if (!isNaN(a) && !isNaN(b) && a !== 0) {
-      const p = (b-a)/a*100;
-      document.getElementById('p3r').textContent = (p>0?'+':'') + fmtNum(p) + '%';
-    } else {
-      document.getElementById('p3r').textContent = '—';
-    }
-  };
+  const calc1 = () => { const x = parseFloat(document.getElementById('p1x').value), y = parseFloat(document.getElementById('p1y').value); document.getElementById('p1r').textContent = (!isNaN(x) && !isNaN(y)) ? fmtNum(x/100*y) : '—'; };
+  const calc2 = () => { const x = parseFloat(document.getElementById('p2x').value), y = parseFloat(document.getElementById('p2y').value); document.getElementById('p2r').textContent = (!isNaN(x) && !isNaN(y) && y !== 0) ? fmtNum(x/y*100) + '%' : '—'; };
+  const calc3 = () => { const a = parseFloat(document.getElementById('p3a').value), b = parseFloat(document.getElementById('p3b').value); if (!isNaN(a) && !isNaN(b) && a !== 0) { const p = (b-a)/a*100; document.getElementById('p3r').textContent = (p>0?'+':'') + fmtNum(p) + '%'; } else document.getElementById('p3r').textContent = '—'; };
   ['p1x','p1y'].forEach(id => document.getElementById(id).addEventListener('input', calc1));
   ['p2x','p2y'].forEach(id => document.getElementById(id).addEventListener('input', calc2));
   ['p3a','p3b'].forEach(id => document.getElementById(id).addEventListener('input', calc3));
@@ -2592,8 +2647,8 @@ TOOL_INIT['percentage'] = () => {
 TOOL_RENDERERS['discount'] = () => `
   <div class="tool-panel">
     <div class="form-row form-row-2">
-      <div class="form-group"><label class="form-label">Original price</label><input class="input" type="number" id="d-price" placeholder="1000" step="any" /></div>
-      <div class="form-group"><label class="form-label">Discount (%)</label><input class="input" type="number" id="d-disc" placeholder="20" step="any" /></div>
+      <div class="form-group"><label class="form-label">Original price</label><input class="input" type="number" id="d-price" placeholder="1000" /></div>
+      <div class="form-group"><label class="form-label">Discount (%)</label><input class="input" type="number" id="d-disc" placeholder="20" /></div>
     </div>
     <div class="result-box">
       <div class="result-row"><span class="result-label">You save</span><span class="result-value" id="d-save">—</span></div>
@@ -2605,11 +2660,7 @@ TOOL_INIT['discount'] = () => {
   const calc = () => {
     const p = parseFloat(document.getElementById('d-price').value);
     const d = parseFloat(document.getElementById('d-disc').value);
-    if (isNaN(p) || isNaN(d)) {
-      document.getElementById('d-save').textContent = '—';
-      document.getElementById('d-final').textContent = '—';
-      return;
-    }
+    if (isNaN(p) || isNaN(d)) { document.getElementById('d-save').textContent = '—'; document.getElementById('d-final').textContent = '—'; return; }
     const save = p * d / 100;
     document.getElementById('d-save').textContent = fmtNum(save);
     document.getElementById('d-final').textContent = fmtNum(p - save);
@@ -2624,22 +2675,20 @@ TOOL_RENDERERS['gst'] = () => `
     <div class="form-row form-row-2">
       <div class="form-group">
         <label class="form-label">Amount</label>
-        <input class="input" type="number" id="g-amt" placeholder="1000" step="any" />
+        <input class="input" type="number" id="g-amt" placeholder="1000" />
       </div>
       <div class="form-group">
         <label class="form-label">GST rate (%)</label>
         <select class="select" id="g-rate">
-          <option value="5">5%</option>
-          <option value="12">12%</option>
-          <option value="18" selected>18%</option>
-          <option value="28">28%</option>
+          <option value="5">5%</option><option value="12">12%</option>
+          <option value="18" selected>18%</option><option value="28">28%</option>
           <option value="custom">Custom</option>
         </select>
       </div>
     </div>
     <div class="form-group hidden" id="customWrap">
       <label class="form-label">Custom rate (%)</label>
-      <input class="input" type="number" id="g-custom" step="any" />
+      <input class="input" type="number" id="g-custom" />
     </div>
     <div class="tabs" role="tablist">
       <button class="tab active" data-mode="add">Add GST</button>
@@ -2667,16 +2716,10 @@ TOOL_INIT['gst'] = () => {
   const calc = () => {
     const amt = parseFloat(document.getElementById('g-amt').value);
     const r = getRate();
-    if (isNaN(amt) || isNaN(r)) {
-      ['g-net','g-gst','g-total'].forEach(id => document.getElementById(id).textContent = '—');
-      return;
-    }
+    if (isNaN(amt) || isNaN(r)) { ['g-net','g-gst','g-total'].forEach(id => document.getElementById(id).textContent = '—'); return; }
     let net, gst, total;
-    if (mode === 'add') {
-      net = amt; gst = amt * r / 100; total = amt + gst;
-    } else {
-      total = amt; net = amt * 100 / (100 + r); gst = amt - net;
-    }
+    if (mode === 'add') { net = amt; gst = amt * r / 100; total = amt + gst; }
+    else { total = amt; net = amt * 100 / (100 + r); gst = amt - net; }
     document.getElementById('g-net').textContent = fmtNum(net);
     document.getElementById('g-gst').textContent = fmtNum(gst);
     document.getElementById('g-total').textContent = fmtNum(total);
@@ -2689,9 +2732,9 @@ TOOL_INIT['gst'] = () => {
 TOOL_RENDERERS['emi'] = () => `
   <div class="tool-panel">
     <div class="form-row form-row-3">
-      <div class="form-group"><label class="form-label">Loan amount</label><input class="input" type="number" id="e-principal" placeholder="500000" step="any" /></div>
+      <div class="form-group"><label class="form-label">Loan amount</label><input class="input" type="number" id="e-principal" placeholder="500000" /></div>
       <div class="form-group"><label class="form-label">Interest rate (% per year)</label><input class="input" type="number" id="e-rate" placeholder="8.5" step="0.01" /></div>
-      <div class="form-group"><label class="form-label">Duration (months)</label><input class="input" type="number" id="e-months" placeholder="60" step="1" /></div>
+      <div class="form-group"><label class="form-label">Duration (months)</label><input class="input" type="number" id="e-months" placeholder="60" /></div>
     </div>
     <div class="result-box">
       <div class="result-row"><span class="result-label">Monthly EMI</span><span class="result-value" id="e-emi">—</span></div>
@@ -2706,7 +2749,7 @@ TOOL_INIT['emi'] = () => {
     const P = parseFloat(document.getElementById('e-principal').value);
     const annual = parseFloat(document.getElementById('e-rate').value);
     const N = parseFloat(document.getElementById('e-months').value);
-    if (isNaN(P) || isNaN(annual) || isNaN(N) || N <= 0 || P < 0) {
+    if (isNaN(P) || isNaN(annual) || isNaN(N) || N <= 0) {
       ['e-emi','e-interest','e-total'].forEach(id => document.getElementById(id).textContent = '—');
       document.getElementById('e-chart').innerHTML = '';
       return;
@@ -2722,7 +2765,7 @@ TOOL_INIT['emi'] = () => {
     const interestPct = interest / total * 100;
     document.getElementById('e-chart').innerHTML = `
       <div class="text-sm text-muted mb-2">Payment breakdown</div>
-      <div style="display:flex;height:28px;border-radius:10px;overflow:hidden;background:var(--surface-2)">
+      <div style="display:flex;height:28px;border-radius:10px;overflow:hidden;background:var(--surface-2);box-shadow:var(--shadow-sm)">
         <div style="width:${principalPct}%;background:var(--gradient-primary)" title="Principal"></div>
         <div style="width:${interestPct}%;background:var(--gradient-warm)" title="Interest"></div>
       </div>
@@ -2734,7 +2777,8 @@ TOOL_INIT['emi'] = () => {
   };
   ['e-principal','e-rate','e-months'].forEach(id => document.getElementById(id).addEventListener('input', calc));
 };
-  /* ============ AGE CALCULATOR ============ */
+
+/* ============ AGE CALCULATOR ============ */
 TOOL_RENDERERS['age'] = () => `
   <div class="tool-panel">
     <div class="form-group">
@@ -2748,8 +2792,6 @@ TOOL_RENDERERS['age'] = () => `
     </div>
     <div class="result-box">
       <div class="result-row"><span class="result-label">Total days</span><span class="result-value" id="a-total-days">—</span></div>
-      <div class="result-row"><span class="result-label">Total weeks</span><span class="result-value" id="a-total-weeks">—</span></div>
-      <div class="result-row"><span class="result-label">Total months</span><span class="result-value" id="a-total-months">—</span></div>
       <div class="result-row"><span class="result-label">Next birthday in</span><span class="result-value" id="a-next">—</span></div>
     </div>
   </div>
@@ -2757,10 +2799,7 @@ TOOL_RENDERERS['age'] = () => `
 TOOL_INIT['age'] = () => {
   const calc = () => {
     const val = document.getElementById('a-dob').value;
-    if (!val) { 
-      ['a-years','a-months','a-days','a-total-days','a-total-weeks','a-total-months','a-next'].forEach(id => document.getElementById(id).textContent = '—'); 
-      return; 
-    }
+    if (!val) { ['a-years','a-months','a-days','a-total-days','a-next'].forEach(id => document.getElementById(id).textContent = '—'); return; }
     const dob = new Date(val);
     const now = new Date();
     if (dob > now) { toast('Date of birth cannot be in the future', 'error'); return; }
@@ -2774,8 +2813,6 @@ TOOL_INIT['age'] = () => {
     document.getElementById('a-days').textContent = days;
     const totalDays = Math.floor((now - dob) / 86400000);
     document.getElementById('a-total-days').textContent = totalDays.toLocaleString();
-    document.getElementById('a-total-weeks').textContent = Math.floor(totalDays / 7).toLocaleString();
-    document.getElementById('a-total-months').textContent = (years * 12 + months).toLocaleString();
     let next = new Date(now.getFullYear(), dob.getMonth(), dob.getDate());
     if (next < now) next.setFullYear(now.getFullYear() + 1);
     const daysToNext = Math.ceil((next - now) / 86400000);
@@ -2788,9 +2825,9 @@ TOOL_INIT['age'] = () => {
 TOOL_RENDERERS['tip'] = () => `
   <div class="tool-panel">
     <div class="form-row form-row-3">
-      <div class="form-group"><label class="form-label">Bill amount</label><input class="input" type="number" id="t-bill" placeholder="100" step="any" /></div>
-      <div class="form-group"><label class="form-label">Tip (%)</label><input class="input" type="number" id="t-tip" placeholder="15" step="any" /></div>
-      <div class="form-group"><label class="form-label">Split between</label><input class="input" type="number" id="t-people" placeholder="1" min="1" value="1" step="1" /></div>
+      <div class="form-group"><label class="form-label">Bill amount</label><input class="input" type="number" id="t-bill" placeholder="100" /></div>
+      <div class="form-group"><label class="form-label">Tip (%)</label><input class="input" type="number" id="t-tip" placeholder="15" /></div>
+      <div class="form-group"><label class="form-label">Split between</label><input class="input" type="number" id="t-people" placeholder="1" min="1" value="1" /></div>
     </div>
     <div class="result-box">
       <div class="result-row"><span class="result-label">Tip amount</span><span class="result-value" id="t-amt">—</span></div>
@@ -2822,12 +2859,12 @@ TOOL_RENDERERS['bill-splitter'] = () => `
       <textarea class="textarea" id="b-items" placeholder="Pizza 400 2&#10;Drinks 100 3&#10;Dessert 200 1"></textarea>
     </div>
     <div class="form-row form-row-2">
-      <div class="form-group"><label class="form-label">Tax (%)</label><input class="input" type="number" id="b-tax" value="0" step="any" /></div>
-      <div class="form-group"><label class="form-label">Tip (%)</label><input class="input" type="number" id="b-tip" value="0" step="any" /></div>
+      <div class="form-group"><label class="form-label">Tax (%)</label><input class="input" type="number" id="b-tax" value="0" /></div>
+      <div class="form-group"><label class="form-label">Tip (%)</label><input class="input" type="number" id="b-tip" value="0" /></div>
     </div>
     <div class="form-group">
       <label class="form-label">Number of people</label>
-      <input class="input" type="number" id="b-people" value="2" min="1" step="1" />
+      <input class="input" type="number" id="b-people" value="2" min="1" />
     </div>
     <button class="btn btn-primary btn-block" id="b-calc">Calculate split</button>
     <div id="b-result" class="mt-4"></div>
@@ -2868,70 +2905,59 @@ TOOL_INIT['bill-splitter'] = () => {
       </div>
     `;
   });
-};
-  /* ============ GENERIC UNIT CONVERTER (FIXED) ============ */
-function unitConverterHTML(units, defaultTo = 1) {
+}; 
+  /* ============ GENERIC UNIT CONVERTER ============ */
+function unitConverterHTML(units) {
   return `
     <div class="tool-panel">
       <div class="converter">
         <div>
           <label class="form-label">From</label>
-          <input class="input" type="number" id="cv-from" placeholder="0" step="any" />
+          <input class="input" type="number" id="cv-from" placeholder="0" />
           <select class="select mt-2" id="cv-from-unit">${units.map(u => `<option value="${u.id}">${u.label}</option>`).join('')}</select>
         </div>
         <button class="converter-swap" id="cv-swap" aria-label="Swap units">${ICONS.convert}</button>
         <div>
           <label class="form-label">To</label>
-          <input class="input" type="text" id="cv-to" placeholder="0" readonly />
-          <select class="select mt-2" id="cv-to-unit">${units.map((u,i) => `<option value="${u.id}" ${i===defaultTo?'selected':''}>${u.label}</option>`).join('')}</select>
+          <input class="input" type="number" id="cv-to" placeholder="0" readonly />
+          <select class="select mt-2" id="cv-to-unit">${units.map((u,i) => `<option value="${u.id}" ${i===1?'selected':''}>${u.label}</option>`).join('')}</select>
         </div>
       </div>
-      <div class="form-hint mt-3">💡 Tip: type in either box to convert both ways.</div>
+      <div class="form-hint mt-3">Tip: type in either box to convert both ways.</div>
     </div>
   `;
 }
-
 function initUnitConverter(units) {
   const fromInput = document.getElementById('cv-from');
   const toInput = document.getElementById('cv-to');
   const fromUnit = document.getElementById('cv-from-unit');
   const toUnit = document.getElementById('cv-to-unit');
   const swap = document.getElementById('cv-swap');
-  
   function convert(val, from, to) {
     const fromFactor = units.find(u => u.id === from).factor;
     const toFactor = units.find(u => u.id === to).factor;
     return (val * fromFactor) / toFactor;
   }
-  
   const updateFrom = () => {
     const v = parseFloat(fromInput.value);
-    if (fromInput.value === '' || isNaN(v)) { toInput.value = ''; return; }
+    if (isNaN(v)) { toInput.value = ''; return; }
     toInput.value = fmtNum(convert(v, fromUnit.value, toUnit.value));
   };
-  
   const updateTo = () => {
     const v = parseFloat(toInput.value);
-    if (toInput.value === '' || isNaN(v)) { fromInput.value = ''; return; }
+    if (isNaN(v)) { fromInput.value = ''; return; }
     fromInput.value = fmtNum(convert(v, toUnit.value, fromUnit.value));
   };
-  
   fromInput.addEventListener('input', updateFrom);
   toInput.addEventListener('input', updateTo);
   fromUnit.addEventListener('change', updateFrom);
   toUnit.addEventListener('change', updateFrom);
-  
   swap.addEventListener('click', () => {
-    const tmpUnit = fromUnit.value;
-    const tmpVal = fromInput.value;
-    fromUnit.value = toUnit.value;
-    fromInput.value = toInput.value;
-    toUnit.value = tmpUnit;
-    toInput.value = tmpVal;
+    const tmp = fromUnit.value; fromUnit.value = toUnit.value; toUnit.value = tmp;
+    updateFrom();
   });
 }
 
-/* ============ LENGTH CONVERTER ============ */
 const LENGTH_UNITS = [
   { id: 'mm', label: 'Millimeter (mm)', factor: 0.001 },
   { id: 'cm', label: 'Centimeter (cm)', factor: 0.01 },
@@ -2941,25 +2967,22 @@ const LENGTH_UNITS = [
   { id: 'ft', label: 'Foot (ft)', factor: 0.3048 },
   { id: 'yd', label: 'Yard (yd)', factor: 0.9144 },
   { id: 'mi', label: 'Mile (mi)', factor: 1609.344 },
-  { id: 'nmi', label: 'Nautical Mile', factor: 1852 },
 ];
 TOOL_RENDERERS['length'] = () => unitConverterHTML(LENGTH_UNITS);
 TOOL_INIT['length'] = () => initUnitConverter(LENGTH_UNITS);
 
-/* ============ WEIGHT CONVERTER ============ */
 const WEIGHT_UNITS = [
   { id: 'mg', label: 'Milligram (mg)', factor: 0.000001 },
   { id: 'g', label: 'Gram (g)', factor: 0.001 },
   { id: 'kg', label: 'Kilogram (kg)', factor: 1 },
   { id: 't', label: 'Metric ton (t)', factor: 1000 },
-  { id: 'oz', label: 'Ounce (oz)', factor: 0.028349523125 },
-  { id: 'lb', label: 'Pound (lb)', factor: 0.45359237 },
-  { id: 'st', label: 'Stone (st)', factor: 6.35029318 },
+  { id: 'oz', label: 'Ounce (oz)', factor: 0.0283495 },
+  { id: 'lb', label: 'Pound (lb)', factor: 0.453592 },
+  { id: 'st', label: 'Stone (st)', factor: 6.35029 },
 ];
 TOOL_RENDERERS['weight'] = () => unitConverterHTML(WEIGHT_UNITS);
 TOOL_INIT['weight'] = () => initUnitConverter(WEIGHT_UNITS);
 
-/* ============ AREA CONVERTER ============ */
 const AREA_UNITS = [
   { id: 'mm2', label: 'Square mm', factor: 0.000001 },
   { id: 'cm2', label: 'Square cm', factor: 0.0001 },
@@ -2967,42 +2990,36 @@ const AREA_UNITS = [
   { id: 'ha', label: 'Hectare', factor: 10000 },
   { id: 'km2', label: 'Square km', factor: 1000000 },
   { id: 'in2', label: 'Square inch', factor: 0.00064516 },
-  { id: 'ft2', label: 'Square foot', factor: 0.09290304 },
-  { id: 'yd2', label: 'Square yard', factor: 0.83612736 },
-  { id: 'ac', label: 'Acre', factor: 4046.8564224 },
+  { id: 'ft2', label: 'Square foot', factor: 0.092903 },
+  { id: 'ac', label: 'Acre', factor: 4046.86 },
 ];
 TOOL_RENDERERS['area'] = () => unitConverterHTML(AREA_UNITS);
 TOOL_INIT['area'] = () => initUnitConverter(AREA_UNITS);
 
-/* ============ VOLUME CONVERTER ============ */
 const VOLUME_UNITS = [
   { id: 'ml', label: 'Milliliter (ml)', factor: 0.001 },
   { id: 'l', label: 'Liter (l)', factor: 1 },
   { id: 'm3', label: 'Cubic meter', factor: 1000 },
-  { id: 'tsp', label: 'Teaspoon (US)', factor: 0.00492892159 },
-  { id: 'tbsp', label: 'Tablespoon (US)', factor: 0.01478676478 },
-  { id: 'floz', label: 'Fluid oz (US)', factor: 0.0295735296 },
-  { id: 'cup', label: 'Cup (US)', factor: 0.2365882365 },
-  { id: 'pt', label: 'Pint (US)', factor: 0.473176473 },
-  { id: 'qt', label: 'Quart (US)', factor: 0.946352946 },
-  { id: 'gal', label: 'Gallon (US)', factor: 3.785411784 },
+  { id: 'tsp', label: 'Teaspoon', factor: 0.00492892 },
+  { id: 'tbsp', label: 'Tablespoon', factor: 0.0147868 },
+  { id: 'cup', label: 'Cup (US)', factor: 0.24 },
+  { id: 'pt', label: 'Pint (US)', factor: 0.473176 },
+  { id: 'qt', label: 'Quart (US)', factor: 0.946353 },
+  { id: 'gal', label: 'Gallon (US)', factor: 3.78541 },
 ];
 TOOL_RENDERERS['volume'] = () => unitConverterHTML(VOLUME_UNITS);
 TOOL_INIT['volume'] = () => initUnitConverter(VOLUME_UNITS);
 
-/* ============ SPEED CONVERTER ============ */
 const SPEED_UNITS = [
   { id: 'mps', label: 'Meter/second', factor: 1 },
-  { id: 'kmh', label: 'Kilometer/hour', factor: 0.277777778 },
+  { id: 'kmh', label: 'Kilometer/hour', factor: 0.277778 },
   { id: 'mph', label: 'Mile/hour', factor: 0.44704 },
   { id: 'fps', label: 'Foot/second', factor: 0.3048 },
-  { id: 'knot', label: 'Knot', factor: 0.514444444 },
-  { id: 'mach', label: 'Mach (at sea level)', factor: 343 },
+  { id: 'knot', label: 'Knot', factor: 0.514444 },
 ];
 TOOL_RENDERERS['speed'] = () => unitConverterHTML(SPEED_UNITS);
 TOOL_INIT['speed'] = () => initUnitConverter(SPEED_UNITS);
 
-/* ============ TIME CONVERTER ============ */
 const TIME_UNITS = [
   { id: 'ms', label: 'Millisecond', factor: 0.001 },
   { id: 's', label: 'Second', factor: 1 },
@@ -3015,29 +3032,25 @@ const TIME_UNITS = [
 ];
 TOOL_RENDERERS['time-conv'] = () => unitConverterHTML(TIME_UNITS);
 TOOL_INIT['time-conv'] = () => initUnitConverter(TIME_UNITS);
-  /* ============ DATA STORAGE CONVERTER (FIXED) ============ */
+
 const DATA_UNITS = [
-  { id: 'bit', label: 'Bit (b)', factor: 0.125 },
   { id: 'b', label: 'Byte (B)', factor: 1 },
   { id: 'kb', label: 'Kilobyte (KB)', factor: 1024 },
-  { id: 'mb', label: 'Megabyte (MB)', factor: 1048576 },
-  { id: 'gb', label: 'Gigabyte (GB)', factor: 1073741824 },
-  { id: 'tb', label: 'Terabyte (TB)', factor: 1099511627776 },
-  { id: 'pb', label: 'Petabyte (PB)', factor: 1125899906842624 },
-  { id: 'kbit', label: 'Kilobit (Kb)', factor: 128 },
-  { id: 'mbit', label: 'Megabit (Mb)', factor: 131072 },
-  { id: 'gbit', label: 'Gigabit (Gb)', factor: 134217728 },
+  { id: 'mb', label: 'Megabyte (MB)', factor: 1024**2 },
+  { id: 'gb', label: 'Gigabyte (GB)', factor: 1024**3 },
+  { id: 'tb', label: 'Terabyte (TB)', factor: 1024**4 },
+  { id: 'pb', label: 'Petabyte (PB)', factor: 1024**5 },
+  { id: 'bit', label: 'Bit', factor: 0.125 },
 ];
 TOOL_RENDERERS['data'] = () => unitConverterHTML(DATA_UNITS);
 TOOL_INIT['data'] = () => initUnitConverter(DATA_UNITS);
-
-/* ============ TEMPERATURE CONVERTER ============ */
+  /* ============ TEMPERATURE ============ */
 TOOL_RENDERERS['temperature'] = () => `
   <div class="tool-panel">
     <div class="converter">
       <div>
         <label class="form-label">From</label>
-        <input class="input" type="number" id="cv-from" placeholder="0" step="any" />
+        <input class="input" type="number" id="cv-from" placeholder="0" />
         <select class="select mt-2" id="cv-from-unit">
           <option value="C">Celsius (°C)</option>
           <option value="F">Fahrenheit (°F)</option>
@@ -3047,7 +3060,7 @@ TOOL_RENDERERS['temperature'] = () => `
       <button class="converter-swap" id="cv-swap" aria-label="Swap units">${ICONS.convert}</button>
       <div>
         <label class="form-label">To</label>
-        <input class="input" type="text" id="cv-to" placeholder="0" readonly />
+        <input class="input" type="number" id="cv-to" placeholder="0" readonly />
         <select class="select mt-2" id="cv-to-unit">
           <option value="C">Celsius (°C)</option>
           <option value="F" selected>Fahrenheit (°F)</option>
@@ -3063,58 +3076,42 @@ TOOL_INIT['temperature'] = () => {
   const fromUnit = document.getElementById('cv-from-unit');
   const toUnit = document.getElementById('cv-to-unit');
   const swap = document.getElementById('cv-swap');
-  
-  function toC(v, u) {
-    if (u === 'C') return v;
-    if (u === 'F') return (v - 32) * 5 / 9;
-    return v - 273.15; // K
-  }
-  function fromC(c, u) {
-    if (u === 'C') return c;
-    if (u === 'F') return c * 9 / 5 + 32;
-    return c + 273.15; // K
-  }
-  
+  function toC(v, u) { return u === 'C' ? v : u === 'F' ? (v-32)*5/9 : v - 273.15; }
+  function fromC(c, u) { return u === 'C' ? c : u === 'F' ? c*9/5 + 32 : c + 273.15; }
   const updateFrom = () => {
     const v = parseFloat(fromInput.value);
-    if (fromInput.value === '' || isNaN(v)) { toInput.value = ''; return; }
+    if (isNaN(v)) { toInput.value = ''; return; }
     toInput.value = fmtNum(fromC(toC(v, fromUnit.value), toUnit.value));
   };
   const updateTo = () => {
     const v = parseFloat(toInput.value);
-    if (toInput.value === '' || isNaN(v)) { fromInput.value = ''; return; }
+    if (isNaN(v)) { fromInput.value = ''; return; }
     fromInput.value = fmtNum(fromC(toC(v, toUnit.value), fromUnit.value));
   };
-  
   fromInput.addEventListener('input', updateFrom);
   toInput.addEventListener('input', updateTo);
   fromUnit.addEventListener('change', updateFrom);
   toUnit.addEventListener('change', updateFrom);
-  
   swap.addEventListener('click', () => {
-    const tmpUnit = fromUnit.value;
-    const tmpVal = fromInput.value;
-    fromUnit.value = toUnit.value;
-    fromInput.value = toInput.value;
-    toUnit.value = tmpUnit;
-    toInput.value = tmpVal;
+    const tmp = fromUnit.value; fromUnit.value = toUnit.value; toUnit.value = tmp;
+    updateFrom();
   });
 };
 
-/* ============ CURRENCY CONVERTER ============ */
-const CURRENCIES = ['USD','EUR','GBP','JPY','INR','CAD','AUD','CHF','CNY','SGD','HKD','NZD','KRW','BRL','RUB','ZAR','MXN','AED','SAR','TRY','SEK','NOK','DKK','PLN','THB','IDR','HUF','CZK','ILS','PHP'];
+/* ============ CURRENCY ============ */
+const CURRENCIES = ['USD','EUR','GBP','JPY','INR','CAD','AUD','CHF','CNY','SGD','HKD','NZD','KRW','BRL','RUB','ZAR','MXN','AED','SAR','TRY'];
 TOOL_RENDERERS['currency'] = () => `
   <div class="tool-panel">
     <div class="converter">
       <div>
         <label class="form-label">From</label>
-        <input class="input" type="number" id="cv-from" placeholder="100" step="any" />
+        <input class="input" type="number" id="cv-from" placeholder="100" />
         <select class="select mt-2" id="cv-from-unit">${CURRENCIES.map(c => `<option value="${c}" ${c==='USD'?'selected':''}>${c}</option>`).join('')}</select>
       </div>
       <button class="converter-swap" id="cv-swap" aria-label="Swap currencies">${ICONS.convert}</button>
       <div>
         <label class="form-label">To</label>
-        <input class="input" type="text" id="cv-to" placeholder="" readonly />
+        <input class="input" type="number" id="cv-to" placeholder="" readonly />
         <select class="select mt-2" id="cv-to-unit">${CURRENCIES.map((c,i) => `<option value="${c}" ${i===1?'selected':''}>${c}</option>`).join('')}</select>
       </div>
     </div>
@@ -3129,7 +3126,6 @@ TOOL_INIT['currency'] = async () => {
   const swap = document.getElementById('cv-swap');
   const status = document.getElementById('fx-status');
   let rates = null;
-  
   async function loadRates() {
     try {
       const res = await fetch('https://api.frankfurter.app/latest');
@@ -3137,43 +3133,34 @@ TOOL_INIT['currency'] = async () => {
       const data = await res.json();
       rates = data.rates;
       rates['EUR'] = 1;
-      status.innerHTML = `✅ Live rates · Updated <strong>${new Date().toLocaleTimeString()}</strong>`;
-      status.style.color = 'var(--success)';
+      status.textContent = `Live rates · Updated ${new Date().toLocaleTimeString()}`;
     } catch (err) {
-      status.textContent = '⚠️ Could not fetch live rates. Check your internet connection.';
+      status.textContent = 'Could not fetch live rates. Check your internet connection.';
       status.style.color = 'var(--danger)';
     }
   }
   await loadRates();
-  
   function convert(v, from, to) {
     if (!rates) return null;
-    if (!rates[from] || !rates[to]) return null;
-    if (from === 'EUR') return v * rates[to];
-    return (v / rates[from]) * rates[to];
+    if (from === 'EUR') return v * (rates[to] || 0);
+    return (v / (rates[from] || 1)) * (rates[to] || 0);
   }
-  
   const updateFrom = () => {
     const v = parseFloat(fromInput.value);
-    if (fromInput.value === '' || isNaN(v) || !rates) { toInput.value = ''; return; }
+    if (isNaN(v) || !rates) { toInput.value = ''; return; }
     const r = convert(v, fromUnit.value, toUnit.value);
-    toInput.value = r !== null ? fmtNum(r) : '—';
+    toInput.value = r !== null ? fmtNum(r) : '';
   };
-  
   fromInput.addEventListener('input', updateFrom);
   fromUnit.addEventListener('change', updateFrom);
   toUnit.addEventListener('change', updateFrom);
-  
   swap.addEventListener('click', () => {
-    const tmpUnit = fromUnit.value;
-    const tmpVal = fromInput.value;
-    fromUnit.value = toUnit.value;
-    fromInput.value = toInput.value;
-    toUnit.value = tmpUnit;
-    toInput.value = tmpVal;
+    const tmp = fromUnit.value; fromUnit.value = toUnit.value; toUnit.value = tmp;
+    updateFrom();
   });
 };
-  /* ============ QR TOOLS - BASE HELPER ============ */
+
+/* ============ QR TOOLS (Base) ============ */
 function qrToolHTML(fields) {
   return `
     <div class="tool-panel">
@@ -3187,10 +3174,10 @@ function qrToolHTML(fields) {
         <div class="form-group">
           <label class="form-label">Error correction</label>
           <select class="select" id="qr-ec">
-            <option value="L">Low (L) - 7%</option>
-            <option value="M" selected>Medium (M) - 15%</option>
-            <option value="Q">Quartile (Q) - 25%</option>
-            <option value="H">High (H) - 30%</option>
+            <option value="L">Low (L)</option>
+            <option value="M" selected>Medium (M)</option>
+            <option value="Q">Quartile (Q)</option>
+            <option value="H">High (H)</option>
           </select>
         </div>
       </div>
@@ -3206,7 +3193,6 @@ function qrToolHTML(fields) {
     </div>
   `;
 }
-
 function initQRTool(buildFn) {
   const size = document.getElementById('qr-size');
   const sizeVal = document.getElementById('qr-size-val');
@@ -3215,85 +3201,60 @@ function initQRTool(buildFn) {
   const result = document.getElementById('qr-result');
   const imgDiv = document.getElementById('qr-img');
   let currentText = '';
-  
   size.addEventListener('input', () => sizeVal.textContent = size.value);
-  
-  function getEcLevel() {
-    return { 'L': 1, 'M': 0, 'Q': 3, 'H': 2 }[ec.value];
-  }
-  
-  function renderQR(text, px) {
-    const qr = qrcode(0, getEcLevel());
-    qr.addData(text);
-    qr.make();
-    const count = qr.getModuleCount();
-    const cell = Math.max(1, Math.floor(px / count));
-    const canvas = document.createElement('canvas');
-    canvas.width = canvas.height = count * cell;
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#000000';
-    for (let r = 0; r < count; r++) {
-      for (let c = 0; c < count; c++) {
-        if (qr.isDark(r, c)) {
-          ctx.fillRect(c * cell, r * cell, cell, cell);
-        }
-      }
-    }
-    return { canvas, count, cell };
-  }
-  
   genBtn.addEventListener('click', () => {
     const text = buildFn();
     if (!text) { toast('Please fill in all required fields', 'error'); return; }
-    try {
-      currentText = text;
-      const px = parseInt(size.value);
-      const { canvas } = renderQR(text, px);
-      imgDiv.innerHTML = '';
-      imgDiv.appendChild(canvas);
-      canvas.style.maxWidth = '100%';
-      canvas.style.height = 'auto';
-      canvas.style.borderRadius = '8px';
-      result.classList.remove('hidden');
-      toast('QR code generated!', 'success');
-    } catch (err) {
-      console.error(err);
-      toast('Could not generate QR code. Text may be too long.', 'error');
-    }
-  });
-  
-  document.getElementById('qr-download-png').addEventListener('click', () => {
-    if (!currentText) return;
+    currentText = text;
+    const ecLevel = { 'L': 1, 'M': 0, 'Q': 3, 'H': 2 }[ec.value];
+    const qr = qrcode(0, ecLevel);
+    qr.addData(text);
+    qr.make();
     const px = parseInt(size.value);
-    const { canvas } = renderQR(currentText, px);
+    imgDiv.innerHTML = qr.createImgTag(px / qr.getModuleCount(), 0);
+    result.classList.remove('hidden');
+  });
+  document.getElementById('qr-download-png').addEventListener('click', () => {
+    const ecLevel = { 'L': 1, 'M': 0, 'Q': 3, 'H': 2 }[ec.value];
+    const qr = qrcode(0, ecLevel);
+    qr.addData(currentText);
+    qr.make();
+    const px = parseInt(size.value);
+    const cell = px / qr.getModuleCount();
+    const canvas = document.createElement('canvas');
+    const count = qr.getModuleCount();
+    canvas.width = canvas.height = count * Math.max(1, Math.floor(cell));
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#000';
+    for (let r = 0; r < count; r++) {
+      for (let c = 0; c < count; c++) {
+        if (qr.isDark(r, c)) ctx.fillRect(c * Math.floor(cell), r * Math.floor(cell), Math.floor(cell), Math.floor(cell));
+      }
+    }
     canvas.toBlob(blob => {
       downloadBlob(blob, 'qrcode.png');
       toast('Downloaded PNG!', 'success');
-    }, 'image/png');
+    });
   });
-  
   document.getElementById('qr-download-svg').addEventListener('click', () => {
-    if (!currentText) return;
-    const qr = qrcode(0, getEcLevel());
+    const ecLevel = { 'L': 1, 'M': 0, 'Q': 3, 'H': 2 }[ec.value];
+    const qr = qrcode(0, ecLevel);
     qr.addData(currentText);
     qr.make();
     const count = qr.getModuleCount();
     let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${count} ${count}" shape-rendering="crispEdges">`;
-    svg += `<rect width="100%" height="100%" fill="#ffffff"/>`;
+    svg += `<rect width="100%" height="100%" fill="#fff"/>`;
     for (let r = 0; r < count; r++) {
       for (let c = 0; c < count; c++) {
-        if (qr.isDark(r, c)) {
-          svg += `<rect x="${c}" y="${r}" width="1" height="1" fill="#000000"/>`;
-        }
+        if (qr.isDark(r, c)) svg += `<rect x="${c}" y="${r}" width="1" height="1" fill="#000"/>`;
       }
     }
     svg += '</svg>';
     downloadBlob(new Blob([svg], { type: 'image/svg+xml' }), 'qrcode.svg');
     toast('Downloaded SVG!', 'success');
   });
-  
   document.getElementById('qr-reset').addEventListener('click', () => {
     result.classList.add('hidden');
     imgDiv.innerHTML = '';
@@ -3301,51 +3262,17 @@ function initQRTool(buildFn) {
   });
 }
 
-/* ============ QR: URL ============ */
-TOOL_RENDERERS['qr-url'] = () => qrToolHTML(`
-  <div class="form-group">
-    <label class="form-label">URL</label>
-    <input class="input" id="qr-data" placeholder="https://example.com" />
-    <div class="form-hint">Enter a full URL including https://</div>
-  </div>
-`);
-TOOL_INIT['qr-url'] = () => initQRTool(() => {
-  const val = document.getElementById('qr-data').value.trim();
-  if (!val) return '';
-  // Auto-add https:// if missing
-  if (!/^https?:\/\//i.test(val)) return 'https://' + val;
-  return val;
-});
+TOOL_RENDERERS['qr-url'] = () => qrToolHTML(`<div class="form-group"><label class="form-label">URL</label><input class="input" id="qr-data" placeholder="https://example.com" /></div>`);
+TOOL_INIT['qr-url'] = () => initQRTool(() => document.getElementById('qr-data').value.trim());
 
-/* ============ QR: TEXT ============ */
-TOOL_RENDERERS['qr-text'] = () => qrToolHTML(`
-  <div class="form-group">
-    <label class="form-label">Text</label>
-    <textarea class="textarea" id="qr-data" placeholder="Any text you want to encode as QR code"></textarea>
-    <div class="form-hint">Maximum ~2000 characters for best results</div>
-  </div>
-`);
+TOOL_RENDERERS['qr-text'] = () => qrToolHTML(`<div class="form-group"><label class="form-label">Text</label><textarea class="textarea" id="qr-data" placeholder="Any text you want to encode"></textarea></div>`);
 TOOL_INIT['qr-text'] = () => initQRTool(() => document.getElementById('qr-data').value.trim());
 
-/* ============ QR: WI-FI ============ */
 TOOL_RENDERERS['qr-wifi'] = () => qrToolHTML(`
-  <div class="form-group">
-    <label class="form-label">Network name (SSID) *</label>
-    <input class="input" id="qr-ssid" placeholder="MyWiFi" />
-  </div>
+  <div class="form-group"><label class="form-label">Network name (SSID)</label><input class="input" id="qr-ssid" /></div>
   <div class="form-row form-row-2">
-    <div class="form-group">
-      <label class="form-label">Password</label>
-      <input class="input" id="qr-pass" type="text" placeholder="password123" />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Security type</label>
-      <select class="select" id="qr-sec">
-        <option value="WPA">WPA/WPA2/WPA3</option>
-        <option value="WEP">WEP</option>
-        <option value="nopass">No password</option>
-      </select>
-    </div>
+    <div class="form-group"><label class="form-label">Password</label><input class="input" id="qr-pass" type="text" /></div>
+    <div class="form-group"><label class="form-label">Security</label><select class="select" id="qr-sec"><option value="WPA">WPA/WPA2</option><option value="WEP">WEP</option><option value="nopass">None</option></select></div>
   </div>
   <label class="checkbox-row"><input type="checkbox" id="qr-hidden" /> Hidden network</label>
 `);
@@ -3355,165 +3282,63 @@ TOOL_INIT['qr-wifi'] = () => initQRTool(() => {
   const pass = document.getElementById('qr-pass').value;
   const sec = document.getElementById('qr-sec').value;
   const hidden = document.getElementById('qr-hidden').checked;
-  // Escape special characters
-  const escape = s => s.replace(/([\\;,:"])/g, '\\$1');
-  return `WIFI:T:${sec};S:${escape(ssid)};P:${escape(pass)};H:${hidden ? 'true' : 'false'};;`;
+  return `WIFI:T:${sec};S:${ssid};P:${pass};H:${hidden ? 'true' : 'false'};;`;
 });
 
-/* ============ QR: EMAIL ============ */
 TOOL_RENDERERS['qr-email'] = () => qrToolHTML(`
-  <div class="form-group">
-    <label class="form-label">Email address *</label>
-    <input class="input" id="qr-email" type="email" placeholder="hello@example.com" />
-  </div>
-  <div class="form-group">
-    <label class="form-label">Subject</label>
-    <input class="input" id="qr-subject" placeholder="Hello!" />
-  </div>
-  <div class="form-group">
-    <label class="form-label">Body</label>
-    <textarea class="textarea" id="qr-body" placeholder="Your message here..."></textarea>
-  </div>
+  <div class="form-group"><label class="form-label">Email address</label><input class="input" id="qr-email" type="email" /></div>
+  <div class="form-group"><label class="form-label">Subject</label><input class="input" id="qr-subject" /></div>
+  <div class="form-group"><label class="form-label">Body</label><textarea class="textarea" id="qr-body"></textarea></div>
 `);
 TOOL_INIT['qr-email'] = () => initQRTool(() => {
   const email = document.getElementById('qr-email').value.trim();
   if (!email) return '';
   const subject = encodeURIComponent(document.getElementById('qr-subject').value);
   const body = encodeURIComponent(document.getElementById('qr-body').value);
-  let mailto = `mailto:${email}`;
-  const params = [];
-  if (subject) params.push(`subject=${subject}`);
-  if (body) params.push(`body=${body}`);
-  if (params.length) mailto += '?' + params.join('&');
-  return mailto;
+  return `mailto:${email}?subject=${subject}&body=${body}`;
 });
-  /* ============ QR: PHONE ============ */
-TOOL_RENDERERS['qr-phone'] = () => qrToolHTML(`
-  <div class="form-group">
-    <label class="form-label">Phone number *</label>
-    <input class="input" id="qr-phone" placeholder="+91 98765 43210" />
-    <div class="form-hint">Include country code (e.g., +91 for India, +1 for USA)</div>
-  </div>
-`);
+  /* ============ QR: PHONE, CONTACT, LOCATION ============ */
+TOOL_RENDERERS['qr-phone'] = () => qrToolHTML(`<div class="form-group"><label class="form-label">Phone number</label><input class="input" id="qr-phone" placeholder="+1 555 123 4567" /></div>`);
 TOOL_INIT['qr-phone'] = () => initQRTool(() => {
-  const phone = document.getElementById('qr-phone').value.trim();
-  if (!phone) return '';
-  // Remove spaces and special chars except +
-  const cleaned = phone.replace(/[\s\-\(\)]/g, '');
-  // Auto-add + if missing
-  if (!cleaned.startsWith('+')) return 'tel:+' + cleaned;
-  return 'tel:' + cleaned;
+  const p = document.getElementById('qr-phone').value.trim();
+  return p ? `tel:${p.replace(/\s+/g, '')}` : '';
 });
 
-/* ============ QR: CONTACT (vCard) ============ */
 TOOL_RENDERERS['qr-contact'] = () => qrToolHTML(`
   <div class="form-row form-row-2">
-    <div class="form-group">
-      <label class="form-label">First name *</label>
-      <input class="input" id="qr-fn" placeholder="John" />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Last name</label>
-      <input class="input" id="qr-ln" placeholder="Doe" />
-    </div>
+    <div class="form-group"><label class="form-label">First name</label><input class="input" id="qr-fn" /></div>
+    <div class="form-group"><label class="form-label">Last name</label><input class="input" id="qr-ln" /></div>
   </div>
-  <div class="form-group">
-    <label class="form-label">Organization</label>
-    <input class="input" id="qr-org" placeholder="Acme Inc." />
-  </div>
+  <div class="form-group"><label class="form-label">Organization</label><input class="input" id="qr-org" /></div>
   <div class="form-row form-row-2">
-    <div class="form-group">
-      <label class="form-label">Phone</label>
-      <input class="input" id="qr-phone" placeholder="+91 98765 43210" />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Email</label>
-      <input class="input" id="qr-email" type="email" placeholder="john@example.com" />
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="form-label">Website</label>
-    <input class="input" id="qr-url" placeholder="https://example.com" />
-  </div>
-  <div class="form-group">
-    <label class="form-label">Address</label>
-    <input class="input" id="qr-addr" placeholder="123 Main St, City, Country" />
+    <div class="form-group"><label class="form-label">Phone</label><input class="input" id="qr-phone" /></div>
+    <div class="form-group"><label class="form-label">Email</label><input class="input" id="qr-email" type="email" /></div>
   </div>
 `);
 TOOL_INIT['qr-contact'] = () => initQRTool(() => {
   const fn = document.getElementById('qr-fn').value.trim();
   const ln = document.getElementById('qr-ln').value.trim();
   if (!fn && !ln) return '';
-  
   const org = document.getElementById('qr-org').value.trim();
   const phone = document.getElementById('qr-phone').value.trim();
   const email = document.getElementById('qr-email').value.trim();
-  const url = document.getElementById('qr-url').value.trim();
-  const addr = document.getElementById('qr-addr').value.trim();
-  
-  // Escape special characters for vCard
-  const escape = s => s.replace(/([\\;,])/g, '\\$1').replace(/\n/g, '\\n');
-  
-  let vcard = 'BEGIN:VCARD\nVERSION:3.0\n';
-  vcard += `N:${escape(ln)};${escape(fn)};;;\n`;
-  vcard += `FN:${escape(fn)}${ln ? ' ' + escape(ln) : ''}\n`;
-  
-  if (org) vcard += `ORG:${escape(org)}\n`;
-  if (phone) {
-    const cleaned = phone.replace(/[\s\-\(\)]/g, '');
-    vcard += `TEL;TYPE=CELL:${cleaned.startsWith('+') ? cleaned : '+' + cleaned}\n`;
-  }
-  if (email) vcard += `EMAIL:${escape(email)}\n`;
-  if (url) vcard += `URL:${url}\n`;
-  if (addr) vcard += `ADR;TYPE=HOME:;;${escape(addr)};;;;\n`;
-  
-  vcard += 'END:VCARD';
-  return vcard;
+  return `BEGIN:VCARD\nVERSION:3.0\nN:${ln};${fn};;;\nFN:${fn} ${ln}\n${org ? 'ORG:' + org + '\n' : ''}${phone ? 'TEL:' + phone + '\n' : ''}${email ? 'EMAIL:' + email + '\n' : ''}END:VCARD`;
 });
 
-/* ============ QR: LOCATION ============ */
 TOOL_RENDERERS['qr-location'] = () => qrToolHTML(`
   <div class="form-row form-row-2">
-    <div class="form-group">
-      <label class="form-label">Latitude *</label>
-      <input class="input" id="qr-lat" type="number" step="any" placeholder="28.6139" />
-      <div class="form-hint">e.g., 28.6139 for New Delhi</div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Longitude *</label>
-      <input class="input" id="qr-lng" type="number" step="any" placeholder="77.2090" />
-      <div class="form-hint">e.g., 77.2090 for New Delhi</div>
-    </div>
+    <div class="form-group"><label class="form-label">Latitude</label><input class="input" id="qr-lat" type="number" step="any" placeholder="40.7128" /></div>
+    <div class="form-group"><label class="form-label">Longitude</label><input class="input" id="qr-lng" type="number" step="any" placeholder="-74.0060" /></div>
   </div>
-  <div class="form-group">
-    <label class="form-label">Location name (optional)</label>
-    <input class="input" id="qr-name" placeholder="Connaught Place" />
-  </div>
-  <div class="form-hint">💡 Tip: Get coordinates from Google Maps by right-clicking on the map</div>
 `);
 TOOL_INIT['qr-location'] = () => initQRTool(() => {
   const lat = document.getElementById('qr-lat').value.trim();
   const lng = document.getElementById('qr-lng').value.trim();
   if (!lat || !lng) return '';
-  
-  // Validate coordinates
-  const latNum = parseFloat(lat);
-  const lngNum = parseFloat(lng);
-  if (isNaN(latNum) || isNaN(lngNum)) return '';
-  if (latNum < -90 || latNum > 90 || lngNum < -180 || lngNum > 180) {
-    toast('Invalid coordinates. Latitude: -90 to 90, Longitude: -180 to 180', 'error');
-    return '';
-  }
-  
-  const name = document.getElementById('qr-name').value.trim();
-  // geo URI format: geo:lat,lng?q=lat,lng(name)
-  let geo = `geo:${lat},${lng}`;
-  if (name) {
-    geo += `?q=${lat},${lng}(${encodeURIComponent(name)})`;
-  }
-  return geo;
+  return `geo:${lat},${lng}`;
 });
-  /* ============ STOPWATCH ============ */
+
+/* ============ STOPWATCH ============ */
 TOOL_RENDERERS['stopwatch'] = () => `
   <div class="tool-panel">
     <div class="timer-display" id="sw-display">00:00:00.000</div>
@@ -3532,7 +3357,6 @@ TOOL_INIT['stopwatch'] = () => {
   const resetBtn = document.getElementById('sw-reset');
   const lapsEl = document.getElementById('sw-laps');
   let running = false, startTime = 0, elapsed = 0, rafId = null, laps = [];
-  
   function render(ms) {
     const h = Math.floor(ms / 3600000);
     const m = Math.floor((ms % 3600000) / 60000);
@@ -3540,40 +3364,30 @@ TOOL_INIT['stopwatch'] = () => {
     const cs = Math.floor(ms % 1000);
     display.textContent = `${pad(h,2)}:${pad(m,2)}:${pad(s,2)}.${pad(cs,3)}`;
   }
-  
   function tick() {
     render(elapsed + (performance.now() - startTime));
     if (running) rafId = requestAnimationFrame(tick);
   }
-  
   startBtn.addEventListener('click', () => {
     if (!running) {
-      running = true;
-      startTime = performance.now();
+      running = true; startTime = performance.now();
       startBtn.innerHTML = `${ICONS.pause} Pause`;
       lapBtn.disabled = false;
       tick();
     } else {
-      running = false;
-      elapsed += performance.now() - startTime;
+      running = false; elapsed += performance.now() - startTime;
       startBtn.innerHTML = `${ICONS.play} Resume`;
       cancelAnimationFrame(rafId);
     }
   });
-  
   lapBtn.addEventListener('click', () => {
     const total = elapsed + (running ? performance.now() - startTime : 0);
     laps.unshift(total);
-    lapsEl.innerHTML = laps.map((t, i) => 
-      `<div class="lap-item"><span>Lap ${laps.length - i}</span><span>${formatMs(t)}</span></div>`
-    ).join('');
+    lapsEl.innerHTML = laps.map((t, i) => `<div class="lap-item"><span>Lap ${laps.length - i}</span><span>${formatMs(t)}</span></div>`).join('');
   });
-  
   resetBtn.addEventListener('click', () => {
-    running = false;
-    cancelAnimationFrame(rafId);
-    elapsed = 0;
-    laps = [];
+    running = false; cancelAnimationFrame(rafId);
+    elapsed = 0; laps = [];
     render(0);
     startBtn.innerHTML = `${ICONS.play} Start`;
     lapBtn.disabled = true;
@@ -3581,44 +3395,32 @@ TOOL_INIT['stopwatch'] = () => {
   });
 };
 
-/* ============ COUNTDOWN TIMER ============ */
+/* ============ COUNTDOWN ============ */
 TOOL_RENDERERS['countdown'] = () => `
   <div class="tool-panel">
     <div class="form-row form-row-3">
-      <div class="form-group">
-        <label class="form-label">Hours</label>
-        <input class="input" type="number" id="cd-h" value="0" min="0" max="99" step="1" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Minutes</label>
-        <input class="input" type="number" id="cd-m" value="5" min="0" max="59" step="1" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Seconds</label>
-        <input class="input" type="number" id="cd-s" value="0" min="0" max="59" step="1" />
-      </div>
+      <div class="form-group"><label class="form-label">Hours</label><input class="input" type="number" id="cd-h" value="0" min="0" /></div>
+      <div class="form-group"><label class="form-label">Minutes</label><input class="input" type="number" id="cd-m" value="5" min="0" max="59" /></div>
+      <div class="form-group"><label class="form-label">Seconds</label><input class="input" type="number" id="cd-s" value="0" min="0" max="59" /></div>
     </div>
     <div class="timer-display" id="cd-display">00:05:00</div>
     <div class="timer-controls">
       <button class="btn btn-primary" id="cd-start">${ICONS.play} Start</button>
       <button class="btn btn-secondary" id="cd-reset">${ICONS.refresh} Reset</button>
     </div>
-    <div class="form-hint mt-3">💡 Timer continues running even if you switch tabs</div>
   </div>
 `;
 TOOL_INIT['countdown'] = () => {
   const display = document.getElementById('cd-display');
   const startBtn = document.getElementById('cd-start');
   const resetBtn = document.getElementById('cd-reset');
-  let endTime = 0, running = false, rafId = null, totalMs = 0, pausedRemaining = 0;
-  
+  let endTime = 0, running = false, rafId = null, total = 0;
   function getInputMs() {
     const h = parseInt(document.getElementById('cd-h').value) || 0;
     const m = parseInt(document.getElementById('cd-m').value) || 0;
     const s = parseInt(document.getElementById('cd-s').value) || 0;
-    return (h * 3600 + m * 60 + s) * 1000;
+    return (h*3600 + m*60 + s) * 1000;
   }
-  
   function render(ms) {
     ms = Math.max(0, ms);
     const h = Math.floor(ms / 3600000);
@@ -3626,87 +3428,57 @@ TOOL_INIT['countdown'] = () => {
     const s = Math.floor((ms % 60000) / 1000);
     display.textContent = `${pad(h,2)}:${pad(m,2)}:${pad(s,2)}`;
   }
-  
   function tick() {
     const remaining = endTime - Date.now();
     render(remaining);
     if (remaining <= 0) {
       running = false;
       startBtn.innerHTML = `${ICONS.play} Start`;
-      cancelAnimationFrame(rafId);
       playBeep();
-      toast('⏰ Time is up!', 'success', 5000);
+      toast('Time is up!', 'success');
       return;
     }
     if (running) rafId = requestAnimationFrame(tick);
   }
-  
   startBtn.addEventListener('click', () => {
     if (!running) {
-      // If starting fresh (no paused time), use input
-      if (pausedRemaining === 0) {
-        totalMs = getInputMs();
-      }
-      if (totalMs <= 0 && pausedRemaining === 0) {
-        toast('Set a duration first', 'error');
-        return;
-      }
-      const remaining = pausedRemaining > 0 ? pausedRemaining : totalMs;
-      endTime = Date.now() + remaining;
-      pausedRemaining = 0;
+      if (total === 0) total = getInputMs();
+      if (total <= 0) { toast('Set a duration first', 'error'); return; }
+      if (!endTime || endTime <= Date.now()) endTime = Date.now() + total;
       running = true;
       startBtn.innerHTML = `${ICONS.pause} Pause`;
       tick();
     } else {
-      // Pause
       running = false;
-      pausedRemaining = endTime - Date.now();
+      total = endTime - Date.now();
       startBtn.innerHTML = `${ICONS.play} Resume`;
       cancelAnimationFrame(rafId);
     }
   });
-  
   resetBtn.addEventListener('click', () => {
-    running = false;
-    cancelAnimationFrame(rafId);
-    pausedRemaining = 0;
-    totalMs = getInputMs();
+    running = false; cancelAnimationFrame(rafId);
+    total = getInputMs();
     endTime = 0;
-    render(totalMs);
+    render(total);
     startBtn.innerHTML = `${ICONS.play} Start`;
   });
-  
-  ['cd-h','cd-m','cd-s'].forEach(id => {
-    document.getElementById(id).addEventListener('input', () => {
-      if (!running && pausedRemaining === 0) {
-        totalMs = getInputMs();
-        render(totalMs);
-      }
-    });
-  });
-  
+  ['cd-h','cd-m','cd-s'].forEach(id => document.getElementById(id).addEventListener('input', () => {
+    if (!running) { total = getInputMs(); render(total); }
+  }));
   render(getInputMs());
 };
   /* ============ DATE DIFFERENCE ============ */
 TOOL_RENDERERS['date-diff'] = () => `
   <div class="tool-panel">
     <div class="form-row form-row-2">
-      <div class="form-group">
-        <label class="form-label">Start date</label>
-        <input class="input" type="date" id="dd-start" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">End date</label>
-        <input class="input" type="date" id="dd-end" />
-      </div>
+      <div class="form-group"><label class="form-label">Start date</label><input class="input" type="date" id="dd-start" /></div>
+      <div class="form-group"><label class="form-label">End date</label><input class="input" type="date" id="dd-end" /></div>
     </div>
     <div class="stats-grid">
       <div class="stat-card"><div class="stat-value" id="dd-days">—</div><div class="stat-label">Days</div></div>
       <div class="stat-card"><div class="stat-value" id="dd-weeks">—</div><div class="stat-label">Weeks</div></div>
       <div class="stat-card"><div class="stat-value" id="dd-months">—</div><div class="stat-label">Months</div></div>
       <div class="stat-card"><div class="stat-value" id="dd-years">—</div><div class="stat-label">Years</div></div>
-      <div class="stat-card"><div class="stat-value" id="dd-hours">—</div><div class="stat-label">Hours</div></div>
-      <div class="stat-card"><div class="stat-value" id="dd-mins">—</div><div class="stat-label">Minutes</div></div>
     </div>
   </div>
 `;
@@ -3714,25 +3486,14 @@ TOOL_INIT['date-diff'] = () => {
   const calc = () => {
     const s = document.getElementById('dd-start').value;
     const e = document.getElementById('dd-end').value;
-    if (!s || !e) { 
-      ['dd-days','dd-weeks','dd-months','dd-years','dd-hours','dd-mins'].forEach(id => 
-        document.getElementById(id).textContent = '—'
-      ); 
-      return; 
-    }
-    const d1 = new Date(s);
-    const d2 = new Date(e);
+    if (!s || !e) { ['dd-days','dd-weeks','dd-months','dd-years'].forEach(id => document.getElementById(id).textContent = '—'); return; }
+    const d1 = new Date(s), d2 = new Date(e);
     const diffMs = Math.abs(d2 - d1);
     const days = Math.floor(diffMs / 86400000);
-    const hours = Math.floor(diffMs / 3600000);
-    const mins = Math.floor(diffMs / 60000);
-    
-    document.getElementById('dd-days').textContent = days.toLocaleString();
+    document.getElementById('dd-days').textContent = days;
     document.getElementById('dd-weeks').textContent = (days / 7).toFixed(1);
     document.getElementById('dd-months').textContent = (days / 30.44).toFixed(1);
     document.getElementById('dd-years').textContent = (days / 365.25).toFixed(2);
-    document.getElementById('dd-hours').textContent = hours.toLocaleString();
-    document.getElementById('dd-mins').textContent = mins.toLocaleString();
   };
   document.getElementById('dd-start').addEventListener('input', calc);
   document.getElementById('dd-end').addEventListener('input', calc);
@@ -3742,34 +3503,13 @@ TOOL_INIT['date-diff'] = () => {
 TOOL_RENDERERS['time-diff'] = () => `
   <div class="tool-panel">
     <div class="form-row form-row-2">
-      <div class="form-group">
-        <label class="form-label">Start time</label>
-        <input class="input" type="time" id="td-start" step="1" />
-        <div class="form-hint">Format: HH:MM:SS</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">End time</label>
-        <input class="input" type="time" id="td-end" step="1" />
-        <div class="form-hint">If end < start, assumes next day</div>
-      </div>
+      <div class="form-group"><label class="form-label">Start time</label><input class="input" type="time" id="td-start" step="1" /></div>
+      <div class="form-group"><label class="form-label">End time</label><input class="input" type="time" id="td-end" step="1" /></div>
     </div>
     <div class="result-box">
-      <div class="result-row">
-        <span class="result-label">Hours</span>
-        <span class="result-value" id="td-hours">—</span>
-      </div>
-      <div class="result-row">
-        <span class="result-label">Minutes</span>
-        <span class="result-value" id="td-mins">—</span>
-      </div>
-      <div class="result-row">
-        <span class="result-label">Seconds</span>
-        <span class="result-value" id="td-secs">—</span>
-      </div>
-      <div class="result-row">
-        <span class="result-label">Total seconds</span>
-        <span class="result-value" id="td-total">—</span>
-      </div>
+      <div class="result-row"><span class="result-label">Hours</span><span class="result-value" id="td-hours">—</span></div>
+      <div class="result-row"><span class="result-label">Minutes</span><span class="result-value" id="td-mins">—</span></div>
+      <div class="result-row"><span class="result-label">Seconds</span><span class="result-value" id="td-secs">—</span></div>
     </div>
   </div>
 `;
@@ -3777,32 +3517,20 @@ TOOL_INIT['time-diff'] = () => {
   const calc = () => {
     const s = document.getElementById('td-start').value;
     const e = document.getElementById('td-end').value;
-    if (!s || !e) { 
-      ['td-hours','td-mins','td-secs','td-total'].forEach(id => 
-        document.getElementById(id).textContent = '—'
-      ); 
-      return; 
-    }
+    if (!s || !e) { ['td-hours','td-mins','td-secs'].forEach(id => document.getElementById(id).textContent = '—'); return; }
     const [sh, sm, ss = 0] = s.split(':').map(Number);
     const [eh, em, es = 0] = e.split(':').map(Number);
-    let diff = (eh * 3600 + em * 60 + es) - (sh * 3600 + sm * 60 + ss);
-    
-    // If end time is before start time, assume next day
+    let diff = (eh*3600 + em*60 + es) - (sh*3600 + sm*60 + ss);
     if (diff < 0) diff += 86400;
-    
-    const hours = Math.floor(diff / 3600);
-    const mins = Math.floor((diff % 3600) / 60);
-    const secs = diff % 60;
-    
-    document.getElementById('td-hours').textContent = hours;
-    document.getElementById('td-mins').textContent = mins;
-    document.getElementById('td-secs').textContent = secs;
-    document.getElementById('td-total').textContent = diff.toLocaleString();
+    document.getElementById('td-hours').textContent = Math.floor(diff / 3600);
+    document.getElementById('td-mins').textContent = Math.floor((diff % 3600) / 60);
+    document.getElementById('td-secs').textContent = diff % 60;
   };
   document.getElementById('td-start').addEventListener('input', calc);
   document.getElementById('td-end').addEventListener('input', calc);
 };
-    /* ============ PASSWORD GENERATOR ============ */
+
+/* ============ PASSWORD GENERATOR ============ */
 TOOL_RENDERERS['password'] = () => `
   <div class="tool-panel">
     <div class="password-display" id="pw-display">Click generate</div>
@@ -3810,7 +3538,7 @@ TOOL_RENDERERS['password'] = () => `
     <div class="strength-text" id="pw-strength-text">—</div>
     <div class="form-group mt-3">
       <label class="form-label">Length: <span id="pw-len-val">16</span></label>
-      <input type="range" id="pw-len" min="6" max="64" value="16" step="1" style="width:100%" />
+      <input type="range" id="pw-len" min="6" max="64" value="16" style="width:100%" />
     </div>
     <label class="checkbox-row"><input type="checkbox" id="pw-upper" checked /> Uppercase (A-Z)</label>
     <label class="checkbox-row"><input type="checkbox" id="pw-lower" checked /> Lowercase (a-z)</label>
@@ -3829,26 +3557,18 @@ TOOL_INIT['password'] = () => {
   const strength = document.getElementById('pw-strength');
   const strengthText = document.getElementById('pw-strength-text');
   let current = '';
-  
   len.addEventListener('input', () => lenVal.textContent = len.value);
-  
   function generate() {
     const upper = document.getElementById('pw-upper').checked;
     const lower = document.getElementById('pw-lower').checked;
     const num = document.getElementById('pw-num').checked;
     const sym = document.getElementById('pw-sym').checked;
-    
     let pool = '';
     if (upper) pool += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     if (lower) pool += 'abcdefghijklmnopqrstuvwxyz';
     if (num) pool += '0123456789';
     if (sym) pool += '!@#$%^&*()_+-=[]{}|;:,.<>?';
-    
-    if (!pool) {
-      toast('Select at least one character type', 'error');
-      return;
-    }
-    
+    if (!pool) { toast('Select at least one character type', 'error'); return; }
     const length = parseInt(len.value);
     const arr = new Uint32Array(length);
     crypto.getRandomValues(arr);
@@ -3856,64 +3576,46 @@ TOOL_INIT['password'] = () => {
     display.textContent = current;
     updateStrength(current);
   }
-  
   function updateStrength(pw) {
     let score = 0;
     if (pw.length >= 8) score++;
     if (pw.length >= 12) score++;
     if (pw.length >= 16) score++;
-    if (pw.length >= 20) score++;
     if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++;
     if (/\d/.test(pw)) score++;
     if (/[^a-zA-Z0-9]/.test(pw)) score++;
-    
     const levels = [
       { label: 'Very weak', color: 'var(--danger)', pct: 20 },
-      { label: 'Weak', color: 'var(--danger)', pct: 35 },
-      { label: 'Fair', color: 'var(--warning)', pct: 50 },
-      { label: 'Good', color: 'var(--success)', pct: 70 },
-      { label: 'Strong', color: 'var(--success)', pct: 85 },
+      { label: 'Weak', color: 'var(--danger)', pct: 40 },
+      { label: 'Fair', color: 'var(--warning)', pct: 60 },
+      { label: 'Good', color: 'var(--success)', pct: 80 },
+      { label: 'Strong', color: 'var(--success)', pct: 90 },
       { label: 'Very strong', color: 'var(--success)', pct: 100 },
     ];
-    
     const lvl = levels[Math.min(score, levels.length - 1)];
     strength.style.width = lvl.pct + '%';
     strength.style.background = lvl.color;
     strengthText.textContent = lvl.label;
     strengthText.style.color = lvl.color;
   }
-  
   document.getElementById('pw-gen').addEventListener('click', generate);
   document.getElementById('pw-copy').addEventListener('click', () => {
-    if (!current) {
-      toast('Generate a password first', 'error');
-      return;
-    }
+    if (!current) { toast('Generate a password first', 'error'); return; }
     copyText(current);
   });
-  
   generate();
 };
 
-/* ============ RANDOM NUMBER GENERATOR ============ */
+/* ============ RANDOM NUMBER ============ */
 TOOL_RENDERERS['random-number'] = () => `
   <div class="tool-panel">
     <div class="form-row form-row-2">
-      <div class="form-group">
-        <label class="form-label">Minimum</label>
-        <input class="input" type="number" id="rn-min" value="1" step="1" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Maximum</label>
-        <input class="input" type="number" id="rn-max" value="100" step="1" />
-      </div>
+      <div class="form-group"><label class="form-label">Minimum</label><input class="input" type="number" id="rn-min" value="1" /></div>
+      <div class="form-group"><label class="form-label">Maximum</label><input class="input" type="number" id="rn-max" value="100" /></div>
     </div>
-    <div class="form-group">
-      <label class="form-label">How many numbers</label>
-      <input class="input" type="number" id="rn-count" value="1" min="1" max="100" step="1" />
-    </div>
+    <div class="form-group"><label class="form-label">How many</label><input class="input" type="number" id="rn-count" value="1" min="1" max="100" /></div>
     <label class="checkbox-row"><input type="checkbox" id="rn-unique" /> Unique values only</label>
-    <button class="btn btn-primary btn-block" id="rn-gen">${ICONS.zap} Generate</button>
+    <button class="btn btn-primary btn-block" id="rn-gen">Generate</button>
     <div class="password-display mt-3" id="rn-result" style="font-size:24px">—</div>
     <button class="btn btn-secondary mt-3 hidden" id="rn-copy">${ICONS.copy} Copy</button>
   </div>
@@ -3921,59 +3623,39 @@ TOOL_RENDERERS['random-number'] = () => `
 TOOL_INIT['random-number'] = () => {
   const result = document.getElementById('rn-result');
   const copyBtn = document.getElementById('rn-copy');
-  
   document.getElementById('rn-gen').addEventListener('click', () => {
     const min = parseInt(document.getElementById('rn-min').value);
     const max = parseInt(document.getElementById('rn-max').value);
     const count = Math.max(1, Math.min(100, parseInt(document.getElementById('rn-count').value) || 1));
     const unique = document.getElementById('rn-unique').checked;
-    
-    if (isNaN(min) || isNaN(max)) {
-      toast('Enter valid numbers', 'error');
-      return;
-    }
-    if (min > max) {
-      toast('Minimum must be ≤ maximum', 'error');
-      return;
-    }
-    if (unique && (max - min + 1) < count) {
-      toast('Not enough unique values in range', 'error');
-      return;
-    }
-    
+    if (isNaN(min) || isNaN(max)) { toast('Enter valid numbers', 'error'); return; }
+    if (min > max) { toast('Minimum must be ≤ maximum', 'error'); return; }
+    if (unique && (max - min + 1) < count) { toast('Not enough unique values in range', 'error'); return; }
     const arr = [];
     const used = new Set();
     const range = max - min + 1;
     const buf = new Uint32Array(count);
     crypto.getRandomValues(buf);
-    
     for (let i = 0; i < count; i++) {
       if (unique) {
         let v;
-        do {
-          v = min + (buf[i] % range);
-        } while (used.has(v));
-        used.add(v);
-        arr.push(v);
+        do { v = min + (buf[i] % range); } while (used.has(v));
+        used.add(v); arr.push(v);
       } else {
         arr.push(min + (buf[i] % range));
       }
     }
-    
     result.textContent = arr.join(', ');
     copyBtn.classList.remove('hidden');
     copyBtn.onclick = () => copyText(arr.join(', '));
   });
 };
-    /* ============ UUID GENERATOR ============ */
+
+/* ============ UUID GENERATOR ============ */
 TOOL_RENDERERS['uuid'] = () => `
   <div class="tool-panel">
-    <div class="form-group">
-      <label class="form-label">How many UUIDs</label>
-      <input class="input" type="number" id="uuid-count" value="5" min="1" max="50" step="1" />
-      <div class="form-hint">Generate 1 to 50 UUIDs at once</div>
-    </div>
-    <button class="btn btn-primary btn-block" id="uuid-gen">${ICONS.zap} Generate UUIDs</button>
+    <div class="form-group"><label class="form-label">How many</label><input class="input" type="number" id="uuid-count" value="5" min="1" max="50" /></div>
+    <button class="btn btn-primary btn-block" id="uuid-gen">Generate UUIDs</button>
     <div class="mt-3" id="uuid-list"></div>
     <button class="btn btn-secondary mt-3 hidden" id="uuid-copy">${ICONS.copy} Copy all</button>
   </div>
@@ -3982,323 +3664,158 @@ TOOL_INIT['uuid'] = () => {
   const list = document.getElementById('uuid-list');
   const copyBtn = document.getElementById('uuid-copy');
   let uuids = [];
-  
   document.getElementById('uuid-gen').addEventListener('click', () => {
     const count = Math.max(1, Math.min(50, parseInt(document.getElementById('uuid-count').value) || 1));
     uuids = [];
-    
-    try {
-      for (let i = 0; i < count; i++) {
-        uuids.push(crypto.randomUUID());
-      }
-      
-      list.innerHTML = uuids.map((u, i) => `
-        <div class="result-row">
-          <span class="font-mono text-sm" style="word-break:break-all">${u}</span>
-          <button class="btn btn-ghost btn-sm" data-copy="${u}" title="Copy this UUID">${ICONS.copy}</button>
-        </div>
-      `).join('');
-      
-      list.querySelectorAll('[data-copy]').forEach(b => {
-        b.addEventListener('click', () => copyText(b.dataset.copy));
-      });
-      
-      copyBtn.classList.remove('hidden');
-      toast(`Generated ${count} UUID${count > 1 ? 's' : ''}`, 'success');
-    } catch (err) {
-      console.error(err);
-      toast('Could not generate UUIDs. Your browser may not support crypto.randomUUID()', 'error');
-    }
+    for (let i = 0; i < count; i++) uuids.push(crypto.randomUUID());
+    list.innerHTML = uuids.map(u => `<div class="result-row"><span class="font-mono text-sm">${u}</span><button class="btn btn-ghost btn-sm" data-copy="${u}">${ICONS.copy}</button></div>`).join('');
+    list.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => copyText(b.dataset.copy)));
+    copyBtn.classList.remove('hidden');
   });
-  
-  copyBtn.addEventListener('click', () => {
-    if (!uuids.length) {
-      toast('Generate UUIDs first', 'error');
-      return;
-    }
-    copyText(uuids.join('\n'));
-  });
+  copyBtn.addEventListener('click', () => copyText(uuids.join('\n')));
 };
-    /* ============ WORD & CHARACTER COUNTER ============ */
+/* ============ WORD COUNTER ============ */
 TOOL_RENDERERS['word-counter'] = () => `
   <div class="tool-panel">
-    <div class="form-group">
-      <label class="form-label">Your text</label>
-      <textarea class="textarea" id="wc-text" placeholder="Paste or type your text here..." style="min-height:200px"></textarea>
-    </div>
-    <div class="stats-grid">
+    <textarea class="textarea" id="wc-text" placeholder="Paste or type your text here..." style="min-height:200px"></textarea>
+    <div class="stats-grid mt-3">
       <div class="stat-card"><div class="stat-value" id="wc-words">0</div><div class="stat-label">Words</div></div>
       <div class="stat-card"><div class="stat-value" id="wc-chars">0</div><div class="stat-label">Characters</div></div>
-      <div class="stat-card"><div class="stat-value" id="wc-chars-ns">0</div><div class="stat-label">Chars (no spaces)</div></div>
+      <div class="stat-card"><div class="stat-value" id="wc-chars-ns">0</div><div class="stat-label">No spaces</div></div>
       <div class="stat-card"><div class="stat-value" id="wc-sent">0</div><div class="stat-label">Sentences</div></div>
       <div class="stat-card"><div class="stat-value" id="wc-para">0</div><div class="stat-label">Paragraphs</div></div>
-      <div class="stat-card"><div class="stat-value" id="wc-read">0s</div><div class="stat-label">Reading time</div></div>
-    </div>
-    <div class="flex gap-2 mt-3" style="flex-wrap:wrap">
-      <button class="btn btn-secondary" id="wc-copy">${ICONS.copy} Copy text</button>
-      <button class="btn btn-secondary" id="wc-clear">${ICONS.trash} Clear</button>
+      <div class="stat-card"><div class="stat-value" id="wc-read">0s</div><div class="stat-label">Read time</div></div>
     </div>
   </div>
 `;
 TOOL_INIT['word-counter'] = () => {
   const ta = document.getElementById('wc-text');
-  
   const update = () => {
     const text = ta.value;
     const words = text.trim() ? text.trim().split(/\s+/).length : 0;
     const chars = text.length;
     const charsNs = text.replace(/\s/g, '').length;
-    const sent = text.trim() ? (text.match(/[.!?]+(\s|$)/g) || []).length || (text.trim() ? 1 : 0) : 0;
+    const sent = text.trim() ? ((text.match(/[.!?]+(\s|$)/g) || []).length || 1) : 0;
     const para = text.trim() ? text.split(/\n\s*\n/).filter(p => p.trim()).length : 0;
-    const readSec = Math.ceil(words / 3.33); // ~200 words per minute
-    
-    document.getElementById('wc-words').textContent = words.toLocaleString();
-    document.getElementById('wc-chars').textContent = chars.toLocaleString();
-    document.getElementById('wc-chars-ns').textContent = charsNs.toLocaleString();
-    document.getElementById('wc-sent').textContent = sent.toLocaleString();
-    document.getElementById('wc-para').textContent = (para || (text.trim() ? 1 : 0)).toLocaleString();
+    const readSec = Math.ceil(words / 4);
+    document.getElementById('wc-words').textContent = words;
+    document.getElementById('wc-chars').textContent = chars;
+    document.getElementById('wc-chars-ns').textContent = charsNs;
+    document.getElementById('wc-sent').textContent = sent;
+    document.getElementById('wc-para').textContent = para || (text.trim() ? 1 : 0);
     document.getElementById('wc-read').textContent = readSec < 60 ? readSec + 's' : Math.ceil(readSec/60) + 'm';
   };
-  
   ta.addEventListener('input', update);
-  
-  document.getElementById('wc-copy').addEventListener('click', () => {
-    if (!ta.value) { toast('Nothing to copy', 'error'); return; }
-    copyText(ta.value);
-  });
-  
-  document.getElementById('wc-clear').addEventListener('click', () => {
-    if (ta.value && !confirm('Clear all text?')) return;
-    ta.value = '';
-    update();
-    toast('Text cleared', 'success');
-  });
-  
-  update();
 };
 
 /* ============ CASE CONVERTER ============ */
 TOOL_RENDERERS['case-converter'] = () => `
   <div class="tool-panel">
-    <div class="form-group">
-      <label class="form-label">Your text</label>
-      <textarea class="textarea" id="cc-text" placeholder="Type or paste text..." style="min-height:160px"></textarea>
-    </div>
+    <textarea class="textarea" id="cc-text" placeholder="Type or paste text..." style="min-height:160px"></textarea>
     <div class="flex gap-2 mt-3" style="flex-wrap:wrap">
       <button class="btn btn-secondary btn-sm" data-case="upper">UPPERCASE</button>
       <button class="btn btn-secondary btn-sm" data-case="lower">lowercase</button>
       <button class="btn btn-secondary btn-sm" data-case="title">Title Case</button>
       <button class="btn btn-secondary btn-sm" data-case="sentence">Sentence case</button>
-      <button class="btn btn-secondary btn-sm" data-case="inverse">iNVERSE cASE</button>
-      <button class="btn btn-secondary btn-sm" data-case="camel">camelCase</button>
-      <button class="btn btn-secondary btn-sm" data-case="snake">snake_case</button>
-      <button class="btn btn-secondary btn-sm" data-case="kebab">kebab-case</button>
-      <button class="btn btn-secondary btn-sm" id="cc-copy">${ICONS.copy} Copy</button>
-      <button class="btn btn-secondary btn-sm" id="cc-clear">${ICONS.trash} Clear</button>
+      <button class="btn btn-secondary btn-sm" data-case="inverse">iNVERSE</button>
+      <button class="btn btn-primary btn-sm" id="cc-copy">${ICONS.copy} Copy</button>
     </div>
   </div>
 `;
 TOOL_INIT['case-converter'] = () => {
   const ta = document.getElementById('cc-text');
-  
-  document.querySelectorAll('[data-case]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const t = ta.value;
-      if (!t) { toast('Enter some text first', 'error'); return; }
-      
-      const c = btn.dataset.case;
-      let result = '';
-      
-      if (c === 'upper') {
-        result = t.toUpperCase();
-      } else if (c === 'lower') {
-        result = t.toLowerCase();
-      } else if (c === 'title') {
-        result = t.toLowerCase().replace(/\b\w/g, ch => ch.toUpperCase());
-      } else if (c === 'sentence') {
-        result = t.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g, m => m.toUpperCase());
-      } else if (c === 'inverse') {
-        result = t.split('').map(ch => ch === ch.toUpperCase() ? ch.toLowerCase() : ch.toUpperCase()).join('');
-      } else if (c === 'camel') {
-        result = t.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, ch) => ch.toUpperCase());
-      } else if (c === 'snake') {
-        result = t.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '');
-      } else if (c === 'kebab') {
-        result = t.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '');
-      }
-      
-      ta.value = result;
-      toast(`Converted to ${btn.textContent.trim()}`, 'success');
-    });
-  });
-  
-  document.getElementById('cc-copy').addEventListener('click', () => {
-    if (!ta.value) { toast('Nothing to copy', 'error'); return; }
-    copyText(ta.value);
-  });
-  
-  document.getElementById('cc-clear').addEventListener('click', () => {
-    if (ta.value && !confirm('Clear all text?')) return;
-    ta.value = '';
-    toast('Text cleared', 'success');
-  });
+  document.querySelectorAll('[data-case]').forEach(btn => btn.addEventListener('click', () => {
+    const t = ta.value;
+    const c = btn.dataset.case;
+    if (c === 'upper') ta.value = t.toUpperCase();
+    else if (c === 'lower') ta.value = t.toLowerCase();
+    else if (c === 'title') ta.value = t.replace(/\w\S*/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase());
+    else if (c === 'sentence') ta.value = t.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g, m => m.toUpperCase());
+    else if (c === 'inverse') ta.value = t.split('').map(ch => ch === ch.toUpperCase() ? ch.toLowerCase() : ch.toUpperCase()).join('');
+  }));
+  document.getElementById('cc-copy').addEventListener('click', () => copyText(ta.value));
 };
-    /* ============ TEXT CLEANER ============ */
+
+/* ============ TEXT CLEANER ============ */
 TOOL_RENDERERS['text-cleaner'] = () => `
   <div class="tool-panel">
-    <div class="form-group">
-      <label class="form-label">Your text</label>
-      <textarea class="textarea" id="tc-text" placeholder="Paste text with extra spaces or duplicate lines..." style="min-height:160px"></textarea>
-    </div>
+    <textarea class="textarea" id="tc-text" placeholder="Paste text with extra spaces or duplicate lines..." style="min-height:160px"></textarea>
     <div class="flex gap-2 mt-3" style="flex-wrap:wrap">
       <button class="btn btn-secondary btn-sm" data-clean="spaces">Remove extra spaces</button>
-      <button class="btn btn-secondary btn-sm" data-clean="lines">Remove duplicate lines</button>
-      <button class="btn btn-secondary btn-sm" data-clean="trim">Trim all lines</button>
+      <button class="btn btn-secondary btn-sm" data-clean="lines">Remove duplicates</button>
+      <button class="btn btn-secondary btn-sm" data-clean="trim">Trim lines</button>
       <button class="btn btn-secondary btn-sm" data-clean="blank">Remove blank lines</button>
-      <button class="btn btn-secondary btn-sm" data-clean="sort">Sort lines A-Z</button>
-      <button class="btn btn-secondary btn-sm" data-clean="reverse">Reverse lines</button>
-      <button class="btn btn-secondary btn-sm" data-clean="number">Number lines</button>
-      <button class="btn btn-secondary btn-sm" id="tc-copy">${ICONS.copy} Copy</button>
-      <button class="btn btn-secondary btn-sm" id="tc-clear">${ICONS.trash} Clear</button>
+      <button class="btn btn-primary btn-sm" id="tc-copy">${ICONS.copy} Copy</button>
     </div>
-    <div class="form-hint mt-3">💡 Click any button to transform your text instantly</div>
   </div>
 `;
 TOOL_INIT['text-cleaner'] = () => {
   const ta = document.getElementById('tc-text');
-  
-  document.querySelectorAll('[data-clean]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      let t = ta.value;
-      if (!t) { toast('Enter some text first', 'error'); return; }
-      
-      const c = btn.dataset.clean;
-      
-      if (c === 'spaces') {
-        // Remove extra spaces (multiple spaces → single space)
-        t = t.replace(/[ \t]+/g, ' ').replace(/ +\n/g, '\n');
-      } else if (c === 'lines') {
-        // Remove duplicate lines (keep first occurrence)
-        const lines = t.split('\n');
-        const seen = new Set();
-        const unique = [];
-        for (const line of lines) {
-          if (!seen.has(line)) {
-            seen.add(line);
-            unique.push(line);
-          }
-        }
-        t = unique.join('\n');
-      } else if (c === 'trim') {
-        // Trim whitespace from start/end of each line
-        t = t.split('\n').map(l => l.trim()).join('\n');
-      } else if (c === 'blank') {
-        // Remove blank lines
-        t = t.split('\n').filter(l => l.trim()).join('\n');
-      } else if (c === 'sort') {
-        // Sort lines alphabetically
-        t = t.split('\n').sort((a, b) => a.localeCompare(b)).join('\n');
-      } else if (c === 'reverse') {
-        // Reverse line order
-        t = t.split('\n').reverse().join('\n');
-      } else if (c === 'number') {
-        // Add line numbers
-        t = t.split('\n').map((l, i) => `${i + 1}. ${l}`).join('\n');
-      }
-      
-      ta.value = t;
-      toast(`Text ${btn.textContent.trim().toLowerCase()}ed`, 'success');
-    });
-  });
-  
-  document.getElementById('tc-copy').addEventListener('click', () => {
-    if (!ta.value) { toast('Nothing to copy', 'error'); return; }
-    copyText(ta.value);
-  });
-  
-  document.getElementById('tc-clear').addEventListener('click', () => {
-    if (ta.value && !confirm('Clear all text?')) return;
-    ta.value = '';
-    toast('Text cleared', 'success');
-  });
+  document.querySelectorAll('[data-clean]').forEach(btn => btn.addEventListener('click', () => {
+    let t = ta.value;
+    const c = btn.dataset.clean;
+    if (c === 'spaces') t = t.replace(/[ \t]+/g, ' ').replace(/ +\n/g, '\n');
+    else if (c === 'lines') t = [...new Set(t.split('\n'))].join('\n');
+    else if (c === 'trim') t = t.split('\n').map(l => l.trim()).join('\n');
+    else if (c === 'blank') t = t.split('\n').filter(l => l.trim()).join('\n');
+    ta.value = t;
+    toast('Text cleaned!', 'success');
+  }));
+  document.getElementById('tc-copy').addEventListener('click', () => copyText(ta.value));
 };
 
 /* ============ TEXT SORTER ============ */
 TOOL_RENDERERS['text-sorter'] = () => `
   <div class="tool-panel">
-    <div class="form-group">
-      <label class="form-label">Your text (one item per line)</label>
-      <textarea class="textarea" id="ts-text" placeholder="Apple&#10;Banana&#10;Cherry&#10;Date" style="min-height:160px"></textarea>
-    </div>
+    <textarea class="textarea" id="ts-text" placeholder="One item per line..." style="min-height:160px"></textarea>
     <div class="flex gap-2 mt-3" style="flex-wrap:wrap">
       <button class="btn btn-secondary btn-sm" data-sort="az">Sort A → Z</button>
       <button class="btn btn-secondary btn-sm" data-sort="za">Sort Z → A</button>
       <button class="btn btn-secondary btn-sm" data-sort="len-asc">Shortest first</button>
       <button class="btn btn-secondary btn-sm" data-sort="len-desc">Longest first</button>
-      <button class="btn btn-secondary btn-sm" data-sort="shuffle">🎲 Shuffle</button>
-      <button class="btn btn-secondary btn-sm" data-sort="unique">Remove duplicates</button>
-      <button class="btn btn-secondary btn-sm" id="ts-copy">${ICONS.copy} Copy</button>
-      <button class="btn btn-secondary btn-sm" id="ts-clear">${ICONS.trash} Clear</button>
+      <button class="btn btn-secondary btn-sm" data-sort="shuffle">Shuffle</button>
+      <button class="btn btn-primary btn-sm" id="ts-copy">${ICONS.copy} Copy</button>
     </div>
-    <div class="form-hint mt-3">💡 Each line is treated as a separate item</div>
   </div>
 `;
 TOOL_INIT['text-sorter'] = () => {
   const ta = document.getElementById('ts-text');
-  
-  document.querySelectorAll('[data-sort]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const text = ta.value;
-      if (!text) { toast('Enter some text first', 'error'); return; }
-      
-      const lines = text.split('\n');
-      const s = btn.dataset.sort;
-      let result = [];
-      
-      if (s === 'az') {
-        result = lines.sort((a, b) => a.localeCompare(b));
-      } else if (s === 'za') {
-        result = lines.sort((a, b) => b.localeCompare(a));
-      } else if (s === 'len-asc') {
-        result = lines.sort((a, b) => a.length - b.length);
-      } else if (s === 'len-desc') {
-        result = lines.sort((a, b) => b.length - a.length);
-      } else if (s === 'shuffle') {
-        // Fisher-Yates shuffle with crypto
-        result = [...lines];
-        const arr = new Uint32Array(result.length);
-        crypto.getRandomValues(arr);
-        for (let i = result.length - 1; i > 0; i--) {
-          const j = arr[i] % (i + 1);
-          [result[i], result[j]] = [result[j], result[i]];
-        }
-      } else if (s === 'unique') {
-        result = [...new Set(lines)];
+  document.querySelectorAll('[data-sort]').forEach(btn => btn.addEventListener('click', () => {
+    const lines = ta.value.split('\n');
+    const s = btn.dataset.sort;
+    if (s === 'az') lines.sort((a,b) => a.localeCompare(b));
+    else if (s === 'za') lines.sort((a,b) => b.localeCompare(a));
+    else if (s === 'len-asc') lines.sort((a,b) => a.length - b.length);
+    else if (s === 'len-desc') lines.sort((a,b) => b.length - a.length);
+    else if (s === 'shuffle') {
+      for (let i = lines.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [lines[i], lines[j]] = [lines[j], lines[i]];
       }
-      
-      ta.value = result.join('\n');
-      toast(`Lines ${btn.textContent.trim().toLowerCase()}`, 'success');
-    });
-  });
-  
-  document.getElementById('ts-copy').addEventListener('click', () => {
-    if (!ta.value) { toast('Nothing to copy', 'error'); return; }
-    copyText(ta.value);
-  });
-  
-  document.getElementById('ts-clear').addEventListener('click', () => {
-    if (ta.value && !confirm('Clear all text?')) return;
-    ta.value = '';
-    toast('Text cleared', 'success');
-  });
+    }
+    ta.value = lines.join('\n');
+  }));
+  document.getElementById('ts-copy').addEventListener('click', () => copyText(ta.value));
 };
-    /* ============ COLOR PICKER ============ */
+  /* ============ PREMIUM REFERENCE DATA ============ */
+const REFERENCE_PALETTES = [
+  { name: 'Ocean Breeze', desc: 'Calm blues', colors: ['#0EA5E9', '#06B6D4', '#14B8A6', '#10B981', '#059669'] },
+  { name: 'Sunset Glow', desc: 'Warm oranges', colors: ['#F97316', '#FB923C', '#FDBA74', '#FED7AA', '#FFEDD5'] },
+  { name: 'Forest', desc: 'Natural greens', colors: ['#166534', '#15803D', '#16A34A', '#22C55E', '#4ADE80'] },
+  { name: 'Royal Berry', desc: 'Rich purples', colors: ['#7C3AED', '#8B5CF6', '#A78BFA', '#C4B5FD', '#DDD6FE'] },
+  { name: 'Rose Garden', desc: 'Soft pinks', colors: ['#E11D48', '#F43F5E', '#FB7185', '#FDA4AF', '#FECDD3'] },
+  { name: 'Midnight', desc: 'Dark neutrals', colors: ['#0F172A', '#1E293B', '#334155', '#475569', '#64748B'] },
+  { name: 'Pastel Dream', desc: 'Soft tones', colors: ['#FDE68A', '#FCA5A5', '#A5B4FC', '#6EE7B7', '#FBCFE8'] },
+  { name: 'Earth Tones', desc: 'Warm browns', colors: ['#78350F', '#92400E', '#B45309', '#D97706', '#F59E0B'] },
+];
+
+/* ============ COLOR PICKER (PREMIUM) ============ */
 TOOL_RENDERERS['color-picker'] = () => `
   <div class="tool-panel">
     <div class="color-preview" id="cp-preview"></div>
     <div class="form-group">
       <label class="form-label">Pick a color</label>
-      <input type="color" id="cp-picker" value="#6366f1" style="width:100%;height:60px;border:none;border-radius:12px;cursor:pointer" />
+      <input type="color" id="cp-picker" value="#6366f1" style="width:100%;height:56px;border:none;border-radius:10px;cursor:pointer;background:none" />
     </div>
     <div class="color-values">
       <div class="color-value-row">
@@ -4319,113 +3836,92 @@ TOOL_RENDERERS['color-picker'] = () => `
     </div>
 
     <div class="reference-section">
-      <div class="reference-title">
-        <span>🎨</span>
-        <span>Reference Palettes</span>
+      <div class="reference-title">🎨 Designer Reference Palettes</div>
+      <p class="text-sm text-muted mb-3">Click any color swatch to apply it instantly</p>
+      <div class="palette-grid" id="paletteGrid">
+        ${REFERENCE_PALETTES.map(p => `
+          <div class="palette-card">
+            <div class="palette-colors">
+              ${p.colors.map(c => `<div class="palette-color" style="background:${c}" data-color="${c}" title="${c}"></div>`).join('')}
+            </div>
+            <div class="palette-name">${p.name}</div>
+            <div class="palette-desc">${p.desc}</div>
+          </div>
+        `).join('')}
       </div>
-      <p class="text-sm text-muted mb-3">Click any color to use it</p>
-      <div class="palette-grid" id="paletteGrid"></div>
     </div>
   </div>
 `;
-
 TOOL_INIT['color-picker'] = () => {
   const picker = document.getElementById('cp-picker');
   const preview = document.getElementById('cp-preview');
   const hex = document.getElementById('cp-hex');
   const rgb = document.getElementById('cp-rgb');
   const hsl = document.getElementById('cp-hsl');
-  const paletteGrid = document.getElementById('paletteGrid');
-
-  // Reference palettes
-  const REFERENCE_PALETTES = [
-    { name: 'Ocean Breeze', desc: 'Calm blues', colors: ['#0EA5E9', '#06B6D4', '#14B8A6', '#10B981', '#059669'] },
-    { name: 'Sunset Glow', desc: 'Warm oranges', colors: ['#F97316', '#FB923C', '#FDBA74', '#FED7AA', '#FFEDD5'] },
-    { name: 'Forest', desc: 'Natural greens', colors: ['#166534', '#15803D', '#16A34A', '#22C55E', '#4ADE80'] },
-    { name: 'Berry', desc: 'Rich purples', colors: ['#7C3AED', '#8B5CF6', '#A78BFA', '#C4B5FD', '#DDD6FE'] },
-    { name: 'Rose', desc: 'Soft pinks', colors: ['#E11D48', '#F43F5E', '#FB7185', '#FDA4AF', '#FECDD3'] },
-    { name: 'Midnight', desc: 'Dark neutrals', colors: ['#0F172A', '#1E293B', '#334155', '#475569', '#64748B'] },
-    { name: 'Pastel', desc: 'Soft tones', colors: ['#FDE68A', '#FCA5A5', '#A5B4FC', '#6EE7B7', '#FBCFE8'] },
-    { name: 'Earth', desc: 'Warm browns', colors: ['#78350F', '#92400E', '#B45309', '#D97706', '#F59E0B'] },
-    { name: 'Neon', desc: 'Vibrant colors', colors: ['#FF006E', '#FB5607', '#FFBE0B', '#8338EC', '#3A86FF'] },
-    { name: 'Minimal', desc: 'Clean grays', colors: ['#FAFAFA', '#E5E5E5', '#A3A3A3', '#525252', '#171717'] },
-    { name: 'Tropical', desc: 'Bright & bold', colors: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'] },
-    { name: 'Corporate', desc: 'Professional', colors: ['#1E40AF', '#3B82F6', '#60A5FA', '#93C5FD', '#DBEAFE'] },
-  ];
 
   function updateColor(c) {
+    if (!/^#[0-9a-f]{6}$/i.test(c)) return;
     preview.style.background = c;
     hex.value = c;
-    const r = parseInt(c.slice(1,3),16);
-    const g = parseInt(c.slice(3,5),16);
-    const b = parseInt(c.slice(5,7),16);
-    rgb.value = \`rgb(\${r}, \${g}, \${b})\`;
+    picker.value = c;
+    const r = parseInt(c.slice(1,3),16), g = parseInt(c.slice(3,5),16), b = parseInt(c.slice(5,7),16);
+    rgb.value = `rgb(${r}, ${g}, ${b})`;
     const [h, s, l] = rgbToHsl(r, g, b);
-    hsl.value = \`hsl(\${h}, \${s}%, \${l}%)\`;
+    hsl.value = `hsl(${h}, ${s}%, ${l}%)`;
   }
 
   picker.addEventListener('input', e => updateColor(e.target.value));
-  
   hex.addEventListener('input', () => {
-    const v = hex.value.trim();
-    if (/^#?[0-9a-f]{6}$/i.test(v)) {
-      const color = v.startsWith('#') ? v : '#' + v;
-      updateColor(color);
-      picker.value = color;
-    }
+    let v = hex.value.trim();
+    if (!v.startsWith('#')) v = '#' + v;
+    if (/^#[0-9a-f]{6}$/i.test(v)) updateColor(v);
   });
 
   document.querySelectorAll('[data-copy-target]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = document.getElementById(btn.dataset.copyTarget);
-      copyText(target.value);
-    });
+    btn.addEventListener('click', () => copyText(document.getElementById(btn.dataset.copyTarget).value));
   });
 
-  // Render reference palettes
-  paletteGrid.innerHTML = REFERENCE_PALETTES.map(palette => \`
-    <div class="palette-card">
-      <div class="palette-colors">
-        \${palette.colors.map(c => \`<div class="palette-color" style="background:\${c}" data-color="\${c}" title="\${c}"></div>\`).join('')}
-      </div>
-      <div class="palette-name">\${palette.name}</div>
-      <div class="palette-desc">\${palette.desc}</div>
-    </div>
-  \`).join('');
-
-  // Palette color click handlers
-  paletteGrid.querySelectorAll('.palette-color').forEach(el => {
-    el.addEventListener('click', (e) => {
+  document.querySelectorAll('#paletteGrid .palette-color').forEach(el => {
+    el.addEventListener('click', e => {
       e.stopPropagation();
-      const color = el.dataset.color;
-      updateColor(color);
-      picker.value = color;
-      toast(\`Applied \${color}\`, 'success');
+      updateColor(el.dataset.color);
+      toast(`Applied ${el.dataset.color}`, 'success');
     });
   });
 
   updateColor('#6366f1');
 };
-    /* ============ GRADIENT GENERATOR ============ */
+  /* ============ GRADIENT PRESETS DATA ============ */
+const GRADIENT_PRESETS = [
+  { name: 'Purple Dream', gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', stops: [{color:'#667eea',pos:0},{color:'#764ba2',pos:100}] },
+  { name: 'Ocean Blue', gradient: 'linear-gradient(135deg, #667eea 0%, #00d4ff 100%)', stops: [{color:'#667eea',pos:0},{color:'#00d4ff',pos:100}] },
+  { name: 'Sunset Pink', gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', stops: [{color:'#f093fb',pos:0},{color:'#f5576c',pos:100}] },
+  { name: 'Fresh Forest', gradient: 'linear-gradient(135deg, #0ba360 0%, #3cba92 100%)', stops: [{color:'#0ba360',pos:0},{color:'#3cba92',pos:100}] },
+  { name: 'Fire Blaze', gradient: 'linear-gradient(135deg, #f12711 0%, #f5af19 100%)', stops: [{color:'#f12711',pos:0},{color:'#f5af19',pos:100}] },
+  { name: 'Dark Midnight', gradient: 'linear-gradient(135deg, #232526 0%, #414345 100%)', stops: [{color:'#232526',pos:0},{color:'#414345',pos:100}] },
+  { name: 'Peach Cream', gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)', stops: [{color:'#ffecd2',pos:0},{color:'#fcb69f',pos:100}] },
+  { name: 'Sky High', gradient: 'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)', stops: [{color:'#89f7fe',pos:0},{color:'#66a6ff',pos:100}] },
+];
+
+/* ============ GRADIENT GENERATOR (PREMIUM) ============ */
 TOOL_RENDERERS['gradient'] = () => `
   <div class="tool-panel">
     <div class="gradient-preview" id="gg-preview"></div>
     <div class="gradient-stops" id="gg-stops"></div>
     <button class="btn btn-ghost btn-sm" id="gg-add">+ Add color</button>
-    
+
     <div class="form-row form-row-2 mt-3">
       <div class="form-group">
         <label class="form-label">Direction</label>
         <select class="select" id="gg-dir">
+          <option value="135deg" selected>↘ 135° (Diagonal)</option>
           <option value="to right">→ Left to right</option>
           <option value="to left">← Right to left</option>
           <option value="to bottom">↓ Top to bottom</option>
           <option value="to top">↑ Bottom to top</option>
-          <option value="to bottom right">↘ Diagonal</option>
-          <option value="to top right">↗ Diagonal</option>
-          <option value="135deg">135°</option>
-          <option value="45deg">45°</option>
-          <option value="90deg">90°</option>
+          <option value="45deg">↗ 45°</option>
+          <option value="90deg">→ 90°</option>
+          <option value="180deg">↓ 180°</option>
         </select>
       </div>
       <div class="form-group">
@@ -4438,131 +3934,110 @@ TOOL_RENDERERS['gradient'] = () => `
     </div>
 
     <div class="form-group">
-      <label class="form-label">CSS</label>
-      <div class="flex gap-2">
-        <input class="input font-mono" id="gg-css" readonly style="flex:1" />
-        <button class="btn btn-secondary" id="gg-copy">${ICONS.copy}</button>
+      <label class="form-label">CSS Code</label>
+      <div class="input-group">
+        <input class="input font-mono" id="gg-css" readonly />
+        <button class="btn btn-primary" id="gg-copy">${ICONS.copy} Copy</button>
       </div>
+    </div>
+
+    <div class="flex gap-2 mt-3" style="flex-wrap:wrap">
+      <button class="btn btn-secondary btn-sm" id="gg-random">🎲 Random gradient</button>
     </div>
 
     <div class="reference-section">
-      <div class="reference-title">
-        <span>✨</span>
-        <span>Gradient Presets</span>
+      <div class="reference-title">✨ Trendy Gradient Presets</div>
+      <p class="text-sm text-muted mb-3">Click any preset to load it into the editor</p>
+      <div class="gradient-presets" id="gradientPresets">
+        ${GRADIENT_PRESETS.map((p, i) => `
+          <div class="gradient-preset" style="background:${p.gradient}" data-preset="${i}">
+            <div class="gradient-preset-label">${p.name}</div>
+          </div>
+        `).join('')}
       </div>
-      <p class="text-sm text-muted mb-3">Click to apply</p>
-      <div class="gradient-presets" id="gradientPresets"></div>
     </div>
   </div>
 `;
-
 TOOL_INIT['gradient'] = () => {
   const stopsEl = document.getElementById('gg-stops');
   const preview = document.getElementById('gg-preview');
   const css = document.getElementById('gg-css');
   const dir = document.getElementById('gg-dir');
   const type = document.getElementById('gg-type');
-  const presetsEl = document.getElementById('gradientPresets');
-  
+
   let stops = [
     { color: '#6366f1', pos: 0 },
     { color: '#a855f7', pos: 100 },
   ];
 
-  // Gradient presets
-  const GRADIENT_PRESETS = [
-    { name: 'Purple Dream', gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
-    { name: 'Ocean Blue', gradient: 'linear-gradient(135deg, #667eea 0%, #00d4ff 100%)' },
-    { name: 'Sunset', gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' },
-    { name: 'Forest', gradient: 'linear-gradient(135deg, #0ba360 0%, #3cba92 100%)' },
-    { name: 'Fire', gradient: 'linear-gradient(135deg, #f12711 0%, #f5af19 100%)' },
-    { name: 'Midnight', gradient: 'linear-gradient(135deg, #232526 0%, #414345 100%)' },
-    { name: 'Peach', gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)' },
-    { name: 'Sky', gradient: 'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)' },
-    { name: 'Rose Gold', gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #fda085 100%)' },
-    { name: 'Aurora', gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 50%, #fa709a 100%)' },
-    { name: 'Cosmic', gradient: 'linear-gradient(135deg, #ff6e7f 0%, #bfe9ff 100%)' },
-    { name: 'Emerald', gradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)' },
-  ];
-
   function renderStops() {
-    stopsEl.innerHTML = stops.map((s, i) => \`
+    stopsEl.innerHTML = stops.map((s, i) => `
       <div class="gradient-stop">
-        <input type="color" value="\${s.color}" data-i="\${i}" />
-        <input type="number" value="\${s.pos}" min="0" max="100" data-i="\${i}" class="input" style="width:60px" />
-        \${stops.length > 2 ? \`<button class="btn btn-ghost btn-sm" data-rm="\${i}">\${ICONS.x}</button>\` : ''}
+        <input type="color" value="${s.color}" data-i="${i}" />
+        <input type="number" value="${s.pos}" min="0" max="100" data-i="${i}" class="input" style="width:60px;padding:4px 8px;font-size:13px" />
+        ${stops.length > 2 ? `<button class="btn btn-ghost btn-sm" data-rm="${i}">${ICONS.x}</button>` : ''}
       </div>
-    \`).join('');
-    
+    `).join('');
     stopsEl.querySelectorAll('input[type="color"]').forEach(el => {
-      el.addEventListener('input', e => {
-        stops[+el.dataset.i].color = e.target.value;
-        updateGradient();
-      });
+      el.addEventListener('input', e => { stops[+el.dataset.i].color = e.target.value; updateGradient(); });
     });
     stopsEl.querySelectorAll('input[type="number"]').forEach(el => {
-      el.addEventListener('input', e => {
-        stops[+el.dataset.i].pos = Math.max(0, Math.min(100, +e.target.value));
-        updateGradient();
-      });
+      el.addEventListener('input', e => { stops[+el.dataset.i].pos = Math.max(0, Math.min(100, +e.target.value)); updateGradient(); });
     });
     stopsEl.querySelectorAll('[data-rm]').forEach(el => {
-      el.addEventListener('click', () => {
-        stops.splice(+el.dataset.rm, 1);
-        renderStops();
-        updateGradient();
-      });
+      el.addEventListener('click', () => { stops.splice(+el.dataset.rm, 1); renderStops(); });
     });
     updateGradient();
   }
 
   function updateGradient() {
     const sorted = [...stops].sort((a,b) => a.pos - b.pos);
-    const stopStr = sorted.map(s => \`\${s.color} \${s.pos}%\`).join(', ');
-    const value = type.value === 'linear' 
-      ? \`linear-gradient(\${dir.value}, \${stopStr})\` 
-      : \`radial-gradient(circle, \${stopStr})\`;
+    const stopStr = sorted.map(s => `${s.color} ${s.pos}%`).join(', ');
+    const value = type.value === 'linear' ? `linear-gradient(${dir.value}, ${stopStr})` : `radial-gradient(circle, ${stopStr})`;
     preview.style.background = value;
-    css.value = \`background: \${value};\`;
+    css.value = `background: ${value};`;
   }
 
   document.getElementById('gg-add').addEventListener('click', () => {
-    if (stops.length >= 6) {
-      toast('Maximum 6 colors', 'error');
-      return;
-    }
+    if (stops.length >= 6) { toast('Maximum 6 colors', 'error'); return; }
     const last = stops[stops.length - 1];
-    stops.push({ color: '#f472b6', pos: Math.min(100, last.pos + 20) });
+    stops.push({ color: '#ec4899', pos: Math.min(100, last.pos + 20) });
     renderStops();
+  });
+
+  document.getElementById('gg-random').addEventListener('click', () => {
+    const rand = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+    stops = [{ color: rand(), pos: 0 }, { color: rand(), pos: 100 }];
+    renderStops();
+    toast('Random gradient generated!', 'success');
+  });
+
+  document.querySelectorAll('#gradientPresets .gradient-preset').forEach(el => {
+    el.addEventListener('click', () => {
+      const preset = GRADIENT_PRESETS[+el.dataset.preset];
+      stops = preset.stops.map(s => ({ ...s }));
+      renderStops();
+      toast(`${preset.name} applied!`, 'success');
+    });
   });
 
   dir.addEventListener('change', updateGradient);
   type.addEventListener('change', updateGradient);
-  
-  document.getElementById('gg-copy').addEventListener('click', () => {
-    copyText(css.value);
-  });
-
-  // Render gradient presets
-  presetsEl.innerHTML = GRADIENT_PRESETS.map(p => \`
-    <div class="gradient-preset" style="background:\${p.gradient}" data-gradient="\${p.gradient}">
-      <div class="gradient-preset-label">\${p.name}</div>
-    </div>
-  \`).join('');
-
-  presetsEl.querySelectorAll('.gradient-preset').forEach(el => {
-    el.addEventListener('click', () => {
-      const gradient = el.dataset.gradient;
-      preview.style.background = gradient;
-      css.value = \`background: \${gradient};\`;
-      toast('Gradient applied!', 'success');
-    });
-  });
+  document.getElementById('gg-copy').addEventListener('click', () => copyText(css.value));
 
   renderStops();
 };
+  /* ============ QUICK REFERENCE COLORS ============ */
+const QUICK_COLORS = [
+  { name: 'Primary', colors: ['#6366F1', '#8B5CF6', '#EC4899'] },
+  { name: 'Success', colors: ['#10B981', '#059669', '#047857'] },
+  { name: 'Warning', colors: ['#F59E0B', '#D97706', '#B45309'] },
+  { name: 'Danger', colors: ['#EF4444', '#DC2626', '#B91C1C'] },
+  { name: 'Info', colors: ['#0EA5E9', '#0284C7', '#0369A1'] },
+  { name: 'Neutral', colors: ['#64748B', '#475569', '#334155'] },
+];
 
-/* ============ COLOR CONVERTER ============ */
+/* ============ COLOR CONVERTER (PREMIUM) ============ */
 TOOL_RENDERERS['color-converter'] = () => `
   <div class="tool-panel">
     <div class="color-preview" id="ccv-preview"></div>
@@ -4576,105 +4051,76 @@ TOOL_RENDERERS['color-converter'] = () => `
         <input class="input font-mono" id="ccv-rgb" placeholder="99, 102, 241" />
       </div>
       <div class="form-group">
-        <label class="form-label">HSL (h, s, l)</label>
+        <label class="form-label">HSL (h, s%, l%)</label>
         <input class="input font-mono" id="ccv-hsl" placeholder="239, 84, 67" />
       </div>
     </div>
 
     <div class="reference-section">
-      <div class="reference-title">
-        <span>🎯</span>
-        <span>Quick Reference Colors</span>
+      <div class="reference-title">🎯 Quick Reference Colors</div>
+      <p class="text-sm text-muted mb-3">Click any swatch to convert it</p>
+      <div class="palette-grid" id="converterPalettes">
+        ${QUICK_COLORS.map(p => `
+          <div class="palette-card">
+            <div class="palette-colors">
+              ${p.colors.map(c => `<div class="palette-color" style="background:${c}" data-color="${c}" title="${c}"></div>`).join('')}
+            </div>
+            <div class="palette-name">${p.name}</div>
+          </div>
+        `).join('')}
       </div>
-      <div class="palette-grid" id="converterPalettes"></div>
     </div>
   </div>
 `;
-
 TOOL_INIT['color-converter'] = () => {
   const preview = document.getElementById('ccv-preview');
-  const hex = document.getElementById('ccv-hex');
-  const rgb = document.getElementById('ccv-rgb');
-  const hsl = document.getElementById('ccv-hsl');
-  const converterPalettes = document.getElementById('converterPalettes');
+  const hexIn = document.getElementById('ccv-hex');
+  const rgbIn = document.getElementById('ccv-rgb');
+  const hslIn = document.getElementById('ccv-hsl');
 
   function fromHex(v) {
     v = v.trim().replace('#','');
     if (!/^[0-9a-f]{6}$/i.test(v)) return null;
     return [parseInt(v.slice(0,2),16), parseInt(v.slice(2,4),16), parseInt(v.slice(4,6),16)];
   }
-  
   function fromRgb(v) {
-    const m = v.match(/(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)/);
+    const m = v.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
     if (!m) return null;
     const r = +m[1], g = +m[2], b = +m[3];
     if ([r,g,b].some(n => n < 0 || n > 255)) return null;
     return [r, g, b];
   }
-  
   function fromHsl(v) {
-    const m = v.match(/(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)/);
+    const m = v.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
     if (!m) return null;
     return hslToRgb(+m[1], +m[2], +m[3]);
   }
-  
   function show(rgbArr) {
     if (!rgbArr) return;
     const [r, g, b] = rgbArr;
-    preview.style.background = \`rgb(\${r},\${g},\${b})\`;
-    hex.value = '#' + [r,g,b].map(n => n.toString(16).padStart(2,'0')).join('');
-    rgb.value = \`\${r}, \${g}, \${b}\`;
+    preview.style.background = `rgb(${r},${g},${b})`;
+    hexIn.value = '#' + [r,g,b].map(n => n.toString(16).padStart(2,'0')).join('');
+    rgbIn.value = `${r}, ${g}, ${b}`;
     const [h, s, l] = rgbToHsl(r, g, b);
-    hsl.value = \`\${h}, \${s}%, \${l}%\`;
+    hslIn.value = `${h}, ${s}, ${l}`;
   }
 
-  hex.addEventListener('input', () => {
-    const r = fromHex(hex.value);
-    if (r) show(r);
-  });
-  
-  rgb.addEventListener('input', () => {
-    const r = fromRgb(rgb.value);
-    if (r) show(r);
-  });
-  
-  hsl.addEventListener('input', () => {
-    const r = fromHsl(hsl.value);
-    if (r) show(r);
-  });
+  hexIn.addEventListener('input', () => { const r = fromHex(hexIn.value); if (r) show(r); });
+  rgbIn.addEventListener('input', () => { const r = fromRgb(rgbIn.value); if (r) show(r); });
+  hslIn.addEventListener('input', () => { const r = fromHsl(hslIn.value); if (r) show(r); });
 
-  // Quick reference colors
-  const quickColors = [
-    { name: 'Primary', colors: ['#6366F1', '#8B5CF6', '#EC4899'] },
-    { name: 'Success', colors: ['#10B981', '#059669', '#047857'] },
-    { name: 'Warning', colors: ['#F59E0B', '#D97706', '#B45309'] },
-    { name: 'Danger', colors: ['#EF4444', '#DC2626', '#B91C1C'] },
-    { name: 'Info', colors: ['#06B6D4', '#0891B2', '#0E7490'] },
-    { name: 'Neutral', colors: ['#64748B', '#475569', '#334155'] },
-  ];
-
-  converterPalettes.innerHTML = quickColors.map(palette => \`
-    <div class="palette-card">
-      <div class="palette-colors">
-        \${palette.colors.map(c => \`<div class="palette-color" style="background:\${c}" data-color="\${c}" title="\${c}"></div>\`).join('')}
-      </div>
-      <div class="palette-name">\${palette.name}</div>
-    </div>
-  \`).join('');
-
-  converterPalettes.querySelectorAll('.palette-color').forEach(el => {
+  document.querySelectorAll('#converterPalettes .palette-color').forEach(el => {
     el.addEventListener('click', () => {
-      const color = el.dataset.color;
-      const rgb = fromHex(color);
-      if (rgb) {
-        show(rgb);
-        toast(\`Applied \${color}\`, 'success');
-      }
+      const rgb = fromHex(el.dataset.color);
+      if (rgb) { show(rgb); toast(`Applied ${el.dataset.color}`, 'success'); }
     });
   });
 
   show([99, 102, 241]);
-}
-    </script>
+};
+
+/* ============ INITIAL RENDER ============ */
+renderRoute();
+</script>
 </body>
 </html>
