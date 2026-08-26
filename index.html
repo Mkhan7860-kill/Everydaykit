@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#6366f1" />
+<title>EverydayKit — Small Tools. Big Convenience.</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%236366f1'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold' font-style='italic'%3EE%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<style>
+  /* ============ DARK THEME (DEFAULT) ============ */
+  :root {
+    --bg: #0a0e1a; --bg-subtle: #0f1424; --surface: #141a2e; --surface-2: #1c2440;
+    --border: #243049; --border-strong: #334166; --text: #f1f5f9; --text-muted: #94a3b8;
+    --text-subtle: #64748b; --accent: #818cf8; --accent-hover: #a5b4fc; --accent-soft: #1e1b4b;
+    --accent-2: #c084fc; --success: #34d399; --success-soft: #064e3b; --warning: #fbbf24;
+    --warning-soft: #451a03; --danger: #f87171; --danger-soft: #450a0a;
+    --gradient-primary: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.5); --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.6);
+    --radius: 12px; --radius-lg: 16px; --radius-xl: 24px;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ============ LIGHT THEME FIX ============ */
+  [data-theme="light"] {
+    --bg: #f8fafc; --bg-subtle: #ffffff; --surface: #ffffff; --surface-2: #f1f5f9;
+    --border: #e2e8f0; --border-strong: #cbd5e1; --text: #0f172a; --text-muted: #475569;
+    --text-subtle: #64748b; --accent: #6366f1; --accent-hover: #4f46e5; --accent-soft: #eef2ff;
+    --accent-2: #a855f7; --success: #10b981; --success-soft: #d1fae5; --warning: #f59e0b;
+    --warning-soft: #fef3c7; --danger: #ef4444; --danger-soft: #fee2e2;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08); --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; padding-bottom: 80px; transition: background var(--transition), color var(--transition); }
+  @media (min-width: 1024px) { body { padding-bottom: 0; } }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input, select, textarea { font-family: inherit; font-size: inherit; }
+  img { max-width: 100%; display: block; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  /* ============ LAYOUT ============ */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  @media (min-width: 768px) { .container { padding: 0 32px; } }
+  main { padding: 24px 0 100px; min-height: calc(100vh - 80px); }
+  @media (min-width: 1024px) { main { padding: 40px 0 80px; } }
+  .hidden { display: none !important; }
+
+  /* ============ HEADER & LOGO ============ */
+  .header { 
+    position: sticky; top: 0; z-index: 100; 
+    background: color-mix(in srgb, var(--bg) 85%, transparent); 
+    backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); 
+  }
+  .header-inner { display: flex; align-items: center; gap: 16px; height: 70px; }
+  .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em; }
+  
+  /* GLOWING LOGO "E" */
+  .logo-mark {
+    width: 42px; height: 42px; border-radius: 12px; background: var(--gradient-primary);
+    display: grid; place-items: center; color: white; font-weight: 900; font-size: 24px;
+    font-style: italic; letter-spacing: -1px;
+    box-shadow: 0 0 20px rgba(129, 140, 248, 0.6), 0 0 40px rgba(129, 140, 248, 0.3);
+    animation: logoGlow 2.5s ease-in-out infinite alternate;
+  }
+  @keyframes logoGlow {
+    from { box-shadow: 0 0 15px rgba(129, 140, 248, 0.5), 0 0 30px rgba(129, 140, 248, 0.2); }
+    to { box-shadow: 0 0 25px rgba(192, 132, 252, 0.8), 0 0 50px rgba(192, 132, 252, 0.4); }
+  }
+
+  /* NAVIGATION */
+  .nav-desktop { display: none; gap: 4px; margin-left: 8px; }
+  @media (min-width: 1024px) { .nav-desktop { display: flex; } }
+  .nav-link { padding: 8px 16px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--text-muted); transition: all var(--transition); }
+  .nav-link:hover, .nav-link.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  
+  .header-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+  .icon-btn { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; color: var(--text-muted); transition: all var(--transition); }
+  .icon-btn:hover { background: var(--surface-2); color: var(--text); }
+  .icon-btn svg { width: 20px; height: 20px; }
+  .theme-btn svg { transition: transform 0.4s ease; }
+  .theme-btn:hover svg { transform: rotate(180deg); }
+  
+  /* HAMBURGER MENU (Hide on Desktop) */
+  .menu-btn { display: grid; }
+  @media (min-width: 1024px) { .menu-btn { display: none !important; } }
+
+  /* MOBILE MENU & BOTTOM NAV */
+  .mobile-menu {
+    position: fixed; inset: 70px 0 0 0; z-index: 99; background: var(--bg); padding: 20px;
+    transform: translateX(100%); transition: transform 300ms ease; overflow-y: auto;
+  }
+  .mobile-menu.open { transform: translateX(0); }
+  .mobile-menu .nav-link { display: block; padding: 16px; font-size: 16px; border-radius: 12px; margin-bottom: 4px; }
+  
+  .bottom-nav {
+    display: flex; position: fixed; bottom: 0; left: 0; right: 0;
+    background: color-mix(in srgb, var(--surface) 95%, transparent); backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border); padding: 8px 4px; z-index: 50; gap: 4px;
+  }
+  @media (min-width: 1024px) { .bottom-nav { display: none; } }
+  .bottom-nav-item {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 8px 4px; border-radius: 12px; color: var(--text-subtle); font-size: 11px; font-weight: 500; transition: all var(--transition);
+  }
+  .bottom-nav-item svg { width: 22px; height: 22px; }
+  .bottom-nav-item.active { color: var(--accent); background: var(--accent-soft); }
+
+  /* HERO SECTION */
+  .hero { text-align: center; padding: 40px 0 60px; }
+  @media (min-width: 768px) { .hero { padding: 60px 0 80px; } }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent); font-size: 13px; font-weight: 600; margin-bottom: 24px;
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  .hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 900; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 20px; }
+  .hero h1 span { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: clamp(16px, 2.5vw, 20px); color: var(--text-muted); max-width: 640px; margin: 0 auto 36px; }
+  .hero-search { max-width: 600px; margin: 0 auto 32px; position: relative; }
+  .hero-search input {
+    width: 100%; padding: 18px 20px 18px 52px; border: 1px solid var(--border); border-radius: 16px;
+    background: var(--surface); color: var(--text); font-size: 16px; box-shadow: var(--shadow); transition: all var(--transition);
+  }
+  .hero-search input:focus { outline: none; border-color: var(--accent); box-shadow: var(--shadow), 0 0 0 4px rgba(129, 140, 248, 0.25); }
+  .hero-search .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-subtle); width: 20px; height: 20px; }
+  .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 12px; font-weight: 600; font-size: 15px; transition: all var(--transition); border: 1px solid transparent; white-space: nowrap; }
+  .btn svg { width: 16px; height: 16px; }
+  .btn-primary { background: var(--gradient-primary); color: white; box-shadow: 0 4px 14px rgba(129, 140, 248, 0.35); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(129, 140, 248, 0.45); }
+  .btn-secondary { background: var(--surface); color: var(--text); border-color: var(--border); box-shadow: var(--shadow); }
+  .btn-secondary:hover { background: var(--surface-2); transform: translateY(-1px); }
+  .btn-ghost { color: var(--text-muted); padding: 8px 14px; }
+  .btn-ghost:hover { background: var(--surface-2); color: var(--text); }
+  .btn-sm { padding: 8px 14px; font-size: 13px; border-radius: 10px; }
+  .btn-block { width: 100%; justify-content: center; }
+
+  /* GRIDS & CARDS */
+  .section { margin: 48px 0; }
+  .section-header { display: flex; align-items: end; justify-content: space-between; margin-bottom: 24px; gap: 16px; flex-wrap: wrap; }
+  .section-title { font-size: clamp(22px, 3vw, 28px); font-weight: 800; letter-spacing: -0.02em; }
+  .section-subtitle { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
+  .tools-grid, .cat-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+
+  .tool-card, .cat-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px;
+    cursor: pointer; position: relative; transition: all var(--transition); display: flex; flex-direction: column; gap: 12px;
+  }
+  .tool-card:hover, .cat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--border-strong); background: var(--surface-2); }
+  .card-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--gradient-primary); color: white; display: grid; place-items: center; box-shadow: 0 4px 12px rgba(129, 140, 248, 0.25); }
+  .card-icon svg { width: 24px; height: 24px; }
+  .tool-card-name, .cat-card-name { font-weight: 700; font-size: 16px; }
+  .tool-card-desc, .cat-card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .tool-card-cat { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-subtle); }
+  .tool-fav-btn {
+    position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 8px;
+    display: grid; place-items: center; color: var(--text-subtle); transition: all var(--transition); background: var(--surface-2);
+  }
+  .tool-fav-btn:hover { background: var(--warning-soft); color: var(--warning); transform: scale(1.1); }
+  .tool-fav-btn.active { color: var(--warning); background: var(--warning-soft); }
+  .tool-fav-btn svg { width: 14px; height: 14px; }
+
+  /* BACK BUTTON */
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px;
+    background: var(--surface-2); color: var(--text-muted); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all var(--transition); border: 1px solid var(--border); margin-bottom: 20px;
+  }
+  .back-btn:hover { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); transform: translateX(-4px); }
+  .back-btn svg { width: 16px; height: 16px; }
+  /* ============ FORMS & INPUTS ============ */
+  .form-group { margin-bottom: 18px; }
+  .form-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text-muted); }
+  .input, .select, .textarea {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-subtle); color: var(--text); font-size: 15px; transition: all var(--transition);
+  }
+  .input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent); background: var(--surface); }
+  .textarea { min-height: 120px; resize: vertical; }
+  .form-row { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .form-row-2 { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 768px) { .form-row-3 { grid-template-columns: 1fr 1fr 1fr; } }
+  .checkbox-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; cursor: pointer; font-size: 14px; color: var(--text-muted); }
+  .checkbox-row input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
+
+  /* ============ RESULTS & STATS ============ */
+  .result-box { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-top: 20px; }
+  .result-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .result-row:last-child { border-bottom: none; }
+  .result-label { color: var(--text-muted); font-size: 14px; }
+  .result-value { font-weight: 700; font-size: 16px; font-variant-numeric: tabular-nums; }
+  .result-highlight {
+    background: var(--gradient-primary); color: white; padding: 18px 24px; border-radius: var(--radius-lg);
+    font-size: 20px; font-weight: 800; display: flex; justify-content: space-between; align-items: center;
+    margin-top: 16px; box-shadow: 0 6px 20px rgba(129, 140, 248, 0.3);
+  }
+  .stats-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); margin-top: 16px; }
+  .stat-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 12px; text-align: center; transition: all var(--transition); }
+  .stat-card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: var(--shadow); }
+  .stat-value { font-size: 28px; font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
+  .stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+  /* ============ TOASTS & EMPTY STATES ============ */
+  .toast-container { position: fixed; top: 80px; right: 20px; z-index: 200; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+  @media (max-width: 640px) { .toast-container { top: auto; bottom: 100px; left: 20px; right: 20px; } }
+  .toast { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 12px; min-width: 260px; max-width: 400px; pointer-events: auto; animation: toastIn 300ms ease; }
+  .toast.hiding { animation: toastOut 200ms forwards; }
+  @keyframes toastIn { from { opacity: 0; transform: translateY(-12px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes toastOut { to { opacity: 0; transform: translateY(-12px) scale(0.95); } }
+  .toast-icon { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; background: var(--surface-2); }
+  .toast.success .toast-icon { color: var(--success); } .toast.error .toast-icon { color: var(--danger); } .toast.info .toast-icon { color: var(--accent); }
+  .toast-message { font-size: 14px; font-weight: 600; }
+  
+  .empty-state { text-align: center; padding: 60px 20px; }
+  .empty-state-icon { width: 64px; height: 64px; border-radius: 16px; background: var(--surface-2); color: var(--text-subtle); display: grid; place-items: center; margin: 0 auto 20px; }
+  .empty-state-icon svg { width: 32px; height: 32px; }
+  .empty-state h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .empty-state p { color: var(--text-muted); margin-bottom: 24px; font-size: 15px; }
+  .prose h1 { font-size: 32px; font-weight: 800; margin-bottom: 16px; }
+  .prose h2 { font-size: 24px; font-weight: 700; margin: 32px 0 12px; }
+  .prose p { color: var(--text-muted); line-height: 1.7; font-size: 16px; margin-bottom: 16px; }
+
+  /* ============ FOOTER ============ */
+  .footer { border-top: 1px solid var(--border); padding: 48px 0 24px; background: var(--bg-subtle); margin-top: 40px; }
+  .footer-grid { display: grid; gap: 32px; grid-template-columns: 1fr; margin-bottom: 32px; }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+  .footer-brand p { color: var(--text-muted); font-size: 14px; margin-top: 12px; max-width: 320px; }
+  .footer-col h4 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; color: var(--text); }
+  .footer-col a { display: block; padding: 6px 0; color: var(--text-muted); font-size: 14px; transition: color var(--transition); }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom { padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="#/" class="logo">
+      <span class="logo-mark">E</span>
+      <span>EverydayKit</span>
+    </a>
+    <nav class="nav-desktop">
+      <a href="#/" class="nav-link" data-route="/">Home</a>
+      <a href="#/tools" class="nav-link" data-route="/tools">All Tools</a>
+      <a href="#/categories" class="nav-link" data-route="/categories">Categories</a>
+      <a href="#/favorites" class="nav-link" data-route="/favorites">Favorites</a>
+    </nav>
+    <div class="header-actions">
+      <!-- THEME TOGGLE BUTTON (Fixed) -->
+      <button class="icon-btn theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+      </button>
+      <!-- HAMBURGER MENU (Mobile Only) -->
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#/" class="nav-link" data-route="/">Home</a>
+  <a href="#/tools" class="nav-link" data-route="/tools">All Tools</a>
+  <a href="#/popular" class="nav-link" data-route="/popular">Popular Tools</a>
+  <a href="#/categories" class="nav-link" data-route="/categories">Categories</a>
+  <a href="#/favorites" class="nav-link" data-route="/favorites">Favorites</a>
+  <a href="#/recent" class="nav-link" data-route="/recent">Recent Tools</a>
+  <a href="#/about" class="nav-link" data-route="/about">About</a>
+  <a href="#/contact" class="nav-link" data-route="/contact">Contact</a>
+</div>
+
+<!-- BOTTOM NAV (MOBILE) -->
+<nav class="bottom-nav">
+  <a href="#/" class="bottom-nav-item" data-route="/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home
+  </a>
+  <a href="#/tools" class="bottom-nav-item" data-route="/tools">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Tools
+  </a>
+  <a href="#/categories" class="bottom-nav-item" data-route="/categories">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Categories
+  </a>
+  <a href="#/favorites" class="bottom-nav-item" data-route="/favorites">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Favorites
+  </a>
+</nav>
+
+<!-- MAIN CONTENT & TOASTS -->
+<main id="app"></main>
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-mark">E</span><span>EverydayKit</span></div>
+        <p>Small tools. Big convenience. Everything you need for everyday digital tasks, in one simple place.</p>
+      </div>
+      <div class="footer-col"><h4>Tools</h4><a href="#/tools">All Tools</a><a href="#/popular">Popular</a><a href="#/categories">Categories</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#/about">About</a><a href="#/contact">Contact</a></div>
+      <div class="footer-col"><h4>Legal</h4><a href="#/privacy">Privacy</a><a href="#/terms">Terms</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 EverydayKit. All tools run locally in your browser.</span>
+      <span>Made with care. | <a href="https://www.instagram.com/m.king_13786" target="_blank" style="color: var(--accent); font-weight: 600;">Instagram: @m.king_13786</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ============ ICONS LIBRARY ============ */
+const ICONS = {
+  image: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+  calculator: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="12" y1="18" x2="14" y2="18"/></svg>',
+  convert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>',
+  qr: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="14" y2="17"/><line x1="20" y1="14" x2="20" y2="17"/><line x1="14" y1="20" x2="17" y2="20"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  key: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>',
+  text: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>',
+  palette: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>',
+  file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+  search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+  star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  starFill: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+  arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+  zap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+  info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+  percent: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>',
+  hash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+  phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+  wifi: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>',
+  map: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+  ruler: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>',
+  weight: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M6.5 8a2 2 0 0 0-1.9 1.4L2 19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2l-2.6-9.6A2 2 0 0 0 17.5 8h-11z"/></svg>',
+  thermo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>',
+  square: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>',
+  cube: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>',
+  speed: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>',
+  database: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',
+  dollar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+  calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+  sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>',
+  moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+};
+
+/* ============ STATE & THEME TOGGLE FIX ============ */
+const state = {
+  theme: localStorage.getItem('ek-theme') || 'dark',
+  favorites: JSON.parse(localStorage.getItem('ek-favorites') || '[]'),
+  recent: JSON.parse(localStorage.getItem('ek-recent') || '[]'),
+};
+function saveFavorites() { localStorage.setItem('ek-favorites', JSON.stringify(state.favorites)); }
+function saveRecent() { localStorage.setItem('ek-recent', JSON.stringify(state.recent)); }
+function toggleFavorite(id) {
+  const i = state.favorites.indexOf(id);
+  if (i >= 0) { state.favorites.splice(i, 1); toast('Removed from favorites', 'info'); }
+  else { state.favorites.push(id); toast('Added to favorites!', 'success'); }
+  saveFavorites();
+  document.querySelectorAll(`[data-fav="${id}"]`).forEach(el => {
+    el.classList.toggle('active', state.favorites.includes(id));
+    el.innerHTML = state.favorites.includes(id) ? ICONS.starFill : ICONS.star;
+  });
+}
+function addRecent(id) { state.recent = [id, ...state.recent.filter(x => x !== id)].slice(0, 10); saveRecent(); }
+
+// THEME FIX: Yeh code properly CSS variables ko switch karega
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', state.theme);
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.innerHTML = state.theme === 'dark' ? ICONS.moon : ICONS.sun;
+}
+document.getElementById('themeToggle').addEventListener('click', () => {
+  state.theme = state.theme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('ek-theme', state.theme);
+  applyTheme();
+});
+applyTheme();
+
+// MOBILE MENU LOGIC
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', (e) => { e.stopPropagation(); mobileMenu.classList.toggle('open'); });
+mobileMenu.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', () => mobileMenu.classList.remove('open')); });
+document.addEventListener('click', (e) => { if (!e.target.closest('#mobileMenu') && !e.target.closest('#menuBtn')) mobileMenu.classList.remove('open'); });
+
+/* ============ TOAST NOTIFICATIONS ============ */
+function toast(message, type = 'info', duration = 2800) {
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  const icon = type === 'success' ? ICONS.check : type === 'error' ? ICONS.x : ICONS.info;
+  el.innerHTML = `<div class="toast-icon">${icon}</div><div class="toast-message">${message}</div>`;
+  container.appendChild(el);
+  setTimeout(() => { el.classList.add('hiding'); setTimeout(() => el.remove(), 200); }, duration);
+}
+
+/* ============ UTILITIES ============ */
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+  if (bytes < 1024*1024*1024) return (bytes/1024/1024).toFixed(2) + ' MB';
+  return (bytes/1024/1024/1024).toFixed(2) + ' GB';
+}
+function fmtNum(n) {
+  if (!isFinite(n)) return '—'; if (n === 0) return '0'; if (isNaN(n)) return '—';
+  const absN = Math.abs(n);
+  if (absN > 0 && absN < 0.000001) return n.toExponential(6);
+  if (absN < 1) return parseFloat(n.toPrecision(6)).toString();
+  if (absN < 1000) return parseFloat(n.toPrecision(8)).toString();
+  if (absN < 1e15) return n.toLocaleString(undefined, { maximumFractionDigits: 4, minimumFractionDigits: 0 });
+  return n.toExponential(6);
+}
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); toast('Copied!', 'success'); }
+  catch { const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); toast('Copied!', 'success'); } catch { toast('Could not copy', 'error'); } ta.remove(); }
+}
+function rgbToHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255; const max = Math.max(r, g, b), min = Math.min(r, g, b); let h, s, l = (max + min) / 2;
+  if (max === min) { h = s = 0; } else { const d = max - min; s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+  switch (max) { case r: h = (g - b) / d + (g < b ? 6 : 0); break; case g: h = (b - r) / d + 2; break; case b: h = (r - g) / d + 4; break; } h /= 6; }
+  return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
+}
+  /* ============ CATEGORIES & TOOLS REGISTRY ============ */
+const CATEGORIES = [
+  { id: 'file', name: 'File Tools', icon: 'image', desc: 'Compress, convert, merge files' },
+  { id: 'calculator', name: 'Calculators', icon: 'calculator', desc: 'Percentages, EMI, age, tips' },
+  { id: 'converter', name: 'Converters', icon: 'convert', desc: 'Units, currency, data sizes' },
+  { id: 'qr', name: 'QR Tools', icon: 'qr', desc: 'Generate QR codes for anything' },
+  { id: 'time', name: 'Time Tools', icon: 'clock', desc: 'Stopwatch, timers, dates' },
+  { id: 'generator', name: 'Generators', icon: 'key', desc: 'Passwords, UUIDs, numbers' },
+  { id: 'text', name: 'Text Tools', icon: 'text', desc: 'Count, transform, clean text' },
+  { id: 'design', name: 'Design Tools', icon: 'palette', desc: 'Colors, gradients, palettes' },
+];
+const TOOLS = [
+  { id: 'image-compressor', name: 'Image Compressor', cat: 'file', icon: 'image', desc: 'Reduce image file size without losing quality' },
+  { id: 'image-resizer', name: 'Image Resizer', cat: 'file', icon: 'image', desc: 'Resize images to exact dimensions' },
+  { id: 'image-converter', name: 'Image Converter', cat: 'file', icon: 'image', desc: 'Convert between JPG, PNG, WebP formats' },
+  { id: 'image-to-pdf', name: 'Image to PDF', cat: 'file', icon: 'file', desc: 'Combine multiple images into a single PDF' },
+  { id: 'pdf-merge', name: 'PDF Merge', cat: 'file', icon: 'file', desc: 'Combine multiple PDFs into one' },
+  { id: 'pdf-split', name: 'PDF Split', cat: 'file', icon: 'file', desc: 'Extract pages from a PDF' },
+  { id: 'percentage', name: 'Percentage Calculator', cat: 'calculator', icon: 'percent', desc: 'Calculate percentages, increases and decreases' },
+  { id: 'discount', name: 'Discount Calculator', cat: 'calculator', icon: 'percent', desc: 'Find final price after a discount' },
+  { id: 'gst', name: 'GST Calculator', cat: 'calculator', icon: 'dollar', desc: 'Add or remove GST from a price' },
+  { id: 'emi', name: 'EMI Calculator', cat: 'calculator', icon: 'dollar', desc: 'Calculate monthly loan payments' },
+  { id: 'age', name: 'Age Calculator', cat: 'calculator', icon: 'calendar', desc: 'Calculate exact age from date of birth' },
+  { id: 'tip', name: 'Tip Calculator', cat: 'calculator', icon: 'dollar', desc: 'Split bills and calculate tips' },
+  { id: 'bill-splitter', name: 'Bill Splitter', cat: 'calculator', icon: 'dollar', desc: 'Split a bill evenly between people' },
+  { id: 'length', name: 'Length Converter', cat: 'converter', icon: 'ruler', desc: 'Convert between meters, feet, inches' },
+  { id: 'weight', name: 'Weight Converter', cat: 'converter', icon: 'weight', desc: 'Convert between kg, pounds, grams' },
+  { id: 'temperature', name: 'Temperature Converter', cat: 'converter', icon: 'thermo', desc: 'Convert Celsius, Fahrenheit, Kelvin' },
+  { id: 'area', name: 'Area Converter', cat: 'converter', icon: 'square', desc: 'Convert square meters, acres, hectares' },
+  { id: 'volume', name: 'Volume Converter', cat: 'converter', icon: 'cube', desc: 'Convert liters, gallons, cups' },
+  { id: 'speed', name: 'Speed Converter', cat: 'converter', icon: 'speed', desc: 'Convert km/h, mph, m/s' },
+  { id: 'time-conv', name: 'Time Converter', cat: 'converter', icon: 'clock', desc: 'Convert seconds, minutes, hours, days' },
+  { id: 'data', name: 'Data Storage Converter', cat: 'converter', icon: 'database', desc: 'Convert bytes, KB, MB, GB, TB' },
+  { id: 'currency', name: 'Currency Converter', cat: 'converter', icon: 'dollar', desc: 'Live world currency exchange rates' },
+  { id: 'qr-url', name: 'URL to QR', cat: 'qr', icon: 'qr', desc: 'Turn any URL into a QR code' },
+  { id: 'qr-text', name: 'Text to QR', cat: 'qr', icon: 'qr', desc: 'Encode any text as a QR code' },
+  { id: 'qr-wifi', name: 'Wi-Fi QR', cat: 'qr', icon: 'wifi', desc: 'Share Wi-Fi credentials via QR' },
+  { id: 'qr-email', name: 'Email QR', cat: 'qr', icon: 'mail', desc: 'Create a QR code that opens an email' },
+  { id: 'qr-phone', name: 'Phone QR', cat: 'qr', icon: 'phone', desc: 'Create a QR code that dials a number' },
+  { id: 'qr-contact', name: 'Contact QR (vCard)', cat: 'qr', icon: 'user', desc: 'Share contact info via QR code' },
+  { id: 'qr-location', name: 'Location QR', cat: 'qr', icon: 'map', desc: 'Share a location via QR code' },
+  { id: 'stopwatch', name: 'Stopwatch', cat: 'time', icon: 'clock', desc: 'Precise stopwatch with lap times' },
+  { id: 'countdown', name: 'Countdown Timer', cat: 'time', icon: 'clock', desc: 'Set a countdown with sound alert' },
+  { id: 'date-diff', name: 'Date Difference', cat: 'time', icon: 'calendar', desc: 'Calculate days between two dates' },
+  { id: 'time-diff', name: 'Time Difference', cat: 'time', icon: 'clock', desc: 'Calculate hours between times' },
+  { id: 'password', name: 'Password Generator', cat: 'generator', icon: 'key', desc: 'Generate strong, secure passwords' },
+  { id: 'random-number', name: 'Random Number', cat: 'generator', icon: 'hash', desc: 'Generate random numbers in a range' },
+  { id: 'uuid', name: 'UUID Generator', cat: 'generator', icon: 'hash', desc: 'Generate unique UUIDs (v4)' },
+  { id: 'word-counter', name: 'Word Counter', cat: 'text', icon: 'text', desc: 'Count words, characters, reading time' },
+  { id: 'case-converter', name: 'Case Converter', cat: 'text', icon: 'text', desc: 'Convert text case (upper, lower, title)' },
+  { id: 'text-cleaner', name: 'Text Cleaner', cat: 'text', icon: 'text', desc: 'Remove extra spaces and duplicates' },
+  { id: 'text-sorter', name: 'Text Sorter', cat: 'text', icon: 'text', desc: 'Sort lines alphabetically' },
+  { id: 'color-picker', name: 'Color Picker', cat: 'design', icon: 'palette', desc: 'Pick colors with reference palettes' },
+  { id: 'gradient', name: 'Gradient Generator', cat: 'design', icon: 'palette', desc: 'Create beautiful CSS gradients' },
+  { id: 'color-converter', name: 'Color Converter', cat: 'design', icon: 'palette', desc: 'Convert between HEX, RGB, HSL' },
+];
+
+/* ============ ROUTER & NAVIGATION ============ */
+const app = document.getElementById('app');
+function parseRoute() { const hash = location.hash.replace(/^#/, '') || '/'; const [path, query] = hash.split('?'); return { path, params: new URLSearchParams(query || '') }; }
+function navigate(path) { location.hash = '#' + path; }
+
+function renderRoute() {
+  const { path, params } = parseRoute();
+  document.querySelectorAll('[data-route]').forEach(el => el.classList.toggle('active', el.getAttribute('data-route') === path));
+  if (mobileMenu) mobileMenu.classList.remove('open');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (path === '/' || path === '') return renderHome();
+  if (path === '/tools') return renderAllTools();
+  if (path === '/popular') return renderPopular();
+  if (path === '/categories') return renderCategories();
+  if (path === '/favorites') return renderFavorites();
+  if (path === '/recent') return renderRecent();
+  if (path === '/about') return renderAbout();
+  if (path === '/privacy') return renderPrivacy();
+  if (path === '/terms') return renderTerms();
+  if (path === '/contact') return renderContact();
+  if (path.startsWith('/category/')) return renderCategoryPage(path.split('/')[2]);
+  if (path.startsWith('/tools/')) return renderToolPage(path.split('/')[2]);
+  if (path === '/search') return renderSearchResults(params.get('q') || '');
+  renderNotFound();
+}
+window.addEventListener('hashchange', renderRoute);
+window.addEventListener('load', renderRoute);
+
+/* ============ UI HELPERS & BACK BUTTON ============ */
+function toolCardHTML(tool) {
+  const isFav = state.favorites.includes(tool.id);
+  return `<article class="tool-card" data-tool="${tool.id}" tabindex="0">
+    <button class="tool-fav-btn ${isFav ? 'active' : ''}" data-fav="${tool.id}">${isFav ? ICONS.starFill : ICONS.star}</button>
+    <div class="card-icon">${ICONS[tool.icon] || ICONS.zap}</div>
+    <div class="tool-card-cat">${CATEGORIES.find(c => c.id === tool.cat).name}</div>
+    <div class="tool-card-name">${tool.name}</div>
+    <div class="tool-card-desc">${tool.desc}</div>
+  </article>`;
+}
+function attachToolCardEvents(container = document) {
+  container.querySelectorAll('.tool-card').forEach(card => {
+    const id = card.dataset.tool;
+    const open = () => navigate('/tools/' + id);
+    card.addEventListener('click', e => { if (e.target.closest('.tool-fav-btn')) return; open(); });
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  });
+  container.querySelectorAll('.tool-fav-btn').forEach(btn => btn.addEventListener('click', e => { e.stopPropagation(); toggleFavorite(btn.dataset.fav); }));
+}
+function toolPageShell(tool, bodyHTML) {
+  const isFav = state.favorites.includes(tool.id);
+  return `<div class="container tool-page">
+    <button class="back-btn" onclick="location.hash='#/'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to Home
+    </button>
+    <div class="section-header" style="margin-top: 0;">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div class="card-icon" style="width: 56px; height: 56px;">${ICONS[tool.icon] || ICONS.zap}</div>
+        <div><h1 style="font-size: 24px; font-weight: 800;">${tool.name}</h1><p style="color: var(--text-muted); font-size: 14px;">${tool.desc}</p></div>
+      </div>
+      <button class="tool-fav-btn ${isFav ? 'active' : ''}" data-fav="${tool.id}" style="position:static; width:40px; height:40px;">${isFav ? ICONS.starFill : ICONS.star}</button>
+    </div>
+    ${bodyHTML}
+  </div>`;
+}
+function renderToolPage(id) {
+  const tool = TOOLS.find(t => t.id === id); if (!tool) return renderNotFound();
+  addRecent(id); document.title = `${tool.name} — EverydayKit`;
+  const renderer = TOOL_RENDERERS[id];
+  if (!renderer) { app.innerHTML = toolPageShell(tool, `<div class="tool-panel"><p>Coming soon.</p></div>`); attachToolCardEvents(app); return; }
+  app.innerHTML = toolPageShell(tool, renderer(tool)); attachToolCardEvents(app);
+  const init = TOOL_INIT[id]; if (init) init(tool);
+}
+function searchTools(query) { const q = query.toLowerCase().trim(); if (!q) return []; return TOOLS.filter(t => [t.name, t.desc].join(' ').toLowerCase().includes(q)); }
+
+/* ============ PAGE RENDERERS (Part 1) ============ */
+function renderHome() {
+  document.title = 'EverydayKit — Small Tools. Big Convenience.';
+  const popular = TOOLS.filter(t => ['image-compressor','pdf-merge','percentage','age','length','qr-url'].includes(t.id));
+  app.innerHTML = `<div class="container">
+    <section class="hero">
+      <div class="hero-badge">✨ Small Tools. Big Convenience.</div>
+      <h1>Your Everyday Tools,<br/><span>All in One Place.</span></h1>
+      <p>Convert, calculate, compress, generate and organize — quickly and effortlessly.</p>
+      <div class="hero-search">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="globalSearch" placeholder="What do you need to do?" autocomplete="off" />
+      </div>
+      <div class="hero-cta">
+        <a href="#/tools" class="btn btn-primary">Explore All Tools ${ICONS.arrow}</a>
+        <a href="#/popular" class="btn btn-secondary">Popular Tools</a>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-header"><div><h2 class="section-title">Most Popular</h2><p class="section-subtitle">Tools everyone loves</p></div><a href="#/popular" class="btn btn-ghost btn-sm">View all ${ICONS.arrow}</a></div>
+      <div class="tools-grid">${popular.map(toolCardHTML).join('')}</div>
+    </section>
+    <section class="section">
+      <div class="section-header"><div><h2 class="section-title">Browse by Category</h2><p class="section-subtitle">Find exactly what you need</p></div><a href="#/categories" class="btn btn-ghost btn-sm">View all ${ICONS.arrow}</a></div>
+      <div class="cat-grid">${CATEGORIES.map(c => `<a href="#/category/${c.id}" class="cat-card"><div class="card-icon">${ICONS[c.icon] || ICONS.zap}</div><div class="cat-card-name">${c.name}</div><div class="cat-card-desc">${TOOLS.filter(t => t.cat === c.id).length} tools · ${c.desc}</div></a>`).join('')}</div>
+    </section>
+    <section class="section">
+      <div class="section-header"><div><h2 class="section-title">Why EverydayKit?</h2><p class="section-subtitle">Built for real everyday use</p></div></div>
+      <div class="cat-grid">
+        <div class="cat-card"><div class="card-icon">${ICONS.zap}</div><div class="cat-card-name">Fast</div><div class="cat-card-desc">Tools run instantly in your browser. No waiting, no uploads.</div></div>
+        <div class="cat-card"><div class="card-icon">${ICONS.shield}</div><div class="cat-card-name">Private</div><div class="cat-card-desc">Your files never leave your device. Everything stays local.</div></div>
+        <div class="cat-card"><div class="card-icon">${ICONS.heart}</div><div class="cat-card-name">Simple</div><div class="cat-card-desc">Clean design, no clutter. Just the tool you need, when you need it.</div></div>
+        <div class="cat-card"><div class="card-icon">${ICONS.globe}</div><div class="cat-card-name">Works everywhere</div><div class="cat-card-desc">Mobile, tablet, laptop, desktop — responsive on every screen.</div></div>
+      </div>
+    </section>
+  </div>`;
+  attachToolCardEvents(app);
+  const searchInput = document.getElementById('globalSearch');
+  if (searchInput) searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') { const q = searchInput.value.trim(); if (q) navigate('/search?q=' + encodeURIComponent(q)); } });
+}
+function renderAllTools() { document.title = 'All Tools — EverydayKit'; app.innerHTML = `<div class="container"><div class="section-header" style="margin-top:24px;"><div><h1 class="section-title">All Tools</h1><p class="section-subtitle">${TOOLS.length} tools across ${CATEGORIES.length} categories</p></div></div><div class="tools-grid">${TOOLS.map(toolCardHTML).join('')}</div></div>`; attachToolCardEvents(app); }
+function renderPopular() { document.title = 'Popular Tools — EverydayKit'; const popular = TOOLS.filter(t => ['image-compressor','qr-url','percentage','pdf-merge','length','age','password','word-counter','discount','emi'].includes(t.id)); app.innerHTML = `<div class="container"><div class="section-header" style="margin-top:24px;"><div><h1 class="section-title">Popular Tools</h1><p class="section-subtitle">The most-used tools on EverydayKit</p></div></div><div class="tools-grid">${popular.map(toolCardHTML).join('')}</div></div>`; attachToolCardEvents(app); }
+function renderCategories() { document.title = 'Categories — EverydayKit'; app.innerHTML = `<div class="container"><div class="section-header" style="margin-top:24px;"><div><h1 class="section-title">Categories</h1><p class="section-subtitle">Browse tools by what you want to do</p></div></div><div class="cat-grid">${CATEGORIES.map(c => `<a href="#/category/${c.id}" class="cat-card"><div class="card-icon">${ICONS[c.icon] || ICONS.zap}</div><div class="cat-card-name">${c.name}</div><div class="cat-card-desc">${TOOLS.filter(t => t.cat === c.id).length} tools · ${c.desc}</div></a>`).join('')}</div></div>`; }
+function renderCategoryPage(catId) { const cat = CATEGORIES.find(c => c.id === catId); if (!cat) return renderNotFound(); document.title = `${cat.name} — EverydayKit`; const tools = TOOLS.filter(t => t.cat === catId); app.innerHTML = `<div class="container"><div class="section-header" style="margin-top:24px;"><div><h1 class="section-title">${cat.name}</h1><p class="section-subtitle">${cat.desc}</p></div></div><div class="tools-grid">${tools.map(toolCardHTML).join('')}</div></div>`; attachToolCardEvents(app); }
+
+const TOOL_RENDERERS = {};
+const TOOL_INIT = {};
+ /* ============ REMAINING PAGE RENDERERS ============ */
+function renderFavorites() {
+  document.title = 'Favorites — EverydayKit';
+  const favs = state.favorites.map(id => TOOLS.find(t => t.id === id)).filter(Boolean);
+  app.innerHTML = `<div class="container"><div class="section-header" style="margin-top:24px;"><div><h1 class="section-title">Your Favorites</h1><p class="section-subtitle">${favs.length ? `${favs.length} saved tools` : 'Save tools for quick access'}</p></div></div>${favs.length ? `<div class="tools-grid">${favs.map(toolCardHTML).join('')}</div>` : `<div class="empty-state"><div class="empty-state-icon">${ICONS.star}</div><h3>No favorites yet</h3><p>Tap the star icon on any tool to save it.</p><a href="#/tools" class="btn btn-primary mt-3">Browse tools</a></div>`}</div>`;
+  attachToolCardEvents(app);
+}
+function renderRecent() {
+  document.title = 'Recent Tools — EverydayKit';
+  const recents = state.recent.map(id => TOOLS.find(t => t.id === id)).filter(Boolean);
+  app.innerHTML = `<div class="container"><div class="section-header" style="margin-top:24px;"><div><h1 class="section-title">Recent Tools</h1><p class="section-subtitle">${recents.length ? `Your last ${recents.length} tools` : 'Tools you open will appear here'}</p></div></div>${recents.length ? `<div class="tools-grid">${recents.map(toolCardHTML).join('')}</div>` : `<div class="empty-state"><div class="empty-state-icon">${ICONS.clock}</div><h3>No recent tools</h3><a href="#/tools" class="btn btn-primary mt-3">Browse tools</a></div>`}</div>`;
+  attachToolCardEvents(app);
+}
+function renderSearchResults(q) {
+  document.title = `Search: ${q} — EverydayKit`;
+  const results = searchTools(q);
+  app.innerHTML = `<div class="container"><div class="section-header" style="margin-top:24px;"><div><h1 class="section-title">Search results for "${q}"</h1><p class="section-subtitle">${results.length} tool${results.length !== 1 ? 's' : ''} found</p></div></div>${results.length ? `<div class="tools-grid">${results.map(toolCardHTML).join('')}</div>` : `<div class="empty-state"><div class="empty-state-icon">${ICONS.search}</div><h3>No results</h3><a href="#/tools" class="btn btn-primary mt-3">Browse all tools</a></div>`}</div>`;
+  attachToolCardEvents(app);
+}
+function renderAbout() { document.title = 'About — EverydayKit'; app.innerHTML = `<div class="container prose" style="max-width:800px; margin:40px auto; padding:0 20px;"><h1>About EverydayKit</h1><p>EverydayKit is a collection of useful digital tools designed for real everyday use. We believe small tools deserve great design. Most utility websites feel cluttered, slow, or outdated. EverydayKit is different: every tool is fast, private, and works the same on every device.</p><h2>Privacy by design</h2><p>Whenever possible, your files are processed entirely inside your browser. Nothing is uploaded to a server. Your data stays yours.</p></div>`; }
+function renderPrivacy() { document.title = 'Privacy — EverydayKit'; app.innerHTML = `<div class="container prose" style="max-width:800px; margin:40px auto; padding:0 20px;"><h1>Privacy Policy</h1><p>Your privacy matters. Most tools run entirely inside your browser. We do not collect personal information, usage analytics, or any data about the files you process.</p></div>`; }
+function renderTerms() { document.title = 'Terms — EverydayKit'; app.innerHTML = `<div class="container prose" style="max-width:800px; margin:40px auto; padding:0 20px;"><h1>Terms of Use</h1><p>By using EverydayKit, you agree to these simple terms. EverydayKit is provided as-is. Do not use EverydayKit to process illegal content or to harm others.</p></div>`; }
+function renderContact() { document.title = 'Contact — EverydayKit'; app.innerHTML = `<div class="container prose" style="max-width:800px; margin:40px auto; padding:0 20px;"><h1>Contact Us</h1><p>We'd love to hear from you! If you have any questions, suggestions, or feedback, feel free to reach out to us on Instagram.</p><div class="tool-panel" style="text-align:center; padding:32px;"><div class="card-icon" style="margin:0 auto 16px; width:64px; height:64px; font-size:28px;">${ICONS.user}</div><h2 style="font-size:20px; margin-bottom:8px;">Follow & Message on Instagram</h2><p style="margin-bottom:24px;">For the fastest response, DM us directly.</p><a href="https://www.instagram.com/m.king_13786" target="_blank" class="btn btn-primary btn-lg" style="text-decoration:none;">@m.king_13786 ${ICONS.arrow}</a></div></div>`; }
+function renderNotFound() { document.title = 'Not found — EverydayKit'; app.innerHTML = `<div class="container text-center" style="padding:80px 20px;"><h1 style="font-size:32px; font-weight:800;">Page not found</h1><p style="color:var(--text-muted); margin:16px 0;">The page you're looking for doesn't exist.</p><a href="#/" class="btn btn-primary">Go home</a></div>`; }
+
+/* ============ FILE TOOLS ============ */
+TOOL_RENDERERS['image-compressor'] = () => `<div class="tool-panel">
+  <div class="form-group"><label class="form-label">Select Image</label><input type="file" id="ic-file" accept="image/*" class="input" /></div>
+  <div class="form-group"><label class="form-label">Quality: <span id="ic-q-val">80</span>%</label><input type="range" id="ic-quality" min="10" max="100" value="80" class="input" /></div>
+  <div class="form-group"><label class="form-label">Output Format</label><select id="ic-format" class="select"><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option><option value="image/png">PNG</option></select></div>
+  <button class="btn btn-primary btn-block" id="ic-compress">Compress Image</button>
+  <div id="ic-result" class="hidden mt-3"></div>
+</div>`;
+TOOL_INIT['image-compressor'] = () => {
+  const fileInput = document.getElementById('ic-file'), qualityInput = document.getElementById('ic-quality');
+  const qVal = document.getElementById('ic-q-val'), formatSelect = document.getElementById('ic-format');
+  qualityInput.addEventListener('input', (e) => qVal.textContent = e.target.value);
+  document.getElementById('ic-compress').addEventListener('click', () => {
+    const file = fileInput.files[0];
+    if (!file) { toast('Please select an image first', 'error'); return; }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas'); canvas.width = img.width; canvas.height = img.height;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+        const quality = parseInt(qualityInput.value) / 100; const format = formatSelect.value;
+        canvas.toBlob((blob) => {
+          if (!blob) { toast('Compression failed', 'error'); return; }
+          const url = URL.createObjectURL(blob);
+          const saved = ((1 - blob.size / file.size) * 100).toFixed(1);
+          document.getElementById('ic-result').classList.remove('hidden');
+          document.getElementById('ic-result').innerHTML = `<div class="result-box"><div class="result-row"><span class="result-label">Original</span><span class="result-value">${formatBytes(file.size)}</span></div><div class="result-row"><span class="result-label">Compressed</span><span class="result-value">${formatBytes(blob.size)} <span style="color:var(--success)">(${saved}%)</span></span></div></div><img src="${url}" style="max-width:100%; border-radius:12px; margin-top:16px; border:1px solid var(--border);" /><a href="${url}" download="compressed.${format.split('/')[1]}" class="btn btn-primary btn-block mt-3">Download Compressed Image</a>`;
+          toast('Image compressed!', 'success');
+        }, format, quality);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
+TOOL_RENDERERS['image-resizer'] = () => `<div class="tool-panel">
+  <div class="form-group"><label class="form-label">Select Image</label><input type="file" id="ir-file" accept="image/*" class="input" /></div>
+  <div class="form-row form-row-2"><div class="form-group"><label class="form-label">Width (px)</label><input type="number" id="ir-width" class="input" placeholder="Width" /></div><div class="form-group"><label class="form-label">Height (px)</label><input type="number" id="ir-height" class="input" placeholder="Height" /></div></div>
+  <label class="checkbox-row"><input type="checkbox" id="ir-lock" checked /> Maintain aspect ratio</label>
+  <button class="btn btn-primary btn-block" id="ir-resize">Resize Image</button>
+  <div id="ir-result" class="hidden mt-3"></div>
+</div>`;
+TOOL_INIT['image-resizer'] = () => {
+  const fileInput = document.getElementById('ir-file'), widthInput = document.getElementById('ir-width');
+  const heightInput = document.getElementById('ir-height'), lockRatio = document.getElementById('ir-lock');
+  let origW = 0, origH = 0;
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => { const img = new Image(); img.onload = () => { origW = img.width; origH = img.height; widthInput.value = origW; heightInput.value = origH; }; img.src = ev.target.result; };
+    reader.readAsDataURL(file);
+  });
+  widthInput.addEventListener('input', () => { if (lockRatio.checked && origW > 0) heightInput.value = Math.round((widthInput.value / origW) * origH); });
+  heightInput.addEventListener('input', () => { if (lockRatio.checked && origH > 0) widthInput.value = Math.round((heightInput.value / origH) * origW); });
+  document.getElementById('ir-resize').addEventListener('click', () => {
+    const file = fileInput.files[0];
+    if (!file) { toast('Please select an image first', 'error'); return; }
+    const w = parseInt(widthInput.value), h = parseInt(heightInput.value);
+    if (!w || !h) { toast('Invalid dimensions', 'error'); return; }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        canvas.toBlob((blob) => {
+          const url = URL.createObjectURL(blob);
+          document.getElementById('ir-result').classList.remove('hidden');
+          document.getElementById('ir-result').innerHTML = `<img src="${url}" style="max-width:100%; border-radius:12px; margin-top:16px;" /><a href="${url}" download="resized.png" class="btn btn-primary btn-block mt-3">Download Resized Image</a>`;
+          toast('Image resized!', 'success');
+        }, 'image/png');
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
+TOOL_RENDERERS['image-converter'] = () => `<div class="tool-panel">
+  <div class="form-group"><label class="form-label">Select Image</label><input type="file" id="icv-file" accept="image/*" class="input" /></div>
+  <div class="form-group"><label class="form-label">Convert To</label><select id="icv-format" class="select"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WebP</option></select></div>
+  <button class="btn btn-primary btn-block" id="icv-convert">Convert Image</button>
+  <div id="icv-result" class="hidden mt-3"></div>
+</div>`;
+TOOL_INIT['image-converter'] = () => {
+  document.getElementById('icv-convert').addEventListener('click', () => {
+    const file = document.getElementById('icv-file').files[0];
+    if (!file) { toast('Please select an image first', 'error'); return; }
+    const format = document.getElementById('icv-format').value;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas'); canvas.width = img.width; canvas.height = img.height;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+        canvas.toBlob((blob) => {
+          if (!blob) { toast('Conversion failed', 'error'); return; }
+          const url = URL.createObjectURL(blob); const ext = format.split('/')[1];
+          document.getElementById('icv-result').classList.remove('hidden');
+          document.getElementById('icv-result').innerHTML = `<img src="${url}" style="max-width:100%; border-radius:12px; margin-top:16px;" /><a href="${url}" download="converted.${ext}" class="btn btn-primary btn-block mt-3">Download Converted Image</a>`;
+          toast('Image converted!', 'success');
+        }, format, 0.95);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
+TOOL_RENDERERS['image-to-pdf'] = () => `<div class="tool-panel">
+  <div class="form-group"><label class="form-label">Select Images (Multiple allowed)</label><input type="file" id="itp-files" accept="image/*" multiple class="input" /></div>
+  <button class="btn btn-primary btn-block" id="itp-convert">Create PDF</button>
+  <div id="itp-status" class="mt-3 text-sm text-muted"></div>
+  <div id="itp-result" class="hidden mt-3"></div>
+</div>`;
+TOOL_INIT['image-to-pdf'] = async () => {
+  document.getElementById('itp-convert').addEventListener('click', async () => {
+    const files = Array.from(document.getElementById('itp-files').files);
+    if (files.length === 0) { toast('Please select at least one image', 'error'); return; }
+    const statusDiv = document.getElementById('itp-status'); statusDiv.textContent = 'Processing images...';
+    try {
+      const { PDFDocument } = PDFLib; const pdfDoc = await PDFDocument.create();
+      for (const file of files) {
+        const imgBytes = await file.arrayBuffer();
+        let img = file.type === 'image/png' ? await pdfDoc.embedPng(imgBytes) : await pdfDoc.embedJpg(imgBytes);
+        const page = pdfDoc.addPage([img.width, img.height]); page.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height });
+      }
+      const pdfBytes = await pdfDoc.save(); const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob); statusDiv.textContent = '';
+      document.getElementById('itp-result').classList.remove('hidden');
+      document.getElementById('itp-result').innerHTML = `<a href="${url}" download="images.pdf" class="btn btn-primary btn-block">Download PDF (${files.length} pages)</a>`;
+      toast('PDF created!', 'success');
+    } catch (err) { statusDiv.textContent = 'Error creating PDF. Use standard JPG/PNG.'; toast('Failed', 'error'); }
+  });
+};
+
+TOOL_RENDERERS['pdf-merge'] = () => `<div class="tool-panel">
+  <div class="form-group"><label class="form-label">Select PDFs (Multiple allowed)</label><input type="file" id="pm-files" accept="application/pdf" multiple class="input" /></div>
+  <button class="btn btn-primary btn-block" id="pm-merge">Merge PDFs</button>
+  <div id="pm-status" class="mt-3 text-sm text-muted"></div>
+  <div id="pm-result" class="hidden mt-3"></div>
+</div>`;
+TOOL_INIT['pdf-merge'] = async () => {
+  document.getElementById('pm-merge').addEventListener('click', async () => {
+    const files = Array.from(document.getElementById('pm-files').files);
+    if (files.length < 2) { toast('Please select at least 2 PDFs', 'error'); return; }
+    const statusDiv = document.getElementById('pm-status'); statusDiv.textContent = 'Merging PDFs...';
+    try {
+      const { PDFDocument } = PDFLib; const mergedPdf = await PDFDocument.create();
+      for (const file of files) { const fileBytes = await file.arrayBuffer(); const pdf = await PDFDocument.load(fileBytes); const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices()); copiedPages.forEach((page) => mergedPdf.addPage(page)); }
+      const pdfBytes = await mergedPdf.save(); const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob); statusDiv.textContent = '';
+      document.getElementById('pm-result').classList.remove('hidden');
+      document.getElementById('pm-result').innerHTML = `<a href="${url}" download="merged.pdf" class="btn btn-primary btn-block">Download Merged PDF</a>`;
+      toast('PDFs merged!', 'success');
+    } catch (err) { statusDiv.textContent = 'Error merging. Files might be encrypted.'; toast('Failed', 'error'); }
+  });
+};
+
+TOOL_RENDERERS['pdf-split'] = () => `<div class="tool-panel">
+  <div class="form-group"><label class="form-label">Select PDF</label><input type="file" id="ps-file" accept="application/pdf" class="input" /></div>
+  <div class="form-group"><label class="form-label">Pages to extract (e.g., 1, 3-5, 8)</label><input type="text" id="ps-pages" class="input" placeholder="1, 3-5, 8" /></div>
+  <button class="btn btn-primary btn-block" id="ps-split">Extract Pages</button>
+  <div id="ps-status" class="mt-3 text-sm text-muted"></div>
+  <div id="ps-result" class="hidden mt-3"></div>
+</div>`;
+TOOL_INIT['pdf-split'] = async () => {
+  document.getElementById('ps-split').addEventListener('click', async () => {
+    const file = document.getElementById('ps-file').files[0]; const pageStr = document.getElementById('ps-pages').value.trim();
+    if (!file) { toast('Please select a PDF', 'error'); return; }
+    if (!pageStr) { toast('Please enter page numbers', 'error'); return; }
+    const statusDiv = document.getElementById('ps-status'); statusDiv.textContent = 'Processing PDF...';
+    try {
+      const { PDFDocument } = PDFLib; const srcPdf = await PDFDocument.load(await file.arrayBuffer()); const totalPages = srcPdf.getPageCount();
+      const pagesToExtract = new Set();
+      pageStr.split(',').forEach(part => { part = part.trim(); if (part.includes('-')) { const [start, end] = part.split('-').map(Number); for (let i = start; i <= end; i++) if (i >= 1 && i <= totalPages) pagesToExtract.add(i - 1); } else { const p = Number(part); if (p >= 1 && p <= totalPages) pagesToExtract.add(p - 1); } });
+      if (pagesToExtract.size === 0) throw new Error('No valid pages');
+      const newPdf = await PDFDocument.create(); const copiedPages = await newPdf.copyPages(srcPdf, Array.from(pagesToExtract).sort((a,b) => a-b)); copiedPages.forEach((page) => newPdf.addPage(page));
+      const pdfBytes = await newPdf.save(); const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob); statusDiv.textContent = '';
+      document.getElementById('ps-result').classList.remove('hidden');
+      document.getElementById('ps-result').innerHTML = `<a href="${url}" download="extracted.pdf" class="btn btn-primary btn-block">Download Extracted PDF (${pagesToExtract.size} pages)</a>`;
+      toast('Pages extracted!', 'success');
+    } catch (err) { statusDiv.textContent = 'Error extracting pages. Check format.'; toast('Failed', 'error'); }
+  });
+};
+/* ============ CALCULATORS ============ */
+TOOL_RENDERERS['percentage'] = () => `<div class="tool-panel">
+  <div style="display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto;">
+    <button class="btn btn-secondary btn-sm" data-pct-tab="1" style="flex:1;">X% of Y</button>
+    <button class="btn btn-secondary btn-sm" data-pct-tab="2" style="flex:1;">X is what % of Y</button>
+    <button class="btn btn-secondary btn-sm" data-pct-tab="3" style="flex:1;">% Change</button>
+  </div>
+  <div id="pct-panel-1"><div class="form-row form-row-2"><div class="form-group"><label class="form-label">Percentage (%)</label><input type="number" id="pct-1-x" class="input" step="any" placeholder="20" /></div><div class="form-group"><label class="form-label">Of Value</label><input type="number" id="pct-1-y" class="input" step="any" placeholder="200" /></div></div><div class="result-highlight"><span>Result</span><span id="pct-1-res">—</span></div></div>
+  <div id="pct-panel-2" class="hidden"><div class="form-row form-row-2"><div class="form-group"><label class="form-label">Value (X)</label><input type="number" id="pct-2-x" class="input" step="any" placeholder="40" /></div><div class="form-group"><label class="form-label">Total (Y)</label><input type="number" id="pct-2-y" class="input" step="any" placeholder="200" /></div></div><div class="result-highlight"><span>Percentage</span><span id="pct-2-res">—</span></div></div>
+  <div id="pct-panel-3" class="hidden"><div class="form-row form-row-2"><div class="form-group"><label class="form-label">From</label><input type="number" id="pct-3-a" class="input" step="any" placeholder="100" /></div><div class="form-group"><label class="form-label">To</label><input type="number" id="pct-3-b" class="input" step="any" placeholder="125" /></div></div><div class="result-highlight"><span>Change</span><span id="pct-3-res">—</span></div></div>
+</div>`;
+TOOL_INIT['percentage'] = () => {
+  document.querySelectorAll('[data-pct-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-pct-tab]').forEach(b => { b.classList.remove('btn-primary'); b.classList.add('btn-secondary'); });
+      btn.classList.remove('btn-secondary'); btn.classList.add('btn-primary');
+      ['1','2','3'].forEach(i => document.getElementById(`pct-panel-${i}`).classList.add('hidden'));
+      document.getElementById(`pct-panel-${btn.dataset.pctTab}`).classList.remove('hidden');
+    });
+  });
+  document.querySelector('[data-pct-tab="1"]').classList.remove('btn-secondary');
+  document.querySelector('[data-pct-tab="1"]').classList.add('btn-primary');
+  const calc1 = () => { const x = parseFloat(document.getElementById('pct-1-x').value), y = parseFloat(document.getElementById('pct-1-y').value); document.getElementById('pct-1-res').textContent = (!isNaN(x) && !isNaN(y)) ? fmtNum((x / 100) * y) : '—'; };
+  const calc2 = () => { const x = parseFloat(document.getElementById('pct-2-x').value), y = parseFloat(document.getElementById('pct-2-y').value); document.getElementById('pct-2-res').textContent = (!isNaN(x) && !isNaN(y) && y !== 0) ? fmtNum((x / y) * 100) + '%' : '—'; };
+  const calc3 = () => { const a = parseFloat(document.getElementById('pct-3-a').value), b = parseFloat(document.getElementById('pct-3-b').value); if (!isNaN(a) && !isNaN(b) && a !== 0) { const change = ((b - a) / Math.abs(a)) * 100; document.getElementById('pct-3-res').textContent = (change > 0 ? '+' : '') + fmtNum(change) + '%'; } else { document.getElementById('pct-3-res').textContent = '—'; } };
+  ['pct-1-x', 'pct-1-y'].forEach(id => document.getElementById(id).addEventListener('input', calc1));
+  ['pct-2-x', 'pct-2-y'].forEach(id => document.getElementById(id).addEventListener('input', calc2));
+  ['pct-3-a', 'pct-3-b'].forEach(id => document.getElementById(id).addEventListener('input', calc3));
+};
+
+TOOL_RENDERERS['discount'] = () => `<div class="tool-panel">
+  <div class="form-row form-row-2"><div class="form-group"><label class="form-label">Original Price</label><input type="number" id="disc-price" class="input" step="any" placeholder="1000" /></div><div class="form-group"><label class="form-label">Discount (%)</label><input type="number" id="disc-rate" class="input" step="any" placeholder="20" /></div></div>
+  <div class="result-box"><div class="result-row"><span class="result-label">You Save</span><span class="result-value" id="disc-save" style="color:var(--success)">—</span></div><div class="result-row"><span class="result-label">Final Price</span><span class="result-value" id="disc-final" style="font-size:20px; color:var(--accent)">—</span></div></div>
+</div>`;
+TOOL_INIT['discount'] = () => {
+  const calc = () => { const price = parseFloat(document.getElementById('disc-price').value), rate = parseFloat(document.getElementById('disc-rate').value); if (isNaN(price) || isNaN(rate)) { document.getElementById('disc-save').textContent = '—'; document.getElementById('disc-final').textContent = '—'; return; } const save = price * (rate / 100); document.getElementById('disc-save').textContent = fmtNum(save); document.getElementById('disc-final').textContent = fmtNum(price - save); };
+  document.getElementById('disc-price').addEventListener('input', calc);
+  document.getElementById('disc-rate').addEventListener('input', calc);
+};
+
+TOOL_RENDERERS['gst'] = () => `<div class="tool-panel">
+  <div class="form-row form-row-2"><div class="form-group"><label class="form-label">Amount</label><input type="number" id="gst-amt" class="input" step="any" placeholder="1000" /></div><div class="form-group"><label class="form-label">GST Rate (%)</label><select id="gst-rate" class="select"><option value="5">5%</option><option value="12">12%</option><option value="18" selected>18%</option><option value="28">28%</option><option value="custom">Custom</option></select></div></div>
+  <div id="gst-custom-wrap" class="form-group hidden"><label class="form-label">Custom Rate (%)</label><input type="number" id="gst-custom" class="input" step="any" /></div>
+  <div style="display: flex; gap: 8px; margin-bottom: 16px;"><button class="btn btn-secondary btn-sm" data-gst-mode="add" style="flex:1;">Add GST</button><button class="btn btn-secondary btn-sm" data-gst-mode="remove" style="flex:1;">Remove GST</button></div>
+  <div class="result-box"><div class="result-row"><span class="result-label">Net Amount</span><span class="result-value" id="gst-net">—</span></div><div class="result-row"><span class="result-label">GST Amount</span><span class="result-value" id="gst-tax">—</span></div><div class="result-row"><span class="result-label">Total Amount</span><span class="result-value" id="gst-total" style="font-size:20px; color:var(--accent)">—</span></div></div>
+</div>`;
+TOOL_INIT['gst'] = () => {
+  const rateSelect = document.getElementById('gst-rate'), customWrap = document.getElementById('gst-custom-wrap');
+  let mode = 'add';
+  rateSelect.addEventListener('change', () => customWrap.classList.toggle('hidden', rateSelect.value !== 'custom'));
+  document.querySelectorAll('[data-gst-mode]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-gst-mode]').forEach(b => { b.classList.remove('btn-primary'); b.classList.add('btn-secondary'); });
+      btn.classList.remove('btn-secondary'); btn.classList.add('btn-primary');
+      mode = btn.dataset.gstMode; calc();
+    });
+  });
+  document.querySelector('[data-gst-mode="add"]').classList.remove('btn-secondary');
+  document.querySelector('[data-gst-mode="add"]').classList.add('btn-primary');
+  const calc = () => {
+    const amt = parseFloat(document.getElementById('gst-amt').value);
+    const rate = rateSelect.value === 'custom' ? parseFloat(document.getElementById('gst-custom').value) : parseFloat(rateSelect.value);
+    if (isNaN(amt) || isNaN(rate)) { ['gst-net','gst-tax','gst-total'].forEach(id => document.getElementById(id).textContent = '—'); return; }
+    let net, tax, total;
+    if (mode === 'add') { net = amt; tax = amt * (rate / 100); total = amt + tax; }
+    else { total = amt; net = amt / (1 + rate / 100); tax = amt - net; }
+    document.getElementById('gst-net').textContent = fmtNum(net);
+    document.getElementById('gst-tax').textContent = fmtNum(tax);
+    document.getElementById('gst-total').textContent = fmtNum(total);
+  };
+  ['gst-amt', 'gst-custom'].forEach(id => document.getElementById(id).addEventListener('input', calc));
+  rateSelect.addEventListener('change', calc);
+};
+
+TOOL_RENDERERS['emi'] = () => `<div class="tool-panel">
+  <div class="form-row form-row-3"><div class="form-group"><label class="form-label">Loan Amount</label><input type="number" id="emi-p" class="input" step="any" placeholder="500000" /></div><div class="form-group"><label class="form-label">Interest Rate (%/yr)</label><input type="number" id="emi-r" class="input" step="any" placeholder="8.5" /></div><div class="form-group"><label class="form-label">Tenure (Months)</label><input type="number" id="emi-n" class="input" step="1" placeholder="60" /></div></div>
+  <div class="result-highlight" style="flex-direction:column; gap:4px; text-align:center;"><span style="font-size:14px; font-weight:500; opacity:0.9;">Monthly EMI</span><span id="emi-monthly" style="font-size:32px;">—</span></div>
+  <div class="result-box mt-3"><div class="result-row"><span class="result-label">Total Interest</span><span class="result-value" id="emi-interest">—</span></div><div class="result-row"><span class="result-label">Total Payment</span><span class="result-value" id="emi-total">—</span></div></div>
+</div>`;
+TOOL_INIT['emi'] = () => {
+  const calc = () => {
+    const P = parseFloat(document.getElementById('emi-p').value), annualR = parseFloat(document.getElementById('emi-r').value), N = parseFloat(document.getElementById('emi-n').value);
+    if (isNaN(P) || isNaN(annualR) || isNaN(N) || P <= 0 || N <= 0) { ['emi-monthly','emi-interest','emi-total'].forEach(id => document.getElementById(id).textContent = '—'); return; }
+    const r = annualR / 12 / 100;
+    const emi = r === 0 ? P / N : P * r * Math.pow(1 + r, N) / (Math.pow(1 + r, N) - 1);
+    document.getElementById('emi-monthly').textContent = fmtNum(emi);
+    document.getElementById('emi-interest').textContent = fmtNum((emi * N) - P);
+    document.getElementById('emi-total').textContent = fmtNum(emi * N);
+  };
+  ['emi-p', 'emi-r', 'emi-n'].forEach(id => document.getElementById(id).addEventListener('input', calc));
+};
+
+TOOL_RENDERERS['age'] = () => `<div class="tool-panel">
+  <div class="form-group"><label class="form-label">Date of Birth</label><input type="date" id="age-dob" class="input" /></div>
+  <div class="stats-grid mt-3"><div class="stat-card"><div class="stat-value" id="age-y">—</div><div class="stat-label">Years</div></div><div class="stat-card"><div class="stat-value" id="age-m">—</div><div class="stat-label">Months</div></div><div class="stat-card"><div class="stat-value" id="age-d">—</div><div class="stat-label">Days</div></div></div>
+  <div class="result-box mt-3"><div class="result-row"><span class="result-label">Total Days Lived</span><span class="result-value" id="age-total-d">—</span></div><div class="result-row"><span class="result-label">Next Birthday In</span><span class="result-value" id="age-next">—</span></div></div>
+</div>`;
+TOOL_INIT['age'] = () => {
+  document.getElementById('age-dob').addEventListener('input', () => {
+    const dobVal = document.getElementById('age-dob').value;
+    if (!dobVal) { ['age-y','age-m','age-d','age-total-d','age-next'].forEach(id => document.getElementById(id).textContent = '—'); return; }
+    const dob = new Date(dobVal), now = new Date();
+    if (dob > now) { toast('Date cannot be in the future', 'error'); return; }
+    let years = now.getFullYear() - dob.getFullYear(), months = now.getMonth() - dob.getMonth(), days = now.getDate() - dob.getDate();
+    if (days < 0) { months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+    if (months < 0) { years--; months += 12; }
+    document.getElementById('age-y').textContent = years;
+    document.getElementById('age-m').textContent = months;
+    document.getElementById('age-d').textContent = days;
+    document.getElementById('age-total-d').textContent = Math.floor((now - dob) / 86400000).toLocaleString();
+    let nextBday = new Date(now.getFullYear(), dob.getMonth(), dob.getDate());
+    if (nextBday < now) nextBday.setFullYear(now.getFullYear() + 1);
+    document.getElementById('age-next').textContent = Math.ceil((nextBday - now) / 86400000) + ' days';
+  });
+};
+
+TOOL_RENDERERS['tip'] = () => `<div class="tool-panel">
+  <div class="form-row form-row-3"><div class="form-group"><label class="form-label">Bill Amount</label><input type="number" id="tip-bill" class="input" step="any" placeholder="100" /></div><div class="form-group"><label class="form-label">Tip (%)</label><input type="number" id="tip-rate" class="input" step="any" placeholder="15" /></div><div class="form-group"><label class="form-label">People</label><input type="number" id="tip-ppl" class="input" step="1" value="1" min="1" /></div></div>
+  <div class="result-box"><div class="result-row"><span class="result-label">Tip Amount</span><span class="result-value" id="tip-amt">—</span></div><div class="result-row"><span class="result-label">Total Bill</span><span class="result-value" id="tip-total">—</span></div><div class="result-row"><span class="result-label">Per Person</span><span class="result-value" id="tip-per" style="font-size:20px; color:var(--accent)">—</span></div></div>
+</div>`;
+TOOL_INIT['tip'] = () => {
+  const calc = () => {
+    const bill = parseFloat(document.getElementById('tip-bill').value), rate = parseFloat(document.getElementById('tip-rate').value), ppl = Math.max(1, parseInt(document.getElementById('tip-ppl').value) || 1);
+    if (isNaN(bill) || isNaN(rate)) { ['tip-amt','tip-total','tip-per'].forEach(id => document.getElementById(id).textContent = '—'); return; }
+    const tipAmt = bill * (rate / 100), total = bill + tipAmt;
+    document.getElementById('tip-amt').textContent = fmtNum(tipAmt);
+    document.getElementById('tip-total').textContent = fmtNum(total);
+    document.getElementById('tip-per').textContent = fmtNum(total / ppl);
+  };
+  ['tip-bill', 'tip-rate', 'tip-ppl'].forEach(id => document.getElementById(id).addEventListener('input', calc));
+};
+
+TOOL_RENDERERS['bill-splitter'] = () => `<div class="tool-panel">
+  <div class="form-group"><label class="form-label">Items (Format: Name Price Qty)</label><textarea id="bs-items" class="textarea" placeholder="Pizza 400 2&#10;Drinks 100 3"></textarea></div>
+  <div class="form-row form-row-2"><div class="form-group"><label class="form-label">Tax (%)</label><input type="number" id="bs-tax" class="input" step="any" value="0" /></div><div class="form-group"><label class="form-label">Tip (%)</label><input type="number" id="bs-tip" class="input" step="any" value="0" /></div></div>
+  <div class="form-group"><label class="form-label">Number of People</label><input type="number" id="bs-ppl" class="input" step="1" value="2" min="1" /></div>
+  <button class="btn btn-primary btn-block" id="bs-calc">Calculate Split</button>
+  <div id="bs-result" class="hidden mt-3"></div>
+</div>`;
+TOOL_INIT['bill-splitter'] = () => {
+  document.getElementById('bs-calc').addEventListener('click', () => {
+    const lines = document.getElementById('bs-items').value.split('\n').map(l => l.trim()).filter(Boolean);
+    const tax = parseFloat(document.getElementById('bs-tax').value) || 0, tip = parseFloat(document.getElementById('bs-tip').value) || 0, ppl = Math.max(1, parseInt(document.getElementById('bs-ppl').value) || 1);
+    let subtotal = 0; const itemsHtml = [];
+    for (const line of lines) {
+      const parts = line.split(/\s+/); if (parts.length < 2) continue;
+      const qty = parseFloat(parts[parts.length - 1]) || 1, price = parseFloat(parts[parts.length - 2]), name = parts.slice(0, -2).join(' ') || 'Item';
+      if (isNaN(price)) continue;
+      const total = price * qty; subtotal += total;
+      itemsHtml.push(`<div class="result-row"><span class="result-label">${name} × ${qty}</span><span class="result-value">${fmtNum(total)}</span></div>`);
+    }
+    if (itemsHtml.length === 0) { toast('Please enter valid items', 'error'); return; }
+    const taxAmt = subtotal * (tax / 100), tipAmt = subtotal * (tip / 100), grandTotal = subtotal + taxAmt + tipAmt;
+    document.getElementById('bs-result').classList.remove('hidden');
+    document.getElementById('bs-result').innerHTML = `<div class="result-box">${itemsHtml.join('')}<div class="result-row"><span class="result-label">Subtotal</span><span class="result-value">${fmtNum(subtotal)}</span></div><div class="result-row"><span class="result-label">Tax (${tax}%)</span><span class="result-value">${fmtNum(taxAmt)}</span></div><div class="result-row"><span class="result-label">Tip (${tip}%)</span><span class="result-value">${fmtNum(tipAmt)}</span></div><div class="result-row"><span class="result-label">Grand Total</span><span class="result-value" style="color:var(--accent)">${fmtNum(grandTotal)}</span></div><div class="result-row" style="background:var(--accent-soft); padding:12px; border-radius:8px; margin-top:8px;"><span class="result-label" style="font-weight:700;">Per Person (${ppl})</span><span class="result-value" style="color:var(--accent); font-size:18px;">${fmtNum(grandTotal / ppl)}</span></div></div>`;
+  });
+};
+/* ============ CONVERTERS ============ */
+function getConverterHTML(units, prefix, defaultToIndex = 1) {
+  return `<div class="tool-panel">
+    <div class="form-row form-row-3" style="align-items: end;">
+      <div><div class="form-group"><label class="form-label">From</label><input type="number" id="${prefix}-from" class="input" step="any" placeholder="0" /></div><div class="form-group"><select id="${prefix}-from-unit" class="select">${units.map(u => `<option value="${u.id}">${u.label}</option>`).join('')}</select></div></div>
+      <div style="display: grid; place-items: center; padding-bottom: 18px;"><button id="${prefix}-swap" class="btn btn-secondary" style="width: 44px; height: 44px; border-radius: 50%; padding: 0;">${ICONS.convert}</button></div>
+      <div><div class="form-group"><label class="form-label">To</label><input type="text" id="${prefix}-to" class="input" readonly placeholder="0" /></div><div class="form-group"><select id="${prefix}-to-unit" class="select">${units.map((u, i) => `<option value="${u.id}" ${i === defaultToIndex ? 'selected' : ''}>${u.label}</option>`).join('')}</select></div></div>
+    </div>
+  </div>`;
+}
+function initUnitConverter(units, prefix) {
+  const fromInput = document.getElementById(`${prefix}-from`), toInput = document.getElementById(`${prefix}-to`);
+  const fromUnit = document.getElementById(`${prefix}-from-unit`), toUnit = document.getElementById(`${prefix}-to-unit`);
+  const swapBtn = document.getElementById(`${prefix}-swap`);
+  const convert = (val, fromId, toId) => (val * units.find(u => u.id === fromId).factor) / units.find(u => u.id === toId).factor;
+  const update = (source) => {
+    if (source === 'from') { const val = parseFloat(fromInput.value); toInput.value = isNaN(val) ? '' : fmtNum(convert(val, fromUnit.value, toUnit.value)); }
+    else { const val = parseFloat(toInput.value); fromInput.value = isNaN(val) ? '' : fmtNum(convert(val, toUnit.value, fromUnit.value)); }
+  };
+  fromInput.addEventListener('input', () => update('from')); toInput.addEventListener('input', () => update('to'));
+  fromUnit.addEventListener('change', () => update('from')); toUnit.addEventListener('change', () => update('from'));
+  swapBtn.addEventListener('click', () => { const t1 = fromUnit.value; fromUnit.value = toUnit.value; toUnit.value = t1; const t2 = fromInput.value; fromInput.value = toInput.value; toInput.value = t2; update('from'); });
+  update('from');
+}
+
+const LENGTH_UNITS = [{ id: 'mm', label: 'Millimeter (mm)', factor: 0.001 }, { id: 'cm', label: 'Centimeter (cm)', factor: 0.01 }, { id: 'm', label: 'Meter (m)', factor: 1 }, { id: 'km', label: 'Kilometer (km)', factor: 1000 }, { id: 'in', label: 'Inch (in)', factor: 0.0254 }, { id: 'ft', label: 'Foot (ft)', factor: 0.3048 }, { id: 'yd', label: 'Yard (yd)', factor: 0.9144 }, { id: 'mi', label: 'Mile (mi)', factor: 1609.344 }];
+TOOL_RENDERERS['length'] = () => getConverterHTML(LENGTH_UNITS, 'len'); TOOL_INIT['length'] = () => initUnitConverter(LENGTH_UNITS, 'len');
+
+const WEIGHT_UNITS = [{ id: 'mg', label: 'Milligram (mg)', factor: 0.000001 }, { id: 'g', label: 'Gram (g)', factor: 0.001 }, { id: 'kg', label: 'Kilogram (kg)', factor: 1 }, { id: 't', label: 'Metric Ton (t)', factor: 1000 }, { id: 'oz', label: 'Ounce (oz)', factor: 0.0283495 }, { id: 'lb', label: 'Pound (lb)', factor: 0.453592 }];
+TOOL_RENDERERS['weight'] = () => getConverterHTML(WEIGHT_UNITS, 'wgt'); TOOL_INIT['weight'] = () => initUnitConverter(WEIGHT_UNITS, 'wgt');
+
+const AREA_UNITS = [{ id: 'sqm', label: 'Square Meter (m²)', factor: 1 }, { id: 'sqkm', label: 'Square Kilometer (km²)', factor: 1000000 }, { id: 'sqft', label: 'Square Foot (ft²)', factor: 0.092903 }, { id: 'acre', label: 'Acre', factor: 4046.86 }, { id: 'hectare', label: 'Hectare', factor: 10000 }];
+TOOL_RENDERERS['area'] = () => getConverterHTML(AREA_UNITS, 'area'); TOOL_INIT['area'] = () => initUnitConverter(AREA_UNITS, 'area');
+
+const VOLUME_UNITS = [{ id: 'ml', label: 'Milliliter (ml)', factor: 0.001 }, { id: 'l', label: 'Liter (L)', factor: 1 }, { id: 'gal', label: 'Gallon (US)', factor: 3.78541 }, { id: 'cup', label: 'Cup (US)', factor: 0.236588 }, { id: 'floz', label: 'Fluid Ounce (fl oz)', factor: 0.0295735 }];
+TOOL_RENDERERS['volume'] = () => getConverterHTML(VOLUME_UNITS, 'vol'); TOOL_INIT['volume'] = () => initUnitConverter(VOLUME_UNITS, 'vol');
+
+const SPEED_UNITS = [{ id: 'mps', label: 'Meter/second (m/s)', factor: 1 }, { id: 'kmh', label: 'Kilometer/hour (km/h)', factor: 0.277778 }, { id: 'mph', label: 'Mile/hour (mph)', factor: 0.44704 }, { id: 'knot', label: 'Knot', factor: 0.514444 }];
+TOOL_RENDERERS['speed'] = () => getConverterHTML(SPEED_UNITS, 'spd'); TOOL_INIT['speed'] = () => initUnitConverter(SPEED_UNITS, 'spd');
+
+const TIME_UNITS = [{ id: 'sec', label: 'Second', factor: 1 }, { id: 'min', label: 'Minute', factor: 60 }, { id: 'hr', label: 'Hour', factor: 3600 }, { id: 'day', label: 'Day', factor: 86400 }, { id: 'week', label: 'Week', factor: 604800 }, { id: 'year', label: 'Year (365 days)', factor: 31536000 }];
+TOOL_RENDERERS['time-conv'] = () => getConverterHTML(TIME_UNITS, 'tim'); TOOL_INIT['time-conv'] = () => initUnitConverter(TIME_UNITS, 'tim');
+
+const DATA_UNITS = [{ id: 'bit', label: 'Bit (b)', factor: 0.125 }, { id: 'byte', label: 'Byte (B)', factor: 1 }, { id: 'kb', label: 'Kilobyte (KB)', factor: 1024 }, { id: 'mb', label: 'Megabyte (MB)', factor: 1048576 }, { id: 'gb', label: 'Gigabyte (GB)', factor: 1073741824 }, { id: 'tb', label: 'Terabyte (TB)', factor: 1099511627776 }];
+TOOL_RENDERERS['data'] = () => getConverterHTML(DATA_UNITS, 'dat'); TOOL_INIT['data'] = () => initUnitConverter(DATA_UNITS, 'dat');
+
+TOOL_RENDERERS['temperature'] = () => `<div class="tool-panel">
+  <div class="form-row form-row-3" style="align-items: end;">
+    <div><div class="form-group"><label class="form-label">From</label><input type="number" id="tmp-from" class="input" step="any" placeholder="0" /></div><div class="form-group"><select id="tmp-from-unit" class="select"><option value="C">Celsius (°C)</option><option value="F">Fahrenheit (°F)</option><option value="K">Kelvin (K)</option></select></div></div>
+    <div style="display: grid; place-items: center; padding-bottom: 18px;"><button id="tmp-swap" class="btn btn-secondary" style="width: 44px; height: 44px; border-radius: 50%; padding: 0;">${ICONS.convert}</button></div>
+    <div><div class="form-group"><label class="form-label">To</label><input type="text" id="tmp-to" class="input" readonly placeholder="0" /></div><div class="form-group"><select id="tmp-to-unit" class="select"><option value="C">Celsius (°C)</option><option value="F" selected>Fahrenheit (°F)</option><option value="K">Kelvin (K)</option></select></div></div>
+  </div>
+</div>`;
+TOOL_INIT['temperature'] = () => {
+  const fromInput = document.getElementById('tmp-from'), toInput = document.getElementById('tmp-to');
+  const fromUnit = document.getElementById('tmp-from-unit'), toUnit = document.getElementById('tmp-to-unit');
+  const swapBtn = document.getElementById('tmp-swap');
+  const toCelsius = (val, unit) => unit === 'C' ? val : unit === 'F' ? (val - 32) * 5/9 : val - 273.15;
+  const fromCelsius = (val, unit) => unit === 'C' ? val : unit === 'F' ? (val * 9/5) + 32 : val + 273.15;
+  const update = (source) => {
+    if (source === 'from') { const val = parseFloat(fromInput.value); toInput.value = isNaN(val) ? '' : fmtNum(fromCelsius(toCelsius(val, fromUnit.value), toUnit.value)); }
+    else { const val = parseFloat(toInput.value); fromInput.value = isNaN(val) ? '' : fmtNum(fromCelsius(toCelsius(val, toUnit.value), fromUnit.value)); }
+  };
+  fromInput.addEventListener('input', () => update('from')); toInput.addEventListener('input', () => update('to'));
+  fromUnit.addEventListener('change', () => update('from')); toUnit.addEventListener('change', () => update('from'));
+  swapBtn.addEventListener('click', () => { const t1 = fromUnit.value; fromUnit.value = toUnit.value; toUnit.value = t1; const t2 = fromInput.value; fromInput.value = toInput.value; toInput.value = t2; update('from'); });
+};
+
+const CURRENCIES = ['USD','EUR','GBP','JPY','INR','CAD','AUD','CHF','CNY','SGD','AED','SAR','PKR','BDT','ZAR','BRL','RUB','TRY'];
+TOOL_RENDERERS['currency'] = () => `<div class="tool-panel">
+  <div id="curr-status" style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--warning); display: inline-block;"></span> Loading live rates...</div>
+  <div class="form-row form-row-3" style="align-items: end;">
+    <div><div class="form-group"><label class="form-label">From</label><input type="number" id="cur-from" class="input" step="any" placeholder="0" /></div><div class="form-group"><select id="cur-from-unit" class="select">${CURRENCIES.map(c => `<option value="${c}" ${c==='USD'?'selected':''}>${c}</option>`).join('')}</select></div></div>
+    <div style="display: grid; place-items: center; padding-bottom: 18px;"><button id="cur-swap" class="btn btn-secondary" style="width: 44px; height: 44px; border-radius: 50%; padding: 0;">${ICONS.convert}</button></div>
+    <div><div class="form-group"><label class="form-label">To</label><input type="text" id="cur-to" class="input" readonly placeholder="0" /></div><div class="form-group"><select id="cur-to-unit" class="select">${CURRENCIES.map((c, i) => `<option value="${c}" ${i===4?'selected':''}>${c}</option>`).join('')}</select></div></div>
+  </div>
+</div>`;
+TOOL_INIT['currency'] = async () => {
+  const fromInput = document.getElementById('cur-from'), toInput = document.getElementById('cur-to');
+  const fromUnit = document.getElementById('cur-from-unit'), toUnit = document.getElementById('cur-to-unit');
+  const swapBtn = document.getElementById('cur-swap'), statusDiv = document.getElementById('curr-status');
+  let rates = {};
+  try {
+    const res = await fetch('https://api.frankfurter.app/latest'); const data = await res.json();
+    rates = data.rates; rates['EUR'] = 1;
+    statusDiv.innerHTML = `<span style="width: 8px; height: 8px; border-radius: 50%; background: var(--success); display: inline-block;"></span> Live rates loaded · Base: EUR`;
+  } catch (e) { statusDiv.innerHTML = `<span style="width: 8px; height: 8px; border-radius: 50%; background: var(--danger); display: inline-block;"></span> Could not load live rates. Check internet.`; }
+  const convert = (val, from, to) => { if (!rates[from] || !rates[to]) return null; return (val / rates[from]) * rates[to]; };
+  const update = (source) => {
+    if (Object.keys(rates).length === 0) return;
+    if (source === 'from') { const val = parseFloat(fromInput.value); const res = convert(val, fromUnit.value, toUnit.value); toInput.value = isNaN(val) || res === null ? '' : fmtNum(res); }
+    else { const val = parseFloat(toInput.value); const res = convert(val, toUnit.value, fromUnit.value); fromInput.value = isNaN(val) || res === null ? '' : fmtNum(res); }
+  };
+  fromInput.addEventListener('input', () => update('from')); toInput.addEventListener('input', () => update('to'));
+  fromUnit.addEventListener('change', () => update('from')); toUnit.addEventListener('change', () => update('from'));
+  swapBtn.addEventListener('click', () => { const t1 = fromUnit.value; fromUnit.value = toUnit.value; toUnit.value = t1; const t2 = fromInput.value; fromInput.value = toInput.value; toInput.value = t2; update('from'); });
+};  
+  /* ============ QR TOOLS ============ */
+function getQRHTML(fields) { 
+  return `<div class="tool-panel">${fields}
+    <div class="form-group"><label class="form-label">Size: <span id="qr-size-val">200</span>px</label><input type="range" id="qr-size" min="100" max="400" value="200" class="input" /></div>
+    <button class="btn btn-primary btn-block" id="qr-gen">Generate QR Code</button>
+    <div id="qr-result" class="hidden mt-3" style="text-align: center;"></div>
+  </div>`; 
+}
+function initQRTool(buildTextFn) {
+  const sizeInput = document.getElementById('qr-size'), sizeVal = document.getElementById('qr-size-val');
+  const genBtn = document.getElementById('qr-gen'), resultDiv = document.getElementById('qr-result');
+  sizeInput.addEventListener('input', (e) => sizeVal.textContent = e.target.value);
+  genBtn.addEventListener('click', () => {
+    const text = buildTextFn();
+    if (!text) { toast('Please enter valid data', 'error'); return; }
+    try {
+      // typeNumber 0 = auto-detect best size, 'M' = medium error correction (very robust)
+      const qr = qrcode(0, 'M'); qr.addData(text); qr.make();
+      const size = parseInt(sizeInput.value), cellSize = Math.max(2, Math.floor(size / qr.getModuleCount()));
+      let html = `<div style="background: white; padding: 20px; border-radius: 16px; display: inline-block; margin-top: 16px; box-shadow: var(--shadow-lg);">`;
+      html += qr.createImgTag(cellSize, 0);
+      html += `</div><br/><button class="btn btn-secondary mt-3" id="qr-dl">Download PNG</button>`;
+      resultDiv.classList.remove('hidden'); resultDiv.innerHTML = html;
+      document.getElementById('qr-dl').addEventListener('click', () => {
+        const img = resultDiv.querySelector('img');
+        if (img) {
+          const canvas = document.createElement('canvas'); canvas.width = img.width; canvas.height = img.height;
+          canvas.getContext('2d').drawImage(img, 0, 0);
+          canvas.toBlob(blob => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = 'qrcode.png'; a.click();
+            URL.revokeObjectURL(url); toast('QR Code downloaded!', 'success');
+          });
+        }
+      });
+      toast('QR Code generated!', 'success');
+    } catch (err) { toast('Text is too long for a QR code. Please shorten it.', 'error'); }
+  });
+}
+TOOL_RENDERERS['qr-url'] = () => getQRHTML(`<div class="form-group"><label class="form-label">URL</label><input type="url" id="qr-data" class="input" placeholder="https://example.com" /></div>`);
+TOOL_INIT['qr-url'] = () => initQRTool(() => { let v = document.getElementById('qr-data').value.trim(); return v && !/^https?:\/\//i.test(v) ? 'https://' + v : v; });
+
+TOOL_RENDERERS['qr-text'] = () => getQRHTML(`<div class="form-group"><label class="form-label">Text</label><textarea id="qr-data" class="textarea" placeholder="Enter text..."></textarea></div>`);
+TOOL_INIT['qr-text'] = () => initQRTool(() => document.getElementById('qr-data').value.trim());
+
+TOOL_RENDERERS['qr-wifi'] = () => getQRHTML(`<div class="form-group"><label class="form-label">Network Name (SSID)</label><input type="text" id="qr-ssid" class="input" /></div><div class="form-group"><label class="form-label">Password</label><input type="text" id="qr-pass" class="input" /></div><div class="form-group"><label class="form-label">Security</label><select id="qr-sec" class="select"><option value="WPA">WPA/WPA2</option><option value="WEP">WEP</option><option value="nopass">None</option></select></div>`);
+TOOL_INIT['qr-wifi'] = () => initQRTool(() => { const s = document.getElementById('qr-ssid').value.trim(); if(!s) return ''; return `WIFI:T:${document.getElementById('qr-sec').value};S:${s};P:${document.getElementById('qr-pass').value};;`; });
+
+TOOL_RENDERERS['qr-email'] = () => getQRHTML(`<div class="form-group"><label class="form-label">Email</label><input type="email" id="qr-email" class="input" /></div><div class="form-group"><label class="form-label">Subject</label><input type="text" id="qr-sub" class="input" /></div>`);
+TOOL_INIT['qr-email'] = () => initQRTool(() => { const e = document.getElementById('qr-email').value.trim(); if(!e) return ''; return `mailto:${e}?subject=${encodeURIComponent(document.getElementById('qr-sub').value)}`; });
+
+TOOL_RENDERERS['qr-phone'] = () => getQRHTML(`<div class="form-group"><label class="form-label">Phone Number</label><input type="tel" id="qr-phone" class="input" placeholder="+91..." /></div>`);
+TOOL_INIT['qr-phone'] = () => initQRTool(() => { const p = document.getElementById('qr-phone').value.trim(); return p ? `tel:${p}` : ''; });
+
+TOOL_RENDERERS['qr-contact'] = () => getQRHTML(`<div class="form-group"><label class="form-label">Name</label><input type="text" id="qr-name" class="input" /></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" id="qr-phone" class="input" /></div><div class="form-group"><label class="form-label">Email</label><input type="email" id="qr-email" class="input" /></div>`);
+TOOL_INIT['qr-contact'] = () => initQRTool(() => { const n = document.getElementById('qr-name').value.trim(); if(!n) return ''; return `BEGIN:VCARD\nVERSION:3.0\nFN:${n}\nTEL:${document.getElementById('qr-phone').value}\nEMAIL:${document.getElementById('qr-email').value}\nEND:VCARD`; });
+
+TOOL_RENDERERS['qr-location'] = () => getQRHTML(`<div class="form-row form-row-2"><div class="form-group"><label class="form-label">Latitude</label><input type="number" id="qr-lat" class="input" step="any" /></div><div class="form-group"><label class="form-label">Longitude</label><input type="number" id="qr-lng" class="input" step="any" /></div></div>`);
+TOOL_INIT['qr-location'] = () => initQRTool(() => { const la = document.getElementById('qr-lat').value; const ln = document.getElementById('qr-lng').value; return (la && ln) ? `geo:${la},${ln}` : ''; });
+
+/* ============ TIME TOOLS ============ */
+TOOL_RENDERERS['stopwatch'] = () => `<div class="tool-panel text-center"><div id="sw-display" style="font-size: 48px; font-weight: 800; font-variant-numeric: tabular-nums; margin: 20px 0; color: var(--accent);">00:00:00</div><div style="display:flex; gap:12px; justify-content:center;"><button class="btn btn-primary" id="sw-start">Start</button><button class="btn btn-secondary" id="sw-reset">Reset</button></div></div>`;
+TOOL_INIT['stopwatch'] = () => {
+  let t = 0, interval = null, running = false;
+  const display = document.getElementById('sw-display'), startBtn = document.getElementById('sw-start');
+  const format = (ms) => { const s = Math.floor(ms/1000); return `${String(Math.floor(s/3600)).padStart(2,'0')}:${String(Math.floor((s%3600)/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`; };
+  startBtn.onclick = () => { if (!running) { interval = setInterval(() => { t += 100; display.textContent = format(t); }, 100); startBtn.textContent = 'Pause'; running = true; } else { clearInterval(interval); startBtn.textContent = 'Resume'; running = false; } };
+  document.getElementById('sw-reset').onclick = () => { clearInterval(interval); t = 0; display.textContent = '00:00:00'; startBtn.textContent = 'Start'; running = false; };
+};
+
+TOOL_RENDERERS['countdown'] = () => `<div class="tool-panel text-center"><div class="form-row form-row-3"><div class="form-group"><label class="form-label">Hrs</label><input type="number" id="cd-h" class="input" value="0" min="0"/></div><div class="form-group"><label class="form-label">Min</label><input type="number" id="cd-m" class="input" value="5" min="0"/></div><div class="form-group"><label class="form-label">Sec</label><input type="number" id="cd-s" class="input" value="0" min="0"/></div></div><div id="cd-display" style="font-size: 48px; font-weight: 800; font-variant-numeric: tabular-nums; margin: 20px 0; color: var(--accent);">00:05:00</div><div style="display:flex; gap:12px; justify-content:center;"><button class="btn btn-primary" id="cd-start">Start</button><button class="btn btn-secondary" id="cd-reset">Reset</button></div></div>`;
+TOOL_INIT['countdown'] = () => {
+  let totalSec = 300, interval = null, running = false;
+  const display = document.getElementById('cd-display'), startBtn = document.getElementById('cd-start');
+  const updateDisplay = () => { const h = Math.floor(totalSec/3600), m = Math.floor((totalSec%3600)/60), s = totalSec%60; display.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; };
+  const getInputs = () => (parseInt(document.getElementById('cd-h').value||0)*3600) + (parseInt(document.getElementById('cd-m').value||0)*60) + parseInt(document.getElementById('cd-s').value||0);
+  startBtn.onclick = () => { if (!running) { if (totalSec <= 0) totalSec = getInputs(); if (totalSec <= 0) return toast('Set time first', 'error'); interval = setInterval(() => { totalSec--; updateDisplay(); if (totalSec <= 0) { clearInterval(interval); toast('Time is up!', 'success'); startBtn.textContent = 'Start'; running = false; } }, 1000); startBtn.textContent = 'Pause'; running = true; } else { clearInterval(interval); startBtn.textContent = 'Resume'; running = false; } };
+  document.getElementById('cd-reset').onclick = () => { clearInterval(interval); totalSec = getInputs(); updateDisplay(); startBtn.textContent = 'Start'; running = false; };
+};
+
+TOOL_RENDERERS['date-diff'] = () => `<div class="tool-panel"><div class="form-row form-row-2"><div class="form-group"><label class="form-label">Start Date</label><input type="date" id="dd-1" class="input"/></div><div class="form-group"><label class="form-label">End Date</label><input type="date" id="dd-2" class="input"/></div></div><div id="dd-res" class="result-highlight" style="justify-content:center; font-size:24px;">—</div></div>`;
+TOOL_INIT['date-diff'] = () => { const calc = () => { const d1 = new Date(document.getElementById('dd-1').value), d2 = new Date(document.getElementById('dd-2').value); if (!isNaN(d1) && !isNaN(d2)) { const diff = Math.abs(d2 - d1); document.getElementById('dd-res').innerHTML = `<span>${Math.ceil(diff / (1000 * 60 * 60 * 24))} Days</span>`; } else { document.getElementById('dd-res').textContent = '—'; } }; document.getElementById('dd-1').oninput = calc; document.getElementById('dd-2').oninput = calc; };
+
+TOOL_RENDERERS['time-diff'] = () => `<div class="tool-panel"><div class="form-row form-row-2"><div class="form-group"><label class="form-label">Start Time</label><input type="time" id="td-1" class="input"/></div><div class="form-group"><label class="form-label">End Time</label><input type="time" id="td-2" class="input"/></div></div><div id="td-res" class="result-highlight" style="justify-content:center; font-size:24px;">—</div></div>`;
+TOOL_INIT['time-diff'] = () => { const calc = () => { const t1 = document.getElementById('td-1').value, t2 = document.getElementById('td-2').value; if (t1 && t2) { const [h1, m1] = t1.split(':').map(Number), [h2, m2] = t2.split(':').map(Number); let diff = (h2*60+m2) - (h1*60+m1); if (diff < 0) diff += 1440; document.getElementById('td-res').innerHTML = `<span>${Math.floor(diff/60)}h ${diff%60}m</span>`; } else { document.getElementById('td-res').textContent = '—'; } }; document.getElementById('td-1').oninput = calc; document.getElementById('td-2').oninput = calc; };
+
+/* ============ GENERATORS ============ */
+TOOL_RENDERERS['password'] = () => `<div class="tool-panel"><div id="pw-res" style="background:var(--bg-subtle); padding:16px; border-radius:12px; font-family:monospace; font-size:18px; word-break:break-all; text-align:center; min-height:60px; display:flex; align-items:center; justify-content:center; border:1px solid var(--border);">Click Generate</div><div class="form-group mt-3"><label class="form-label">Length: <span id="pw-len-val">16</span></label><input type="range" id="pw-len" min="6" max="32" value="16" class="input"/></div><div class="form-row form-row-2"><label class="checkbox-row"><input type="checkbox" id="pw-up" checked/> Uppercase</label><label class="checkbox-row"><input type="checkbox" id="pw-lo" checked/> Lowercase</label><label class="checkbox-row"><input type="checkbox" id="pw-nu" checked/> Numbers</label><label class="checkbox-row"><input type="checkbox" id="pw-sy" checked/> Symbols</label></div><div style="display:flex; gap:12px;"><button class="btn btn-primary" id="pw-gen" style="flex:1;">Generate</button><button class="btn btn-secondary" id="pw-copy" style="flex:1;">Copy</button></div></div>`;
+TOOL_INIT['password'] = () => {
+  const lenInput = document.getElementById('pw-len'), lenVal = document.getElementById('pw-len-val');
+  lenInput.oninput = () => lenVal.textContent = lenInput.value;
+  document.getElementById('pw-gen').onclick = () => {
+    let chars = ''; if (document.getElementById('pw-up').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; if (document.getElementById('pw-lo').checked) chars += 'abcdefghijklmnopqrstuvwxyz'; if (document.getElementById('pw-nu').checked) chars += '0123456789'; if (document.getElementById('pw-sy').checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    if (!chars) return toast('Select at least one option', 'error');
+    let pw = ''; const arr = new Uint32Array(parseInt(lenInput.value)); crypto.getRandomValues(arr); for (let i = 0; i < arr.length; i++) pw += chars[arr[i] % chars.length];
+    document.getElementById('pw-res').textContent = pw;
+  };
+  document.getElementById('pw-copy').onclick = () => { const t = document.getElementById('pw-res').textContent; if (t !== 'Click Generate') copyText(t); };
+};
+
+TOOL_RENDERERS['random-number'] = () => `<div class="tool-panel"><div class="form-row form-row-2"><div class="form-group"><label class="form-label">Min</label><input type="number" id="rn-min" class="input" value="1"/></div><div class="form-group"><label class="form-label">Max</label><input type="number" id="rn-max" class="input" value="100"/></div></div><div id="rn-res" style="background:var(--bg-subtle); padding:20px; border-radius:12px; text-align:center; font-size:32px; font-weight:800; color:var(--accent); margin:16px 0; border:1px solid var(--border);">—</div><button class="btn btn-primary btn-block" id="rn-gen">Generate Number</button></div>`;
+TOOL_INIT['random-number'] = () => { document.getElementById('rn-gen').onclick = () => { const min = parseInt(document.getElementById('rn-min').value), max = parseInt(document.getElementById('rn-max').value); if (min >= max) return toast('Min must be less than Max', 'error'); const res = Math.floor(Math.random() * (max - min + 1)) + min; document.getElementById('rn-res').textContent = res; }; };
+
+TOOL_RENDERERS['uuid'] = () => `<div class="tool-panel text-center"><div id="uuid-res" style="background:var(--bg-subtle); padding:16px; border-radius:12px; font-family:monospace; font-size:16px; word-break:break-all; margin-bottom:16px; border:1px solid var(--border);">Click Generate</div><button class="btn btn-primary btn-block" id="uuid-gen">Generate UUID</button></div>`;
+TOOL_INIT['uuid'] = () => { document.getElementById('uuid-gen').onclick = () => { try { const u = crypto.randomUUID(); document.getElementById('uuid-res').textContent = u; copyText(u); } catch(e) { toast('UUID not supported in this browser', 'error'); } }; };
+  /* ============ TEXT TOOLS ============ */
+TOOL_RENDERERS['word-counter'] = () => `<div class="tool-panel"><div class="form-group"><label class="form-label">Paste your text</label><textarea id="wc-text" class="textarea" style="min-height:150px;" placeholder="Type or paste here..."></textarea></div><div class="stats-grid mt-3"><div class="stat-card"><div class="stat-value" id="wc-w">0</div><div class="stat-label">Words</div></div><div class="stat-card"><div class="stat-value" id="wc-c">0</div><div class="stat-label">Characters</div></div><div class="stat-card"><div class="stat-value" id="wc-s">0</div><div class="stat-label">Sentences</div></div></div></div>`;
+TOOL_INIT['word-counter'] = () => { document.getElementById('wc-text').oninput = (e) => { const t = e.target.value; document.getElementById('wc-c').textContent = t.length; document.getElementById('wc-w').textContent = t.trim() ? t.trim().split(/\s+/).length : 0; document.getElementById('wc-s').textContent = t.trim() ? (t.match(/[.!?]+/g) || []).length || 1 : 0; }; };
+
+TOOL_RENDERERS['case-converter'] = () => `<div class="tool-panel"><div class="form-group"><label class="form-label">Your Text</label><textarea id="cc-text" class="textarea" style="min-height:120px;"></textarea></div><div class="form-row form-row-2 mt-3"><button class="btn btn-secondary btn-sm" data-case="upper">UPPERCASE</button><button class="btn btn-secondary btn-sm" data-case="lower">lowercase</button><button class="btn btn-secondary btn-sm" data-case="title">Title Case</button><button class="btn btn-secondary btn-sm" data-case="sentence">Sentence case</button></div></div>`;
+TOOL_INIT['case-converter'] = () => { document.querySelectorAll('[data-case]').forEach(b => b.onclick = () => { let t = document.getElementById('cc-text').value; const c = b.dataset.case; if (c === 'upper') t = t.toUpperCase(); if (c === 'lower') t = t.toLowerCase(); if (c === 'title') t = t.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()); if (c === 'sentence') t = t.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g, c => c.toUpperCase()); document.getElementById('cc-text').value = t; toast('Text converted', 'success'); }); };
+
+TOOL_RENDERERS['text-cleaner'] = () => `<div class="tool-panel"><div class="form-group"><label class="form-label">Your Text</label><textarea id="tc-text" class="textarea" style="min-height:120px;"></textarea></div><div class="form-row form-row-2 mt-3"><button class="btn btn-secondary btn-sm" id="tc-trim">Trim Lines</button><button class="btn btn-secondary btn-sm" id="tc-blank">Remove Blanks</button><button class="btn btn-secondary btn-sm" id="tc-dup">Remove Duplicates</button><button class="btn btn-secondary btn-sm" id="tc-sort">Sort A-Z</button></div></div>`;
+TOOL_INIT['text-cleaner'] = () => { const ta = document.getElementById('tc-text'); document.getElementById('tc-trim').onclick = () => ta.value = ta.value.split('\n').map(l=>l.trim()).join('\n'); document.getElementById('tc-blank').onclick = () => ta.value = ta.value.split('\n').filter(l=>l.trim()).join('\n'); document.getElementById('tc-dup').onclick = () => ta.value = [...new Set(ta.value.split('\n'))].join('\n'); document.getElementById('tc-sort').onclick = () => ta.value = ta.value.split('\n').sort().join('\n'); };
+
+TOOL_RENDERERS['text-sorter'] = () => `<div class="tool-panel"><div class="form-group"><label class="form-label">List (one per line)</label><textarea id="ts-text" class="textarea" style="min-height:120px;"></textarea></div><div class="form-row form-row-2 mt-3"><button class="btn btn-secondary btn-sm" id="ts-az">Sort A-Z</button><button class="btn btn-secondary btn-sm" id="ts-za">Sort Z-A</button><button class="btn btn-secondary btn-sm" id="ts-shuf">Shuffle</button><button class="btn btn-secondary btn-sm" id="ts-rev">Reverse</button></div></div>`;
+TOOL_INIT['text-sorter'] = () => { const ta = document.getElementById('ts-text'); document.getElementById('ts-az').onclick = () => ta.value = ta.value.split('\n').sort().join('\n'); document.getElementById('ts-za').onclick = () => ta.value = ta.value.split('\n').sort().reverse().join('\n'); document.getElementById('ts-rev').onclick = () => ta.value = ta.value.split('\n').reverse().join('\n'); document.getElementById('ts-shuf').onclick = () => { const a = ta.value.split('\n'); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } ta.value = a.join('\n'); }; };
+
+/* ============ DESIGN TOOLS ============ */
+TOOL_RENDERERS['color-picker'] = () => `<div class="tool-panel text-center"><input type="color" id="cp-input" value="#818cf8" style="width:100%; height:120px; border:none; border-radius:12px; cursor:pointer; background:none;"/><div class="form-row form-row-3 mt-3"><div class="form-group"><label class="form-label">HEX</label><input type="text" id="cp-hex" class="input" value="#818cf8"/></div><div class="form-group"><label class="form-label">RGB</label><input type="text" id="cp-rgb" class="input" readonly/></div><div class="form-group"><label class="form-label">HSL</label><input type="text" id="cp-hsl" class="input" readonly/></div></div></div>`;
+TOOL_INIT['color-picker'] = () => { const inp = document.getElementById('cp-input'), hex = document.getElementById('cp-hex'), rgb = document.getElementById('cp-rgb'), hsl = document.getElementById('cp-hsl'); const update = (c) => { inp.value = c; hex.value = c; const r = parseInt(c.slice(1,3),16), g = parseInt(c.slice(3,5),16), b = parseInt(c.slice(5,7),16); rgb.value = `${r}, ${g}, ${b}`; const [h,s,l] = rgbToHsl(r,g,b); hsl.value = `${h}, ${s}%, ${l}%`; }; inp.oninput = (e) => update(e.target.value); hex.oninput = (e) => { if (/^#[0-9A-F]{6}$/i.test(e.target.value)) update(e.target.value); }; update('#818cf8'); };
+
+TOOL_RENDERERS['gradient'] = () => `<div class="tool-panel"><div id="grad-preview" style="height:150px; border-radius:12px; background:linear-gradient(90deg, #818cf8, #c084fc); margin-bottom:16px; box-shadow: var(--shadow);"></div><div class="form-row form-row-2"><div class="form-group"><label class="form-label">Color 1</label><input type="color" id="grad-c1" value="#818cf8" class="input" style="height:44px;"/></div><div class="form-group"><label class="form-label">Color 2</label><input type="color" id="grad-c2" value="#c084fc" class="input" style="height:44px;"/></div></div><div class="form-group"><label class="form-label">CSS Code</label><input type="text" id="grad-css" class="input" readonly/></div><button class="btn btn-primary btn-block" id="grad-copy">Copy CSS Code</button></div>`;
+TOOL_INIT['gradient'] = () => { const c1 = document.getElementById('grad-c1'), c2 = document.getElementById('grad-c2'), prev = document.getElementById('grad-preview'), css = document.getElementById('grad-css'); const update = () => { const val = `linear-gradient(90deg, ${c1.value}, ${c2.value})`; prev.style.background = val; css.value = `background: ${val};`; }; c1.oninput = update; c2.oninput = update; update(); document.getElementById('grad-copy').onclick = () => copyText(css.value); };
+
+TOOL_RENDERERS['color-converter'] = () => `<div class="tool-panel"><div class="form-group"><label class="form-label">HEX</label><input type="text" id="cc-hex" class="input" placeholder="#ffffff"/></div><div class="form-group"><label class="form-label">RGB (r, g, b)</label><input type="text" id="cc-rgb" class="input" placeholder="255, 255, 255"/></div><div class="form-group"><label class="form-label">HSL (h, s%, l%)</label><input type="text" id="cc-hsl" class="input" placeholder="0, 0%, 100%"/></div></div>`;
+TOOL_INIT['color-converter'] = () => { const hex = document.getElementById('cc-hex'), rgb = document.getElementById('cc-rgb'), hsl = document.getElementById('cc-hsl'); hex.oninput = () => { if (/^#[0-9A-F]{6}$/i.test(hex.value)) { const r = parseInt(hex.value.slice(1,3),16), g = parseInt(hex.value.slice(3,5),16), b = parseInt(hex.value.slice(5,7),16); rgb.value = `${r}, ${g}, ${b}`; const [h,s,l] = rgbToHsl(r,g,b); hsl.value = `${h}, ${s}%, ${l}%`; } }; };
+  </script>
+</body>
+</html>
